@@ -236,14 +236,13 @@ button {
 
 /* Кнопка для секции Hero */
 .btn-hero {
-    padding: 10px 60px;
+    /* padding: 10px 60px; */
     border: none;
     text-transform: uppercase;
 }
 
 .btn-hero:hover {
     background-color: #E6E6D8;
-    transform: translateY(-1px);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
@@ -262,7 +261,7 @@ button {
 .btn-form {
     background-color: rgba(215, 83, 0, 0.6);
     color: var(--color-white);
-    padding: 11px 42px;
+    /* padding: 11px 42px; */
 }
 
 .btn-form:hover {
