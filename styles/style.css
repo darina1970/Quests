@@ -243,7 +243,7 @@ button {
 
 /* Кнопка для секции Hero */
 .btn-hero {
-    /* padding: 10px 60px; */
+    padding: 10px 60px;
     border: none;
     text-transform: uppercase;
 }
@@ -342,6 +342,28 @@ button {
 /* Header */
 
 /* Hero */
+.hero__content {
+    position: relative;
+    z-index: 1;
+    max-width: 900px;
+    margin: 0 auto;
+    padding-top: clamp(100px, 20vw, 200px);
+    text-align: center;
+    color: var(--color-white);
+}
+
+.hero__title {
+    font-family: var(--font-heading);
+    font-size: clamp(32px, 2.604vw, 50px);
+    font-weight: var(--font-weight-bold);
+    margin-bottom: 20px;
+}
+
+.hero__subtitle {
+    font-family: var(--font-heading);
+    font-size: clamp(18px, 1.5vw, 24px);
+    margin-bottom: 40px;
+}
 
 /* Products */
 
