@@ -165,7 +165,6 @@ h1,
     font-family: var(--font-heading);
     display: inline-block;
     font-weight: 700;
-    text-transform: uppercase;
 }
 
 /* Заголовок в HERO */
@@ -179,6 +178,7 @@ h2,
 .h2 {
     font-size: clamp(24px, 2.083vw, 40px);
     margin-bottom: clamp(30px, 3.646vw, 70px);
+    text-transform: uppercase;
 }
 
 /* Заголовки блогов, подзаголовок формы */
