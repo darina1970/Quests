@@ -1,26 +1,28 @@
-const magnifier = document.querySelector(".magnifier");
-const contentClone = document.body.cloneNode(true);
-contentClone.classList.add("magnifier-content");
-magnifier.appendChild(contentClone);
+document.querySelectorAll(".custom-select").forEach((select) => {
+  const value = select.querySelector(".custom-select-value");
+  const options = select.querySelectorAll(".custom-select-options li");
 
-let mouseX = 0;
-let mouseY = 0;
+  // Открытие/закрытие выпадающего меню при клике на поле
+  select.addEventListener("click", (e) => {
+    e.stopPropagation(); // чтобы клик не закрывал сразу меню
+    select.classList.toggle("open");
+  });
 
-document.addEventListener("mousemove", (e) => {
-  mouseX = e.clientX;
-  mouseY = e.clientY;
+  // Выбор значения из списка
+  options.forEach((option) => {
+    option.addEventListener("click", (e) => {
+      value.textContent = option.textContent;
+      select.classList.remove("open");
+
+      // Если нужно, здесь можно вызвать функцию фильтрации/сортировки
+      // например: filterProducts();
+    });
+  });
 });
 
-function animate() {
-  // двигаем лупу за мышью
-  magnifier.style.left = `${mouseX - 50}px`;
-  magnifier.style.top = `${mouseY - 50}px`;
-
-  // двигаем клонированное содержимое так, чтобы под лупой совпадала область
-  contentClone.style.left = `${-mouseX * 1.05 + 50}px`;
-  contentClone.style.top = `${-mouseY * 1.05 + 50}px`;
-
-  requestAnimationFrame(animate);
-}
-
-requestAnimationFrame(animate);
+// Закрытие всех селектов при клике вне
+document.addEventListener("click", () => {
+  document.querySelectorAll(".custom-select").forEach((select) => {
+    select.classList.remove("open");
+  });
+});
