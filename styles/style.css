@@ -89,6 +89,7 @@
     --color-card: #F3F1E8;
     --color-orange: #D75300;
     --color-form-input: rgba(25, 26, 24, 0.3);
+    --color-gray: #555555;
 
     /* Адаптивная высота обрезанного края блоков */
     --tear-height: clamp(90px, 6.25vw, 120px);
@@ -496,7 +497,54 @@ button {
 /* Parallax */
 
 /* FAQ */
+.faq__wrapper {
+    margin: 0 auto;
+    max-width: 1200px;
+    padding: 0 30px;
+    font-family: var(--font-filter);
+    letter-spacing: 0.6px;
+}
+.faq-item {
+    border-bottom: 1px solid var(--color-text);
+    padding: 15px 0;
+}
 
+.faq-item:first-of-type {
+    border-top: 1px solid var(--color-text);
+}
+
+.faq-question__wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: url('../assets/icons/magnifying-glass.svg');
+}
+
+.faq-question {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.faq-answer {
+    display: none;
+    padding: 20px 30px 5px 30px;
+    color: var(--color-gray);
+}
+
+.faq-arrow {
+    display: inline-block;
+    transition: transform 0.3s ease;
+    transform: rotate(0deg);
+}
+
+.faq-question__wrapper.active .faq-arrow {
+    transform: rotate(180deg);
+}
+
+.faq-answer.show {
+    display: block;
+}
 /* Form */
 
 /* Footer */
@@ -514,7 +562,8 @@ button {
 }
 
 @media (max-width: 768px) {
-    .container {
+    .container,
+    .faq__wrapper {
         padding: 0 20px;
     }
     .product-items__wrapper {
@@ -531,7 +580,8 @@ button {
 } */
 
 @media (max-width: 480px) {
-    .container {
+    .container,
+    .faq__wrapper {
         padding: 0 10px;
     }
     .product-items__wrapper {
