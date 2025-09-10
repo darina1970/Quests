@@ -89,6 +89,7 @@
     --color-card: #F3F1E8;
     --color-orange: #D75300;
     --color-form-input: rgba(25, 26, 24, 0.3);
+    --color-gray: #555555;
 
     /* Адаптивная высота обрезанного края блоков */
     --tear-height: clamp(90px, 6.25vw, 120px);
@@ -191,6 +192,12 @@ h3,
 h4,
 .h4 {
     font-size: clamp(18px, 1.042vw, 20px);
+}
+
+/* Можно добавить заголовку, чтобы центрировать */
+.text-align {
+    width: 100%;
+    text-align: center;
 }
 
 p {
@@ -338,6 +345,151 @@ button {
 
 /* Products */
 
+
+.products__controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: clamp(30px, 2.604vw, 50px);
+}
+
+.products__filters {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.products__filters-label {
+    margin-right: 10px;
+}
+
+.products__filters label,
+.products__sort label {
+    font-size: 14px;
+    margin-right: 5px;
+}
+
+.products__filters select,
+.products__sort select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    padding: 6px 20px 6px 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    background-color: var(--color-bg);
+    background-image: url('../assets/icons/arrow-down.svg');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 10px 6px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+/* Сетка карточек */
+.product-items__wrapper {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+}
+
+/* Карточка товара */
+.product-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    padding: 15px;
+    background: var(--color-card);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card__content {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.product-card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+/* Изображение карточки с затемнением */
+.product-card__image {
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 15px;
+}
+
+.product-card__image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+/* Затемняющий оверлей */
+.product-card__image::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(106, 57, 14, 0.5);
+    pointer-events: none;
+    transition: background 0.3 ease;
+}
+
+.product-card:hover .product-card__image::after {
+    background: rgba(106, 57, 14, 0);
+}
+
+/* Название продукта */
+.product-card__title {
+    flex-grow: 1;
+}
+
+/* Мета (иконка + возраст) */
+.product-card__meta {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 20px;
+}
+
+.product-card__icon {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+    display: block;
+}
+
+.product-card__age {
+    height: 20px;
+    display: flex;
+}
+
+.product-card__bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.product-card__price {
+    font-size: 18px;
+}
+
+
+
 /* Reviews */
 
 /* Blog */
@@ -345,24 +497,98 @@ button {
 /* Parallax */
 
 /* FAQ */
+.faq__wrapper {
+    margin: 0 auto;
+    max-width: 1200px;
+    padding: 0 30px;
+    font-family: var(--font-filter);
+    letter-spacing: 0.6px;
+}
+.faq-item {
+    border-bottom: 1px solid var(--color-text);
+    padding: 15px 0;
+}
 
+.faq-item:first-of-type {
+    border-top: 1px solid var(--color-text);
+}
+
+.faq-question__wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: url('../assets/icons/magnifying-glass.svg');
+}
+
+.faq-question {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.faq-answer {
+    display: none;
+    padding: 20px 30px 5px 30px;
+    color: var(--color-gray);
+}
+
+.faq-arrow {
+    display: inline-block;
+    transition: transform 0.3s ease;
+    transform: rotate(0deg);
+}
+
+.faq-question__wrapper.active .faq-arrow {
+    transform: rotate(180deg);
+}
+
+.faq-answer.show {
+    display: block;
+}
 /* Form */
 
 /* Footer */
 
+@media (max-width: 1440px) {
+    .product-items__wrapper {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
 
-/* @media (max-width: 1024px) {
-
+@media (max-width: 1024px) {
+    .product-items__wrapper {
+        grid-template-columns: repeat(3, 1fr);
+    }
 }
 
 @media (max-width: 768px) {
-    
+    .container,
+    .faq__wrapper {
+        padding: 0 20px;
+    }
+    .product-items__wrapper {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .products__controls {
+        flex-direction: column;
+        align-items: flex-start;
+    }
 }
 
-@media (max-width: 575px) {
-    
-}
-
-@media (max-width: 420px) {
+/* @media (max-width: 575px) {
     
 } */
+
+@media (max-width: 480px) {
+    .container,
+    .faq__wrapper {
+        padding: 0 10px;
+    }
+    .product-items__wrapper {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* @media (max-width: 420px) {
+    
+}  */
