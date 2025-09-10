@@ -491,7 +491,71 @@ button {
 
 
 /* Reviews */
+.reviews__slider-wrapper {
+    overflow: hidden;
+    position: relative;
+}
 
+.reviews__slider {
+    display: flex;
+    gap: 30px;
+    animation: scrollReviews 60s linear infinite;
+}
+
+.review-card {
+    flex: 0 0 auto;
+    width: 100%;
+    max-width: 360px;
+    background-color: var(--color-header-footer-bg);
+    color: var(--color-white);
+    padding: 30px;
+    font-family: var(--font-base);
+    transition: transform 0.3s ease;
+}
+
+.review-card__stars {
+    font-size: 20px;
+    color: goldenrod;
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+}
+
+.review-card__author {
+    font-weight: var(--font-weight-bold);
+    margin-bottom: 10px;
+    font-family: var(--font-heading);
+    color: var(--color-white);
+    font-size: 18px;
+}
+
+.review-card__text {
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+/* Анимация автоскролла */
+@keyframes scrollReviews {
+    0% {
+            transform: translateX(0);
+    }
+    
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+/* Адаптивность */
+@media (max-width: 1024px) {
+    .reviews__slider {
+        grid-template-columns: repeat(6, 50%);
+    }
+}
+
+@media (max-width: 768px) {
+    .reviews__slider {
+        grid-template-columns: repeat(6, 100%);
+    }
+}
 /* Blog */
 
 /* Parallax */
