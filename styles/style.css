@@ -193,6 +193,12 @@ h4,
     font-size: clamp(18px, 1.042vw, 20px);
 }
 
+/* Можно добавить заголовку, чтобы центрировать */
+.text-align {
+    width: 100%;
+    text-align: center;
+}
+
 p {
     margin: 0;
 }
@@ -337,11 +343,8 @@ button {
 /* Hero */
 
 /* Products */
-/* Контролы фильтров и сортировки */
 
-.text-align {
-    align-self: center;
-}
+
 .products__controls {
     display: flex;
     justify-content: space-between;
