@@ -498,19 +498,19 @@ button {
 
 .reviews__slider {
     display: flex;
+    will-change: transform;
     gap: 30px;
-    animation: scrollReviews 60s linear infinite;
+    transition: transform 0.6s ease-in-out;
 }
 
 .review-card {
-    flex: 0 0 auto;
-    width: 100%;
-    max-width: 360px;
+    flex: 0 0 calc((100% - 60px) / 3);
+    max-width: 394px;
     background-color: var(--color-header-footer-bg);
     color: var(--color-white);
     padding: 30px;
-    font-family: var(--font-base);
-    transition: transform 0.3s ease;
+    font-family: var(--font-review);
+    transition: transform 0.8s ease-in-out;
 }
 
 .review-card__stars {
@@ -526,6 +526,7 @@ button {
     font-family: var(--font-heading);
     color: var(--color-white);
     font-size: 18px;
+    text-transform: uppercase
 }
 
 .review-card__text {
@@ -546,15 +547,21 @@ button {
 
 /* Адаптивность */
 @media (max-width: 1024px) {
-    .reviews__slider {
-        grid-template-columns: repeat(6, 50%);
-    }
+    .review-card {
+            flex: 0 0 calc((100% - 30px) / 2);
+            /* 2 карточки + 1 gap */
+        }
 }
 
 @media (max-width: 768px) {
-    .reviews__slider {
-        grid-template-columns: repeat(6, 100%);
+    .review-card {
+        flex: 0 0 100%;
+        /* 1 карточка */
     }
+}
+
+@media (max-width: 575px) {
+    
 }
 /* Blog */
 
