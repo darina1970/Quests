@@ -549,6 +549,13 @@ button {
 
 /* Footer */
 
+/* Page Product */
+/* Product-tabs */
+.review-header {
+    display: flex;
+    justify-content: space-between;
+}
+
 @media (max-width: 1440px) {
     .product-items__wrapper {
         grid-template-columns: repeat(4, 1fr);
