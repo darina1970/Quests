@@ -16,4 +16,31 @@ document.addEventListener("DOMContentLoaded", () => {
       answer.classList.toggle("show");
     });
   });
+
+  const slider = document.querySelector('.reviews__slider');
+const cards = document.querySelectorAll('.review-card');
+let currentIndex = 0;
+
+function scrollSlider() {
+  const cardWidth = cards[0].offsetWidth + 30; // ширина + gap
+  const visibleCards = window.innerWidth >= 1024 ? 3 : window.innerWidth >= 768 ? 2 : 1;
+  const maxIndex = cards.length - visibleCards;
+
+  currentIndex = (currentIndex + 1) > maxIndex ? 0 : currentIndex + 1;
+  slider.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
+}
+
+setInterval(scrollSlider, 4000); // каждые 4 секунды
+
+});
+
+/* Parallax */
+window.addEventListener('scroll', () => {
+  const parallax = document.querySelector('.parallax');
+  const img = document.querySelector('.parallax__img');
+  
+  const rect = parallax.getBoundingClientRect();
+  const offset = -rect.top * 0.6; 
+
+  img.style.transform = `translateY(${offset}px)`;
 });
