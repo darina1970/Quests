@@ -382,13 +382,11 @@ button {
     font-weight: var(--font-weight-bold);
     line-height: 1.2;
     white-space: normal;
-    margin-bottom: 20px;
 }
 
 .hero__subtitle {
     font-family: var(--font-heading);
     font-size: clamp(18px, 1.5vw, 24px);
-    margin-bottom: 26px;
 }
 
 @media (max-width: 1140px) {
@@ -399,16 +397,21 @@ button {
     }
 }
 
+
 @media (max-width: 768px) {
     .hero__content {
         max-width: 100%;
         padding: 0 20px;
-        gap: 6px;
+        gap: 15px;
     }
 
     .btn-hero {
         font-size: 16px;
         padding: 10px 30px;
+    }
+
+    .hero__title {
+        font-size: clamp(28px, 2.2vw, 42px);
     }
 }
 /* Products */
