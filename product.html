@@ -15,7 +15,37 @@
     <main>
         <section class="hero section-decorated-light" id="hero"></section>
         <section class="product-info section-common" id="productInfo"></section>
-        <section class="product-tabs__info section-common" id="productTabsInfo"></section>
+        <section class="product-tabs__info section-common" id="productTabsInfo">
+            <div class="product-tabs__wrapper container">
+                <div class="product-tabs">
+                    <div class="product-tab active" data-tab="reviews">Reviews</div>
+                    <div class="product-tab" data-tab="rdescription">Description</div>
+                </div>
+                <div class="tab-content">
+                    <div class="content reviews active">
+                        <button class="btn write-review-btn">Write Your Review</button>
+                        <form action="" class="review-form">
+                            <input type="text" placeholder="YOUR NAME" required>
+                            <textarea name="" id="" placeholder="Your Review" required></textarea>
+                            <button type="submit">Submit</button>
+                        </form>
+                        <div class="reviews-list">
+                            <div class="review">
+                                <strong>John</strong>
+                                <p>On New Year’s, we traditionally organized a quest for the kids from Natasha. This time it was “The Strange Story of Professor Wondermaker.”
+                                Since we celebrated with a big group, there were five kids, and we decided to split them into two teams.
+                                To even things out, we involved one adult as well. Accordingly, all the tasks were printed in duplicate (and placed into ifferent envelopes — white ones for one team, kraft ones for the other).
+                                The children happily dove right into the comic book — they had never seen anything like that in a quest before! Then they moved on to the tasks — some of them weren’t easy at all, there were even some spy-style listenings to check whether the other team had solved a challenge.
+                                It was exciting for everyone — from ages 10–17 and even 40+. They were absorbed for about an hour and a half, maybe more — time just flew by, and everyone was happy!
+                                Natasha, thank you for helping us create such a wonderful adventure for the kids with minimal effort!
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="content description"></div>
+                </div>
+            </div>
+        </section>
         <section class="product-recommend section-common" id="productRecommend"></section>
     </main>
     <footer class="footer"></footer>
