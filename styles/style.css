@@ -268,7 +268,7 @@ button {
 .btn-form {
     background-color: rgba(215, 83, 0, 0.6);
     color: var(--color-white);
-    /* padding: 11px 42px; */
+    padding: 11px 42px; 
 }
 
 .btn-form:hover {
@@ -545,7 +545,121 @@ button {
 .faq-answer.show {
     display: block;
 }
+
 /* Form */
+.form__wrapper {
+    border: 1px solid red;
+    max-width: 90vw;/*883px 90vw 58vw*/
+    margin: 0 auto;
+}
+
+.form__text {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;/*20px*/
+    margin-bottom: clamp(30px, 3.646vw, 54px);
+}
+
+.form__text h2 {
+    font-weight: var(--font-weight-bold);
+    letter-spacing: 0.05em;
+    margin-bottom: 0;
+}
+
+.form__text h3 {
+    text-transform: uppercase;
+    font-weight: var(--font-weight-regular);
+    letter-spacing: 0.05em;
+}
+
+.form__content {
+display: flex;
+flex-direction: column;
+align-items: center;
+}
+
+
+.form__input {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(clamp(240px, 25vw, 400px), 1fr));
+gap: clamp(16px, 2.5vw, 32px);
+justify-content: center;
+align-items: start;
+max-width: 100%;
+}
+
+
+.form__input input {
+border: 1px solid #a8a8a8;
+border-radius: 8px;
+background: var(--color-form-input);
+height: 48px;
+font-family: var(--font-base);
+font-size: 16px;
+color: #4d4d4d;
+padding: 12.5px 13px;
+width: 100%;
+}
+
+
+.checkbox {
+grid-column: 1 / 2;
+display: flex;
+align-items: center;
+gap: 10px;
+margin-top: clamp(20px, 2vw, 40px);
+}
+
+
+.checkbox input[type="checkbox"] {
+appearance: none;
+-webkit-appearance: none;
+-moz-appearance: none;
+border-radius: 5px;
+width: 26px;
+height: 26px;
+border: none;
+background-color: rgba(215, 83, 0, 0.6);
+cursor: pointer;
+position: relative;
+}
+
+
+.checkbox input[type="checkbox"]:checked::after {
+content: "✔";
+font-size: 24px;
+color: var(--color-bg);
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+}
+
+
+.checkbox a {
+color: var(--color-orange);
+text-decoration: none;
+cursor: pointer;
+}
+
+
+.checkbox label {
+font-size: 14px;
+font-weight: var(--font-weight-light);
+line-height: 1.4;
+}
+
+
+.form__button_wrapper {
+grid-column: 1 / -1;
+display: flex;
+justify-content: center;
+margin-top: clamp(20px, 2vw, 40px);
+}
+
+.modal {
+    display: none;
+}
 
 /* Footer */
 
