@@ -657,8 +657,41 @@ justify-content: center;
 margin-top: clamp(20px, 2vw, 40px);
 }
 
-.modal {
-    display: none;
+.privacy-content {
+    margin: 50px 0;
+}
+
+/* Privacy */
+.privacy-content h2 {
+    margin-bottom: 15px;
+    line-height: 1.4;
+}
+
+.privacy-content h3 {
+    margin: 20px 0 10px;
+}
+
+.privacy-content p {
+    margin-bottom: 12px;
+}
+
+.privacy-content ul {
+    padding-left: 20px;
+    margin-bottom: 15px;
+}
+
+.privacy-content ul li {
+    list-style: disc;
+    margin-bottom: 6px;
+}
+
+.privacy-content a {
+    cursor: pointer !important;
+}
+
+.divider {
+    margin: 46px 0;
+    border: 1px solid var(--color-form-input);
 }
 
 /* Footer */
