@@ -492,6 +492,8 @@ button {
 
 /* Reviews */
 .reviews__slider-wrapper {
+    max-width: 1400px;
+    margin: 0 auto;
     overflow: hidden;
     position: relative;
 }
@@ -505,7 +507,7 @@ button {
 
 .review-card {
     flex: 0 0 calc((100% - 60px) / 3);
-    max-width: 394px;
+    max-width: calc((100% - 60px) / 3);
     background-color: var(--color-header-footer-bg);
     color: var(--color-white);
     padding: 30px;
@@ -536,7 +538,7 @@ button {
 
 @keyframes scrollReviews {
     0% {
-            transform: translateX(0);
+        transform: translateX(0);
     }
     
     100% {
@@ -545,8 +547,13 @@ button {
 }
 
 @media (max-width: 1024px) {
+    .reviews__slider-wrapper {
+        max-width: 800px;
+        }
+
     .review-card {
-            flex: 0 0 calc((100% - 30px) / 2);
+        flex: 0 0 calc((100% - 30px) / 2);
+        max-width: calc((100% - 30px) / 2);
         }
 }
 
