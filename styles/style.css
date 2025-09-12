@@ -677,6 +677,16 @@ button {
     gap: 15px;
 }
 
+.stars-input span img {
+    cursor: pointer;
+    filter: grayscale(100%);
+    transition: filter 0.2s;
+}
+
+.stars-input span.selected img {
+    filter: grayscale(0%) brightness(1.2);
+}
+
 .review-form__overlay textarea,
 .review-form__overlay input {
     background: transparent;
@@ -726,19 +736,15 @@ button {
     color: var(--color-gray);
 }
 
-.review__buttons {
-    display: flex;
-    gap: 15px;
-}
-
 .btn-review-form {
+    align-self: center;
+    width: fit-content;
     padding: 10px 30px;
 }
 
-
-/* .hidden {
+.hidden {
     display: none;
-} */
+}
 
 
 @media (max-width: 1440px) {
