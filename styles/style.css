@@ -644,28 +644,30 @@ button {
 /* Blog */
 
 /* Parallax */
+.parallax__mobile {
+    display: none;
+}
+
 .parallax {
-    /*height: clamp(200px, 50vh, 400px);
+    height: 400px;
     background-image: url('../assets/images/parallax.webp');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
-    background-repeat: no-repeat;*/
-    position: relative;
-    height: 35vw;    
-    overflow: hidden;
+    background-repeat: no-repeat;
 }
 
 .parallax__img {
-    position: absolute;
-    top: 0;/*-10%*/
-    left: 0;
     width: 100%;
-    height: 120%; 
+    height: 100%;
     object-fit: cover;
-    will-change: transform;
+    position: absolute;
+    top: 0;
+    left: 0;
     transform: translateY(0);
+    will-change: transform;
 }
+
 
 /* FAQ */
 .faq__wrapper {
@@ -865,15 +867,33 @@ button {
         grid-template-columns: repeat(4, 1fr);
     }
 
+    /* Parallax */
+    .parallax {
+        display: none;
+    }
+
+    .parallax__mobile {
+        display: block;
+        height: 650px;
+        overflow: hidden;
+        position: relative;
+        z-index: 1;
+    }
+
     /* Form */
     .form__wrapper {
         width: 70%;
-}
+    }
 }
 
 @media (max-width: 1024px) {
     .product-items__wrapper {
         grid-template-columns: repeat(3, 1fr);
+    }
+
+    /* Parallax */
+        .parallax__mobile {
+        height: 550px;
     }
 
     /* Form */
@@ -895,6 +915,11 @@ button {
         align-items: flex-start;
     }
 
+    /* Parallax */
+    .parallax__mobile {
+        height: 474px;
+    }
+
     /* Form */
     .form__input {
         align-items: center;
@@ -908,8 +933,8 @@ button {
 
 @media (max-width: 575px) {
     /* Parallax */
-    .parallax__img {
-    height: 150%; 
+    .parallax__mobile{
+    height: 300px; 
     }
 
     /* Form */

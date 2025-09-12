@@ -35,12 +35,22 @@ setInterval(scrollSlider, 4000); // каждые 4 секунды
 });
 
 /* Parallax */
-window.addEventListener('scroll', () => {
-  const parallax = document.querySelector('.parallax');
-  const img = document.querySelector('.parallax__img');
-  
-  const rect = parallax.getBoundingClientRect();
-  const offset = -rect.top * 0.6; 
+document.addEventListener("DOMContentLoaded", () => {
+  const img = document.querySelector(".parallax__mobile .parallax__img");
+  if (!img) return;
 
-  img.style.transform = `translateY(${offset}px)`;
+  window.addEventListener("scroll", () => {
+    const block = img.parentElement;
+    const rect = block.getBoundingClientRect();
+    const windowHeight = window.innerHeight;
+
+    if (rect.top < windowHeight && rect.bottom > 0) {
+      const blockHeight = block.offsetHeight;
+      const progress = (windowHeight - rect.top) / (windowHeight + blockHeight);
+      const maxShift = blockHeight * 0.6;
+      img.style.transform = `translateY(${(progress - 0.5) * 2 * maxShift}px)`;
+    }
+  });
 });
+
+
