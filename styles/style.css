@@ -88,6 +88,7 @@
     --color-white: #FFFFFF;
     --color-card: #F3F1E8;
     --color-orange: #D75300;
+    --color-orange-light: rgba(215, 83, 0, 0.6);
     --color-form-input: rgba(25, 26, 24, 0.3);
     --color-gray: #555555;
 
@@ -551,9 +552,62 @@ button {
 
 /* Page Product */
 /* Product-tabs */
+.product-tabs {
+    display: flex;
+    gap: 20px;
+    border-bottom: 2px solid var(--color-orange-light);
+    padding-left: 30px;
+    padding-top: 3px;
+    overflow: hidden;
+    
+}
+
+.product-tab {
+    position: relative;
+    top: 0;
+    padding: 18px 100px;
+    cursor: url('../assets/icons/magnifying-glass.svg') 16 16, auto;
+    border: none;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    background: var(--color-orange-light);
+    color: var(--color-white);
+    transition: top 0.2s ease;
+    margin-bottom: -3px;
+}
+
+.product-tab:hover {
+    top: -3px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+}
+
+.reviews-list {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+.review {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
 .review-header {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+}
+
+.stars,
+.review-date {
+    display: flex;
+    align-items: center;
+}
+
+.review__user-info {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 15px;
 }
 
 @media (max-width: 1440px) {
