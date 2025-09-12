@@ -602,6 +602,7 @@ button {
     display: flex;
     gap: 40px;
     align-items: center;
+    margin-bottom: 50px;
 }
 
 .reviews-header-title {
@@ -746,6 +747,33 @@ button {
     display: none;
 }
 
+.description__wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+}
+
+.tools-list li,
+.extra-tools-list li {
+    position: relative;
+    padding-left: 30px;
+    margin-bottom: 10px;
+}
+
+.tools-list li::before,
+.extra-tools-list li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 20px;
+    height: 20px;
+    transform: translateY(-50%);
+    background-image: url('../assets/icons/tick.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
 
 @media (max-width: 1440px) {
     .product-items__wrapper {
@@ -787,6 +815,13 @@ button {
         flex-direction: column;
         gap: 15px;
     }
+    .product-tabs {
+        justify-content: center;
+        padding-left: 0;
+    }
+    .product-tab {
+        padding: 12px 50px;
+    }
 }
 
 @media (max-width: 575px) {
@@ -816,7 +851,9 @@ button {
     .review__buttons button {
         width: 100%;
     }
-
+    .product-tab {
+        padding: 12px 30px;
+    }
 }
 
 /* @media (max-width: 420px) {
