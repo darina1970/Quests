@@ -13,7 +13,26 @@
 </head>
 
 <body>
-    <header class="header"></header>
+    <header id="header" class="header">
+        <div class="header__wrapper container">
+            <a href="/" class="logo"><img src="./assets/logo.svg" alt="logo" /></a>
+            <nav class="header__nav">
+                <ul class="header__nav-list text-black text-uppercase list-unstyled">
+                    <li class="nav-list__item"><a href="/">Home</a></li>
+                </ul>
+            </nav>
+            <div class="header__icons">
+                <a href="#" class="header__cart">
+                    <img src="./assets/icons/cart.svg" alt="product cart" />
+                </a>
+                <button class="header__burger" aria-label="menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
     <main>
         <section class="hero section-decorated-light" id="hero"></section>
         <section class="blog-article__main section-common" id="productInfo"></section>
@@ -79,8 +98,21 @@
         </section>
         <section class="form section-common" id="form"></section>
     </main>
-    <footer class="footer"></footer>
-
+    <footer class="footer">
+        <div class="footer__wrapper container">
+            <div class="logo">
+                <a href="/"><img src="./assets/logo.svg" alt="logo" /></a>
+            </div>
+            <nav class="footer__nav">
+                <ul class="footer__nav-list">
+                    <li class="nav-list__item"><a href="/">Home</a></li>
+                </ul>
+            </nav>
+            <div class="footer__arrow">
+                <a href="#header"><img src="./assets/icons/scroll-up.svg" alt="scroll up" /></a>
+            </div>
+        </div>
+    </footer>
 
     <script type="module" src="./js/blog.js"></script>
 </body>
