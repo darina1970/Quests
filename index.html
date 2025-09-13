@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,11 +11,39 @@
 
     <link rel="stylesheet" href="./styles/style.css">
 </head>
+
 <body>
-    <header class="header" id="header"></header>
+    <header id="header" class="header main-pg">
+        <div class="header__wrapper container">
+            <a href="/" class="logo"><img src="./assets/logo.svg" alt="logo" /></a>
+            <nav class="header__nav">
+                <ul class="header__nav-list text-black text-uppercase list-unstyled">
+                    <li class="nav-list__item"><a href="#products">our products</a></li>
+                    <li class="nav-list__item"><a href="#reviews">REVIEWS</a></li>
+                    <li class="nav-list__item"><a href="blog.html">Blog</a></li>
+                    <li class="nav-list__item"><a href="#faq">FAQ</a></li>
+                </ul>
+            </nav>
+            <div class="header__icons">
+                <a href="#" class="header__cart">
+                    <img src="./assets/icons/cart.svg" alt="product cart" />
+                </a>
+                <button class="header__burger" aria-label="menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
     <main>
         <section class="hero section-decorated-light" id="hero">
             <img class="hero__bg" src="./assets/images/hero.webp">
+            <div class="hero__content">
+                <h1 class="hero__title">Unlock the Secrets Hidden at Home</h1>
+                <p class="hero__subtitle">The mystery begins right at your doorstep</p>
+                <a href="#products" class="btn btn-hero">See Our Products</a>
+            </div>
         </section>
         <section class="products section-common" id="products">
             <div class="products__wrapper container">
@@ -164,6 +193,63 @@
             </div>
         </section>
         <section class="reviews section-decorated-dark section-common" id="reviews">
+            <div class="container">
+                <h2 class="text-align">REVIEWS</h2>
+                <div class="reviews__slider-wrapper">
+                    <div class="reviews__slider">
+                        <div class="review-card">
+                            <div class="review-card__stars">★★★★★</div>
+                            <div class="review-card__author">Julia</div>
+                            <p class="review-card__text">We hosted the quest on Saturday and it was an absolute hit!
+                                Everyone loved it — adults and kids alike. The puzzles were
+                                fun and varied, and the witty texts made us laugh throughout. Thank you for such a
+                                fantastic celebration!</p>
+                        </div>
+                        <div class="review-card">
+                            <div class="review-card__stars">★★★★★</div>
+                            <div class="review-card__author">Leo</div>
+                            <p class="review-card__text">We hosted the quest on Saturday and it was an absolute hit!
+                                Everyone loved it — adults and kids alike. The puzzles were
+                                fun and varied, and the witty texts made us laugh throughout. Thank you for such a
+                                fantastic celebration!
+                            </p>
+                        </div>
+                        <div class="review-card">
+                            <div class="review-card__stars">★★★★★</div>
+                            <div class="review-card__author">Maya</div>
+                            <p class="review-card__text">We hosted the quest on Saturday and it was an absolute hit!
+                                Everyone loved it — adults and kids alike. The puzzles were
+                                fun and varied, and the witty texts made us laugh throughout. Thank you for such a
+                                fantastic celebration!</p>
+                        </div>
+                        <div class="review-card">
+                            <div class="review-card__stars">★★★★★</div>
+                            <div class="review-card__author">Tom</div>
+                            <p class="review-card__text">We hosted the quest on Saturday and it was an absolute hit!
+                                Everyone loved it — adults and kids alike. The puzzles were
+                                fun and varied, and the witty texts made us laugh throughout. Thank you for such a
+                                fantastic celebration!
+                            </p>
+                        </div>
+                        <div class="review-card">
+                            <div class="review-card__stars">★★★★★</div>
+                            <div class="review-card__author">Anna</div>
+                            <p class="review-card__text">We hosted the quest on Saturday and it was an absolute hit!
+                                Everyone loved it — adults and kids alike. The puzzles were
+                                fun and varied, and the witty texts made us laugh throughout. Thank you for such a
+                                fantastic celebration!</p>
+                        </div>
+                        <div class="review-card">
+                            <div class="review-card__stars">★★★★★</div>
+                            <div class="review-card__author">Chris</div>
+                            <p class="review-card__text">We hosted the quest on Saturday and it was an absolute hit!
+                                Everyone loved it — adults and kids alike. The puzzles were
+                                fun and varied, and the witty texts made us laugh throughout. Thank you for such a
+                                fantastic celebration!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
         <section class="blog section-special" id="blog">
         </section>
@@ -221,10 +307,54 @@
                 </div>
             </div>
         </section>
-        <section class="form section-common" id="form"></section>
+        <section class="form section-common" id="form">
+            <div class="container">
+                <div class="form__wrapper">
+                    <div class="form__text">
+                        <h2 class="text-align">Keep Up with QuestTime</h2>
+                        <h3 class="text-align">Subscribe to our Newsletter</h3>
+                    </div>
+                    <form>
+                        <div class="form__content">
+                            <div class="form__input">
+                                <input class="name-input" type="text" placeholder="First Name" required>
+                                <input class="adress-input" type="text" placeholder="Email Address" required>
+                            </div>
+                            <div class="form__button_wrapper">
+                                <button class="btn-form btn" type="submit">Subscribe</button>
+                            </div>
+                            <div class="checkbox">
+                                <input type="checkbox" id="agree" required>
+                                <label for="agree">By subscribing, you agree to our <a href="/privacy-policy.html"
+                                        target="_blank">Privacy Policy</a></label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
     </main>
-    <footer class="footer"></footer>
+    <footer class="footer">
+        <div class="footer__wrapper container">
+            <div class="logo">
+                <a href="/"><img src="./assets/logo.svg" alt="logo" /></a>
+            </div>
+            <nav class="footer__nav">
+                <ul class="footer__nav-list">
+                    <li class="nav-list__item"><a href="#products">our products</a>
+                    </li>
+                    <li class="nav-list__item"><a href="#reviews">REVIEWS</a></li>
+                    <li class="nav-list__item"><a href="blog.html">Blog</a></li>
+                    <li class="nav-list__item"><a href="#faq">FAQ</a></li>
+                </ul>
+            </nav>
+            <div class="footer__arrow">
+                <a href="#header"><img src="./assets/icons/scroll-up.svg" alt="scroll up" /></a>
+            </div>
+        </div>
+    </footer>
 
     <script type="module" src="./js/main.js"></script>
 </body>
+
 </html>

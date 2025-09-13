@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,8 +11,29 @@
 
     <link rel="stylesheet" href="./styles/style.css">
 </head>
+
 <body>
-    <header class="header"></header>
+    <header id="header" class="header">
+        <div class="header__wrapper container">
+            <a href="/" class="logo"><img src="./assets/logo.svg" alt="logo" /></a>
+            <nav class="header__nav">
+                <ul class="header__nav-list text-black text-uppercase list-unstyled">
+                    <li class="nav-list__item"><a href="/">Home</a></li>
+                    <li class="nav-list__item"><a href="blog.html">Blog</a></li>
+                </ul>
+            </nav>
+            <div class="header__icons">
+                <a href="#" class="header__cart">
+                    <img src="./assets/icons/cart.svg" alt="product cart" />
+                </a>
+                <button class="header__burger" aria-label="menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
     <main>
         <section class="hero section-decorated-light" id="hero"></section>
         <section class="product-info section-common" id="productInfo"></section>
@@ -126,9 +148,25 @@
         </section>
         <section class="product-recommend section-common" id="productRecommend"></section>
     </main>
-    <footer class="footer"></footer>
+    <footer class="footer">
+        <div class="footer__wrapper container">
+            <div class="logo">
+                <a href="/"><img src="./assets/logo.svg" alt="logo" /></a>
+            </div>
+            <nav class="footer__nav">
+                <ul class="footer__nav-list">
+                    <li class="nav-list__item"><a href="/">Home</a></li>
+                    <li class="nav-list__item"><a href="blog.html">Blog</a></li>
+                </ul>
+            </nav>
+            <div class="footer__arrow">
+                <a href="#header"><img src="./assets/icons/scroll-up.svg" alt="scroll up" /></a>
+            </div>
+        </div>
+    </footer>
 
 
     <script type="module" src="./js/product.js"></script>
 </body>
+
 </html>
