@@ -13,7 +13,29 @@
 </head>
 
 <body>
-    <header class="header" id="header"></header>
+    <header id="header" class="header main-pg">
+        <div class="header__wrapper container">
+            <a href="/" class="logo"><img src="./assets/logo.svg" alt="logo" /></a>
+            <nav class="header__nav">
+                <ul class="header__nav-list text-black text-uppercase list-unstyled">
+                    <li class="nav-list__item"><a href="#products">our products</a></li>
+                    <li class="nav-list__item"><a href="#reviews">REVIEWS</a></li>
+                    <li class="nav-list__item"><a href="blog.html">Blog</a></li>
+                    <li class="nav-list__item"><a href="#faq">FAQ</a></li>
+                </ul>
+            </nav>
+            <div class="header__icons">
+                <a href="#" class="header__cart">
+                    <img src="./assets/icons/cart.svg" alt="product cart" />
+                </a>
+                <button class="header__burger" aria-label="menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
     <main>
         <section class="hero section-decorated-light" id="hero">
             <img class="hero__bg" src="./assets/images/hero.webp">
