@@ -1236,6 +1236,7 @@ nav li:hover {
     .reviews-header {
         flex-direction: column;
         align-items: center;
+    }
 
     /* Form */
     .form__wrapper {
@@ -1314,6 +1315,7 @@ nav li:hover {
     }
     .product-tab {
         padding: 12px 50px;
+    }
 
     /* Form */
     .form__input {
@@ -1375,4 +1377,4 @@ nav li:hover {
 
 /* @media (max-width: 420px) {
     
-}  */
+}   */
