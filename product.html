@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,17 +11,162 @@
 
     <link rel="stylesheet" href="./styles/style.css">
 </head>
+
 <body>
-    <header class="header"></header>
+    <header id="header" class="header">
+        <div class="header__wrapper container">
+            <a href="/" class="logo"><img src="./assets/logo.svg" alt="logo" /></a>
+            <nav class="header__nav">
+                <ul class="header__nav-list text-black text-uppercase list-unstyled">
+                    <li class="nav-list__item"><a href="/">Home</a></li>
+                    <li class="nav-list__item"><a href="blog.html">Blog</a></li>
+                </ul>
+            </nav>
+            <div class="header__icons">
+                <a href="#" class="header__cart">
+                    <img src="./assets/icons/cart.svg" alt="product cart" />
+                </a>
+                <button class="header__burger" aria-label="menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
     <main>
         <section class="hero section-decorated-light" id="hero"></section>
         <section class="product-info section-common" id="productInfo"></section>
-        <section class="product-tabs__info section-common" id="productTabsInfo"></section>
+        <section class="product-tabs__info section-common" id="productTabsInfo">
+            <div class="product-tabs__wrapper container">
+                <div class="product-tabs">
+                    <div class="product-tab active" data-tab="reviews">Reviews</div>
+                    <div class="product-tab" data-tab="description">Description</div>
+                </div>
+                <div class="tab-content active" id="reviews">
+                    <div class="reviews-header">
+                        <p class="reviews-header-title"><span id="reviewsCount">3 REVIEWS on </span><span class="review-game-name">Halloween Home Quest: Frank and his Spooky Gang (Ages 6-11)</span></p>
+                        <button class="btn btn-form btn-review-form" id="writeReview">Write Your Review</button>
+                    </div>
+                    <div id="reviewForm" class="review-form hidden">
+                        <img class="form-bg" src="./assets/images/product-page/piece-of-paper.png" alt="Form background">
+                        <form class="review-form__overlay">
+                            <div class="rating__wrapper">
+                                <p class="text-align">RATING *</p>
+                                <div class="stars-input">
+                                    <span data-value="1"><img src="./assets/icons/star.svg" alt="star one"></span>
+                                    <span data-value="2"><img src="./assets/icons/star.svg" alt="star two"></span>
+                                    <span data-value="3"><img src="./assets/icons/star.svg" alt="star three"></span>
+                                    <span data-value="4"><img src="./assets/icons/star.svg" alt="star four"></span>
+                                    <span data-value="5"><img src="./assets/icons/star.svg" alt="star five"></span>
+                                </div>
+                            </div>
+                            <div class="review__wrapper">
+                                <p class="text-align">REVIEW *</p>
+                                <textarea class="review-text" name="review-text" id="reviewText" placeholder="Text your message here"></textarea>
+                            </div>
+                            <div class="name__wrapper">
+                                <p class="text-align">YOUR NAME</p>
+                                <input type="text" id="reviewName" placeholder="Your name">
+                            </div>
+                            <div class="email__wrapper">
+                                <p class="text-align">YOUR EMAIL </p>
+                                <input type="email" id="reviewEmail" placeholder="Your email">
+                            </div>
+                            <p class="text-align notion">Your email address will not be published. Required fields are marked *</p>
+                            <button class="btn btn-form btn-review-form" id="submit-review">Submit Your Review</button>
+                        </form>
+                    </div>    
+                    <div class="reviews-list">
+                        <div class="review">
+                            <div class="review-header">
+                                <img src="./assets/icons/stars.svg" alt="stars">
+                                <p class="review-date">10/01/24</p>
+                            </div>
+                            <div class="review__user-info">
+                                <img src="./assets/icons/review-icon.svg" alt="user icon">
+                                <p>Catherine</p>
+                            </div>
+                            <p>On New Year’s, we traditionally organized a quest for the kids from Natasha. This time it was “The  Strange Story of Professor Wondermaker.” Since we celebrated with a big group, there were five kids, and we decided to split them into two teams.To even things out, we involved one adult as well. Accordingly, all the tasks were printed in duplicate (and placed into ifferent envelopes — white ones for one team, kraft ones for the other).The children happily dove right into the comic book — they had never seen anything like that in a quest before! Then they moved on to the tasks — some of them weren’t easy at all, there were even some spy-style listenings to check whether the other team had solved a challenge.It was exciting for everyone — from ages 10–17 and even 40+. They were absorbed for about an hour and a half, maybe more — time just flew by, and everyone was happy!Natasha, thank you for helping us create such a wonderful adventure for the kids with minimal effort!
+                            </p>
+                        </div>
+                        <div class="review">
+                            <div class="review-header">
+                                <img src="./assets/icons/stars.svg" alt="stars">
+                                <p class="review-date">10/01/24</p>
+                            </div>
+                            <div class="review__user-info">
+                                <img src="./assets/icons/review-icon.svg" alt="user icon">
+                                <p>Catherine</p>
+                            </div>
+                            <p>On New Year’s, we traditionally organized a quest for the kids from Natasha. This time it was “The  Strange Story of Professor Wondermaker.” Since we celebrated with a big group, there were five kids, and we decided to split them into two teams.To even things out, we involved one adult as well. Accordingly, all the tasks were printed in duplicate (and placed into ifferent envelopes — white ones for one team, kraft ones for the other).The children happily dove right into the comic book — they had never seen anything like that in a quest before! Then they moved on to the tasks — some of them weren’t easy at all, there were even some spy-style listenings to check whether the other team had solved a challenge.It was exciting for everyone — from ages 10–17 and even 40+. They were absorbed for about an hour and a half, maybe more — time just flew by, and everyone was happy!Natasha, thank you for helping us create such a wonderful adventure for the kids with minimal effort!
+                            </p>
+                        </div>
+                        <div class="review">
+                            <div class="review-header">
+                                <img src="./assets/icons/stars.svg" alt="stars">
+                                <p class="review-date">10/01/24</p>
+                            </div>
+                            <div class="review__user-info">
+                                <img src="./assets/icons/review-icon.svg" alt="user icon">
+                                <p>Catherine</p>
+                            </div>
+                            <p>On New Year’s, we traditionally organized a quest for the kids from Natasha. This time it was “The  Strange Story of Professor Wondermaker.” Since we celebrated with a big group, there were five kids, and we decided to split them into two teams.To even things out, we involved one adult as well. Accordingly, all the tasks were printed in duplicate (and placed into ifferent envelopes — white ones for one team, kraft ones for the other).The children happily dove right into the comic book — they had never seen anything like that in a quest before! Then they moved on to the tasks — some of them weren’t easy at all, there were even some spy-style listenings to check whether the other team had solved a challenge.It was exciting for everyone — from ages 10–17 and even 40+. They were absorbed for about an hour and a half, maybe more — time just flew by, and everyone was happy!Natasha, thank you for helping us create such a wonderful adventure for the kids with minimal effort!
+                            </p>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="tab-content" id="description">
+                    <div class="description__wrapper">
+                        <p>At the beginning of the quest, the children receive an audio message from the ghost of Blackmore and learn that he is trapped somewhere in the castle, while a suspicious double has taken his place. To Blackmore’s surprise, neither his daughter Amalia, nor Aunt Ginny, nor his closest friends noticed the substitution. He tries to reach out to his relatives with his thoughts, since family ties are a great power. The children must visit each of them, piece together the fragments of his thoughts, and discover where Count Blackmore is being held. Naturally, the information will be encrypted with riddles and puzzles. By showing courage and ingenuity, the children will rescue Count Blackmore, uncover who his mysterious double really is, and of course, receive gifts from the ghost.The quest is available in two versions: with props and creative tasks, or as a fully printable version.</p>
+                        <p>For the printable version, you will need to print the tasks on a color printer or at a print shop, as well as:</p>
+                        <ul class="tools-list">
+                            <li>Scissors</li>
+                            <li>10 envelopes</li>
+                            <li>Double-sided tape, painter’s tape, or adhesive putty (e.g. Blu Tack)</li>
+                            <li>A pen or pencil for solving tasks</li>
+                            <li>A phone or tablet for scanning QR codes</li>
+                            <li>Several books</li>
+                            <li>Black or orange wool yarn</li>
+                            <li>Sweets (or other prizes) for the finale</li>
+                        </ul>
+                        <p>If you want to add a spooky atmosphere, we recommend the “with props” version. In addition to the items listed above, you will also need:</p>
+                        <ul class="extra-tools-list">
+                            <li>5 clean bottles, vials, or glasses (glass or plastic)</li>
+                            <li>a cup, spoon, or measuring cup</li>
+                            <li>juices, fruit drinks, water (5 different kinds)</li>
+                            <li>wool gloves (one pair per participant)</li>
+                            <li>glue pads or needle and thread (one set per participant)</li>
+                            <li>buttons, pieces of felt, or any decorative materials you have on hand for customizing the gloves.</li>
+                        </ul>
+                        <p>So, read the guide, print out the letters, tasks, and puzzles, cut out the necessary elements, and place them around your home (garden, studio) according to the plan. Get ready for a magical evening filled with the delighted shouts and laughter of children. Preparation will take no more than 1.5 hours. Some elements need to be added during the quest itself, so it’s important to stay nearby. This way, you’ll also be able to share the adventure together with your child (or children).</p>
+                        <p><strong>Quest authors:</strong> Dina Artemkina and Natalia Minskaya</p>
+                    </div>
+                </div>
+            </div>
+        </section>
         <section class="product-recommend section-common" id="productRecommend"></section>
     </main>
-    <footer class="footer"></footer>
+    <footer class="footer">
+        <div class="footer__wrapper container">
+            <div class="logo">
+                <a href="/"><img src="./assets/logo.svg" alt="logo" /></a>
+            </div>
+            <nav class="footer__nav">
+                <ul class="footer__nav-list">
+                    <li class="nav-list__item"><a href="/">Home</a></li>
+                    <li class="nav-list__item"><a href="blog.html">Blog</a></li>
+                </ul>
+            </nav>
+            <div class="footer__arrow">
+                <a href="#header"><img src="./assets/icons/scroll-up.svg" alt="scroll up" /></a>
+            </div>
+        </div>
+    </footer>
 
 
     <script type="module" src="./js/product.js"></script>
 </body>
+
 </html>
