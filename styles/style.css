@@ -954,6 +954,34 @@ nav li:hover {
 }
 
 /* Footer */
+.footer {
+    padding: 20px 0;
+}
+
+.footer__wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.footer__nav-list {
+    display: flex;
+    gap: 35px;
+}
+
+.footer__arrow {
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.footer__arrow:hover {
+    transform: scale(1.1);
+}
+
+.footer__arrow img {
+    width: clamp(60px, 9vw, 100px);
+    aspect-ratio: 1/1;
+}
 
 @media (max-width: 1440px) {
     .product-items__wrapper {
@@ -1039,10 +1067,13 @@ nav li:hover {
     .checkbox {
         justify-content: center;
     }
+
+    .footer__nav {
+        display: none;
+    }
 }
 
 @media (max-width: 575px) {
-
     .main-pg .header__nav {
         width: 100%;
     }
