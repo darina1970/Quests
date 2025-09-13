@@ -67,9 +67,9 @@ document.addEventListener("DOMContentLoaded", function () {
     let starsHTML = "";
     for (let i = 0; i < 5; i++) {
       if (i < selectedRating) {
-        starsHTML += `<img src="../assets/icons/star-full.svg" alt="star">`;
+        starsHTML += `<img src="./assets/icons/star-full.svg" alt="star">`;
       } else {
-        starsHTML += `<img src="../assets/icons/star.svg" alt="star">`;
+        starsHTML += `<img src="./assets/icons/star.svg" alt="star">`;
       }
     }
 
