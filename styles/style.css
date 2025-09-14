@@ -774,15 +774,12 @@ nav li:hover {
 /* Blog */
 
 /* You may also like */
-.text-align {
+.recommend-title {
     font-family: var(--font-review);
-    font-size: 21px;
     font-weight: var(--font-weight-regular);
     line-height: 1.4;
-    color: var(--color-text);
     text-align: left;
-    padding-left: 10px;
-    text-transform: none;
+    margin-bottom: 40px;
 }
 
 /* Parallax */
@@ -1388,6 +1385,11 @@ nav li:hover {
 
     .footer__nav {
         display: none;
+    }
+
+    .recommend-title {
+        width: 100%;
+        text-align: center;
     }
 }
 
