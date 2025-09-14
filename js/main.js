@@ -1,4 +1,22 @@
 document.addEventListener("DOMContentLoaded", () => {
+  const burger = document.querySelector(".header__burger");
+  const nav = document.querySelector(".header__nav");
+  const navLinks = document.querySelectorAll(".header__nav a");
+
+  burger.addEventListener("click", () => {
+    burger.classList.toggle("active");
+    nav.classList.toggle("active");
+    document.body.classList.toggle("lock");
+  });
+
+  navLinks.forEach((link) => {
+    link.addEventListener("click", () => {
+      burger.classList.remove("active");
+      nav.classList.remove("active");
+      document.body.classList.remove("lock");
+    });
+  });
+
   const faqItems = document.querySelectorAll(".faq-item");
 
   faqItems.forEach((item) => {
@@ -17,19 +35,38 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  const slider = document.querySelector('.reviews__slider');
-const cards = document.querySelectorAll('.review-card');
-let currentIndex = 0;
+  const slider = document.querySelector(".reviews__slider");
+  const cards = document.querySelectorAll(".review-card");
+  let currentIndex = 0;
 
-function scrollSlider() {
-  const cardWidth = cards[0].offsetWidth + 30; // ширина + gap
-  const visibleCards = window.innerWidth >= 1024 ? 3 : window.innerWidth >= 768 ? 2 : 1;
-  const maxIndex = cards.length - visibleCards;
+  function scrollSlider() {
+    const cardWidth = cards[0].offsetWidth + 30; // ширина + gap
+    const visibleCards =
+      window.innerWidth >= 1024 ? 3 : window.innerWidth >= 768 ? 2 : 1;
+    const maxIndex = cards.length - visibleCards;
 
-  currentIndex = (currentIndex + 1) > maxIndex ? 0 : currentIndex + 1;
-  slider.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
-}
+    currentIndex = currentIndex + 1 > maxIndex ? 0 : currentIndex + 1;
+    slider.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
+  }
 
-setInterval(scrollSlider, 4000); // каждые 4 секунды
+  setInterval(scrollSlider, 4000); // каждые 4 секунды
 
+  /* Parallax */
+  const img = document.querySelector(".parallax__mobile .parallax__img");
+  if (!img) return;
+
+  window.addEventListener("scroll", () => {
+    const block = img.parentElement;
+    const rect = block.getBoundingClientRect();
+    const windowHeight = window.innerHeight;
+
+    if (rect.top < windowHeight && rect.bottom > 0) {
+      const blockHeight = block.offsetHeight;
+      const progress = (windowHeight - rect.top) / (windowHeight + blockHeight);
+      const maxShift = blockHeight * 0.6;
+      img.style.transform = `translateY(${(progress - 0.5) * 2 * maxShift}px)`;
+    }
+  });
 });
+
+
