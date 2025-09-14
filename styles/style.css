@@ -101,7 +101,8 @@ button,
 a,
 input,
 select,
-textarea {
+textarea,
+.cursor-scale {
     cursor: url('../assets/icons/magnifying-glass.svg') 16 16, auto !important;
 }
 
