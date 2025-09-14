@@ -38,16 +38,25 @@
         <section class="product-hero section-common" id="hero">
             <div class="product-hero__wrapper container">
                 <div class="product-hero__slider">
-                    <div class="main-image">
-                            <img id="current" src="./assets/images/product-page/quest1-1.webp" alt="Главное фото">
-                        </div>
-                        <div class="thumbnails">
-                            <img src="./assets/images/product-page/quest1-2.webp" class="thumb active" alt="thumb">
-                            <img src="./assets/images/product-page/quest1-3.webp" class="thumb" alt="thumb">
-                            <img src="./assets/images/product-page/quest1-4.webp" class="thumb" alt="thumb">
-                            <img src="./assets/images/product-page/quest1-5.webp" class="thumb" alt="thumb">
-                            <img src="./assets/images/product-page/quest1-6.webp" class="thumb" alt="thumb">
-                        </div>
+                    <div class="product__main-image">
+                        <img id="current" src="./assets/images/product-page/quest1-1.webp" alt="Main image">
+                    </div>
+                    <div class="images-slider">
+                        <img src="./assets/images/product-page/quest1-2.webp" class="img active" alt="img">
+                        <img src="./assets/images/product-page/quest1-3.webp" class="img" alt="img">
+                        <img src="./assets/images/product-page/quest1-4.webp" class="img" alt="img">
+                        <img src="./assets/images/product-page/quest1-5.webp" class="img" alt="img">
+                        <img src="./assets/images/product-page/quest1-6.webp" class="img" alt="img">
+                        <img src="./assets/images/card-2.webp" class="img" alt="img">
+                        <img src="./assets/images/card-3.webp" class="img" alt="img">
+                        <img src="./assets/images/card-4.webp" class="img" alt="img">
+                    </div>
+                </div>
+                <div id="lightbox" class="lightbox">
+                    <span class="btn-close">&times;</span>
+                    <span class="btn-prev">&#10094;</span>
+                    <img class="lightbox-content" id="lightbox-img" alt="lightbox">
+                    <span class="btn-next">&#10095;</span>
                 </div>
                 <div class="product-hero__description">
                     <div class="product-hero__text">
@@ -68,6 +77,7 @@
                         <p><strong>Number of players:</strong> 1–8</p>
                         <p><strong>Duration:</strong> ~60 minutes</p>
                     </div>
+                    <button class="btn-form btn hero-btn">Add to Cart</button>
                 </div>
             </div>
         </section>
