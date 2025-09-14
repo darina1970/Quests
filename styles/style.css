@@ -135,7 +135,6 @@ html {
 
 
 body {
-    cursor: url('../assets/icons/magnifying-glass.svg') 16 16, auto;
     min-width: 320px;
     display: flex;
     flex-direction: column;
