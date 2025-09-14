@@ -787,15 +787,23 @@ nav li:hover {
     gap: 26px;
 }
 
-.blog__item-image {
+.blog__item-image,
+.blog__item-image-main {
     width: 100%;
     aspect-ratio: 5/3;
+    overflow: hidden;
 }
 
-.blog__item-image img {
+.blog__item-image img,
+.blog__item-image-main img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.blog__item-image:hover img {
+    transform: scale(1.2);
 }
 
 .blog__item h3 {
