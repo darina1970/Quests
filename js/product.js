@@ -101,3 +101,15 @@ document.addEventListener("DOMContentLoaded", function () {
     setTimeout(() => thanksMsg.remove(), 3000);
   });
 });
+
+// Миниатюры
+const thumbnails = document.querySelectorAll(".thumb");
+const current = document.getElementById("current");
+
+thumbnails.forEach(thumb => {
+  thumb.addEventListener("click", () => {
+    current.src = thumb.src;
+    thumbnails.forEach(t => t.classList.remove("active"));
+    thumb.classList.add("active");
+  });
+});

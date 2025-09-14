@@ -998,6 +998,59 @@ nav li:hover {
 }
 
 /* Page Product */
+/* Product-hero */
+.product-hero {}
+
+.product-hero__wrapper {
+    display: flex;
+    gap: 112px;
+}
+
+.product-hero__slider {
+    max-width: 600px;
+    flex: 1;
+}
+
+.main-image img {
+  width: 100%;
+  border-radius: 12px;
+  transition: 0.3s;
+}
+
+.thumbnails {
+  display: flex;
+  justify-content: center;
+  gap: 7px;
+  margin-top: 10px;
+}
+
+.thumbnails img {
+  height: 60px;
+  object-fit: cover;
+  border-radius: 6px;
+  opacity: 0.5;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.thumbnails img.active {
+  opacity: 1;
+  border: 2px solid var(--color-golden);
+}
+
+.product-hero__text h4 {
+    text-transform: uppercase;
+    padding-bottom: 21px;
+}
+
+.product-hero__text p {
+    padding-bottom: 21px;
+}
+
+.product-hero__text li {
+    padding-bottom: 20px;
+}
+
 /* Product-tabs */
 .product-tabs {
     display: flex;
