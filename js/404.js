@@ -1,9 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const reveal = document.getElementById("reveal");
-  const beam = document.getElementById("beam");
-  const sparkWrap = document.getElementById("sparkWrap");
+  const reveal = document.querySelector(".page-404 #reveal");
+  const beam = document.querySelector(".page-404 #beam");
+  const sparkWrap = document.querySelector(".page-404 #sparkWrap");
 
-  if (!reveal || !beam || !sparkWrap) return;
+  if (!beam || !sparkWrap) return;
 
   // стартовые координаты
   let mx = 50;
@@ -13,8 +13,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // функция обновления CSS переменных
   function updatePos(xPerc, yPerc) {
-    reveal.style.setProperty("--mx", xPerc + "%");
-    reveal.style.setProperty("--my", yPerc + "%");
+    if (reveal) {
+      reveal.style.setProperty("--mx", xPerc + "%");
+      reveal.style.setProperty("--my", yPerc + "%");
+    }
     beam.style.setProperty("--mx", xPerc + "%");
     beam.style.setProperty("--my", yPerc + "%");
   }
@@ -23,7 +25,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // создаём искры
   const sparks = [];
-  for (let i = 0; i < 10; i++) {
+  const sparkCount = 10;
+  for (let i = 0; i < sparkCount; i++) {
     const s = document.createElement("div");
     s.className = "spark";
     const left = 20 + Math.random() * 60;
@@ -34,11 +37,14 @@ document.addEventListener("DOMContentLoaded", () => {
     sparks.push({ el: s, left, top });
   }
 
+  // анимация
   function loop() {
     sweep += 0.8 * speed;
+    // двигаем фонарик влево-вправо по цифрам
     mx = 20 + 60 * (0.5 + 0.5 * Math.sin(sweep * 0.018));
     updatePos(mx, my);
 
+    // искры вокруг фонарика
     sparks.forEach((sp) => {
       const dx = mx - sp.left;
       const dy = my - sp.top;
