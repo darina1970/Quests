@@ -1188,6 +1188,7 @@ nav li:hover {
     object-fit: cover;
     border-radius: 12px;
     transition: 0.3s;
+    cursor: pointer;
 }
 
 .images-slider {
