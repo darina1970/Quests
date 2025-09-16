@@ -1779,10 +1779,10 @@ body.page-404 .spark {
     }
     body.page-404 .big-404 .reveal {
         -webkit-mask-image: radial-gradient(circle 150px at var(--mx,50%) var(--my,50%), rgba(0,0,0,1) 0%, rgba(0,0,0,0.65) 40%, rgba(0,0,0,0) 60%);
-        mask-image: radial-gradient(circle 120px at var(--mx,50%) var(--my,50%), rgba(0,0,0,1) 0%, rgba(0,0,0,0.65) 40%, rgba(0,0,0,0) 60%);
+        mask-image: radial-gradient(circle 160px at var(--mx,50%) var(--my,50%), rgba(0,0,0,1) 0%, rgba(0,0,0,0.65) 40%, rgba(0,0,0,0) 60%);
     }
 
     body.page-404 .beam-glow {
-        background: radial-gradient(circle 130px at var(--mx,50%) var(--my,50%), rgba(255,200,120,0.25), transparent 35%);
+        background: radial-gradient(circle 240px at var(--mx,50%) var(--my,50%), rgba(255,200,120,0.25), transparent 35%);
     }   
 }
