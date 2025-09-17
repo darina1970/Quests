@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,8 +11,150 @@
 
     <link rel="stylesheet" href="./styles/style.css">
 </head>
+
 <body>
-    
-    
+    <header id="header" class="header">
+        <div class="header__wrapper container">
+            <a href="/" class="logo"><img src="./assets/logo.svg" alt="logo" /></a>
+            <nav class="header__nav">
+                <ul class="header__nav-list text-black text-uppercase list-unstyled">
+                    <li class="nav-list__item"><a href="/">Home</a></li>
+                    <li class="nav-list__item"><a href="blog.html">Blog</a></li>
+                </ul>
+            </nav>
+            <div class="header__icons">
+                <a href="#" class="header__cart">
+                    <img src="./assets/icons/cart.svg" alt="product cart" />
+                </a>
+                <button class="header__burger" aria-label="menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+    <main>
+        <section class="article section-common" id="article">
+            <div class="article__wrapper container">
+                <div class="blog-article__image">
+                    <img src="./assets/icons/monogram.png" alt="monogram">
+                </div>
+                <div class="article__slider">
+                    <div class="article__main-image">
+                        <img id="current" src="./assets/images/card-8.webp" alt="Main image">
+                    </div>
+                    <div class="images-slider">
+                        <img src="./assets/images/card-8.webp" class="img active" alt="img">
+                        <img src="./assets/images/card-8.webp" class="img" alt="img">
+                        <img src="./assets/images/card-8.webp" class="img" alt="img">
+                        <img src="./assets/images/card-8.webp" class="img" alt="img">
+                    </div>
+                    <div class="slider-arrows">
+                        <button class="left-arrow"><img src="./assets/icons/left-arrow.png" alt="left-arrow"></button>
+                        <button class="right-arrow"><img src="./assets/icons/right-arrow.png"
+                                alt="right-arrow"></button>
+                    </div>
+                </div>
+                <div id="lightbox" class="lightbox">
+                    <span class="btn-close">&times;</span>
+                    <span class="btn-prev">&#10094;</span>
+                    <img class="lightbox-content" id="lightbox-img" alt="lightbox">
+                    <span class="btn-next">&#10095;</span>
+                </div>
+                <div class="blog__item-descr">
+                    <a href="article.html">
+                        <h3 class="blog__item-title">Deciphering an Ancient Map</h3>
+                    </a>
+                    <p class="blog__item-date">August 28, 2025</p>
+                    <div class="blog__item-text">
+                        <p>Faded ink, torn edges, and cryptic symbols… The map seems to whisper
+                            secrets of places long forgotten. Every mark invites you to look closer, to connect clues
+                            and
+                            uncover what lies beyond the obvious. Faded ink, torn edges, and cryptic symbols… The map
+                            seems
+                            to whisper secrets of places long forgotten. Every mark invites you to look closer, to
+                            connect
+                            clues and uncover what lies beyond the obvious.Faded ink, torn edges, and cryptic symbols…
+                            The
+                            map seems to whisper secrets of places long forgotten. Every mark invites you to look
+                            closer, to
+                            connect clues and uncover what lies beyond the obvious.Faded ink, torn edges, and cryptic
+                            symbols… The map seems to whisper secrets of places long forgotten. Every mark invites you
+                            to
+                            look closer, to connect clues and uncover what lies beyond the obvious.Faded ink, torn
+                            edges,
+                            and cryptic symbols… The map seems to whisper secrets of places long forgotten. Every mark
+                            invites you to look closer, to connect clues and uncover what lies beyond the obvious.Faded
+                            ink,
+                            torn edges, and cryptic symbols… The map seems to whisper secrets of places long forgotten.
+                            Every mark invites you to look closer, to connect clues and uncover what lies beyond the
+                            obvious.Faded ink, torn edges, and cryptic symbols…
+                            The map seems to whisper secrets of places long forgotten. Every mark invites you to look
+                            closer, to connect clues and uncover what lies beyond the obvious.Faded ink, torn edges, and
+                            cryptic symbols…</p>
+                        <p>The map seems to whisper secrets of places long forgotten. Every mark invites you to look
+                            closer, to connect clues and uncover what lies beyond the obvious.Faded ink, torn edges, and
+                            cryptic symbols… The map seems to whisper secrets of places long forgotten. Every mark
+                            invites
+                            you to look closer, to connect clues and uncover what lies beyond the obvious.Faded ink,
+                            torn
+                            edges, and cryptic symbols… The map seems to whisper secrets of places long forgotten. Every
+                            mark invites you to look closer, to connect clues and uncover what lies beyond the
+                            obvious.Faded
+                            ink, torn edges, and cryptic symbols… The map seems to whisper secrets of places long
+                            forgotten.
+                            Every mark invites you to look closer, to connect clues and uncover what lies beyond the
+                            obvious.Faded ink, torn edges, and cryptic symbols… The map seems to whisper secrets of
+                            places
+                            long forgotten. Every mark invites you to look closer, to connect clues and uncover what
+                            lies
+                            beyond the obvious.</p>
+                        <p>Faded ink, torn edges, and cryptic symbols… The map seems to whisper secrets of places long
+                            forgotten. Every mark invites you to look closer, to connect clues and uncover what lies
+                            beyond
+                            the obvious. Faded ink, torn edges, and cryptic symbols… The map seems to whisper secrets of
+                            places long forgotten. Every mark invites you to look closer, to connect clues and uncover
+                            what
+                            lies beyond the obvious. Faded ink, torn edges, and cryptic symbols… The map seems to
+                            whisper
+                            secrets of places long forgotten. Every mark invites you to look closer, to connect clues
+                            and
+                            uncover what lies beyond the obvious. Faded ink, torn edges, and cryptic symbols… The map
+                            seems
+                            to whisper secrets of places long forgotten. Every mark invites you to look closer, to
+                            connect
+                            clues and uncover what lies beyond the obvious. Faded ink, torn edges, and cryptic symbols…
+                            The
+                            map seems to whisper secrets of places long forgotten. Every mark invites you to look
+                            closer, to
+                            connect clues and uncover what lies beyond the obvious.</p>
+                    </div>
+                </div>
+                <a href="blog.html" class="blog__link">
+                    <span>BACK TO BLOG</span>
+                    <img src="./assets/icons/learn-more-arrow.svg" alt="arrow right">
+                </a>
+            </div>
+        </section>
+    </main>
+    <footer class="footer">
+        <div class="footer__wrapper container">
+            <div class="logo">
+                <a href="/"><img src="./assets/logo.svg" alt="logo" /></a>
+            </div>
+            <nav class="footer__nav">
+                <ul class="footer__nav-list">
+                    <li class="nav-list__item"><a href="/">Home</a></li>
+                </ul>
+            </nav>
+            <div class="footer__arrow">
+                <a href="#header"><img src="./assets/icons/scroll-up.svg" alt="scroll up" /></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="./js/article.js"></script>
 </body>
+
 </html>
