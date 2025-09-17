@@ -19,12 +19,17 @@ document.addEventListener("DOMContentLoaded", function () {
     sliderContainer.innerHTML = "";
 
     const thumbnails = [];
-    for (let i = 1; i <= 4; i++) {
+    for (let i = 0; i < 4; i++) {
       const thumbIndex = (currentIndex + i) % allImages.length;
       const thumb = document.createElement("img");
       thumb.src = allImages[thumbIndex].src;
       thumb.className = "img";
       thumb.alt = `Thumbnail ${thumbIndex}`;
+
+      if (thumbIndex === currentIndex) {
+        thumb.classList.add("active");
+      }
+
       thumb.addEventListener("click", () => {
         currentIndex = thumbIndex;
         updateMainImage();
