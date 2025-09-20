@@ -2,17 +2,40 @@ document.addEventListener("DOMContentLoaded", function () {
   const tabs = document.querySelectorAll(".product-tab");
   const tabContents = document.querySelectorAll(".tab-content");
 
+  function activateTab(targetId) {
+    tabs.forEach((t) => t.classList.remove("active"));
+    tabContents.forEach((tc) => tc.classList.remove("active"));
+
+    const targetTab = document.querySelector(`[data-tab="${targetId}"]`);
+    const targetContent = document.getElementById(targetId);
+
+    if (targetTab && targetContent) {
+      targetTab.classList.add("active");
+      targetContent.classList.add("active");
+    }
+  }
+
   tabs.forEach((tab) => {
     tab.addEventListener("click", () => {
       const target = tab.dataset.tab;
+      activateTab(target);
 
-      tabs.forEach((t) => t.classList.remove("active"));
-      tabContents.forEach((tc) => tc.classList.remove("active"));
+      // tabs.forEach((t) => t.classList.remove("active"));
+      // tabContents.forEach((tc) => tc.classList.remove("active"));
 
-      tab.classList.add("active");
-      document.getElementById(target).classList.add("active");
+      // tab.classList.add("active");
+      // document.getElementById(target).classList.add("active");
     });
   });
+
+  const reviewLink = document.querySelector('a[href="#reviews"]');
+  if (reviewLink) {
+    reviewLink.addEventListener("click", (e) => {
+      e.preventDefault();
+      activateTab("reviews");
+      document.getElementById("reviews").scrollIntoView({ behavior: "smooth" });
+    });
+  }
 
   const writeBtn = document.getElementById("writeReview");
   const reviewForm = document.getElementById("reviewForm");
