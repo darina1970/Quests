@@ -63,12 +63,12 @@
                 </div>
                 <div class="product-hero__description">
                     <div class="product-hero__text">
-                        <h3>Halloween Home Quests: Frank and his Spooky Gang (Ages 6-11)</h3>
+                        <h3 class="product-hero__title"><span>Halloween Home Quests: </span><span>Frank and his Spooky Gang (Ages 6-11)</span></h3>
                         <div class="rating-info">
                             <img src="./assets/icons/stars.svg" alt="stars">
-                            <span>(10 reviews)</span>
+                            <a href="#reviews">(10 reviews)</a>
                         </div>
-                        <p><strong>Price:</strong> €20</p>
+                        <p><strong>Price:</strong> €20 <span class="old-price"> €30</span></p>
                         <p><strong>Get a ready-made Halloween quest for your child!</strong></p>
                         <ul>
                             <li><img src="./assets/icons/tick.svg" alt="tick"> Complete printable materials for a Halloween quest.</li>
@@ -105,16 +105,22 @@
                             <div class="rating__wrapper">
                                 <p class="text-align">RATING *</p>
                                 <div class="stars-input">
-                                    <span data-value="1"><img src="./assets/icons/star.svg" alt="star one"></span>
-                                    <span data-value="2"><img src="./assets/icons/star.svg" alt="star two"></span>
-                                    <span data-value="3"><img src="./assets/icons/star.svg" alt="star three"></span>
-                                    <span data-value="4"><img src="./assets/icons/star.svg" alt="star four"></span>
-                                    <span data-value="5"><img src="./assets/icons/star.svg" alt="star five"></span>
+                                    <span data-value="1"><img src="./assets/icons/star-full.svg" alt="star one"></span>
+                                    <span data-value="2"><img src="./assets/icons/star-full.svg" alt="star two"></span>
+                                    <span data-value="3"><img src="./assets/icons/star-full.svg" alt="star three"></span>
+                                    <span data-value="4"><img src="./assets/icons/star-full.svg" alt="star four"></span>
+                                    <span data-value="5"><img src="./assets/icons/star-full.svg" alt="star five"></span>
                                 </div>
                             </div>
                             <div class="review__wrapper">
                                 <p class="text-align">REVIEW *</p>
                                 <textarea class="review-text" name="review-text" id="reviewText" placeholder="Text your message here"></textarea>
+                            </div>
+                            <div class="photo__wrapper">
+                                <p class="text-align">UPLOAD PHOTOS</p>
+                                <input type="file" id="reviewPhotos" name="reviewPhotos" accept="image/*" multiple>
+                                <div id="photoPreview" class="photo-preview"></div>
+                                <p id="photoError" class="photo-error" style="color: red; margin-top: 5px;"></p>
                             </div>
                             <div class="name__wrapper">
                                 <p class="text-align">YOUR NAME</p>
