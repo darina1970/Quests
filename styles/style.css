@@ -1199,6 +1199,7 @@ nav li:hover {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 15px;
 }
 
 .footer__socials-wrapper {
