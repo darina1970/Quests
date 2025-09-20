@@ -116,6 +116,12 @@
                                 <p class="text-align">REVIEW *</p>
                                 <textarea class="review-text" name="review-text" id="reviewText" placeholder="Text your message here"></textarea>
                             </div>
+                            <div class="photo__wrapper">
+                                <p class="text-align">UPLOAD PHOTOS</p>
+                                <input type="file" id="reviewPhotos" name="reviewPhotos" accept="image/*" multiple>
+                                <div id="photoPreview" class="photo-preview"></div>
+                                <p id="photoError" class="photo-error" style="color: red; margin-top: 5px;"></p>
+                            </div>
                             <div class="name__wrapper">
                                 <p class="text-align">YOUR NAME</p>
                                 <input type="text" id="reviewName" placeholder="Your name">

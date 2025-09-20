@@ -70,11 +70,142 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
+  // превью фото
+  // const photoInput = document.getElementById("reviewPhotos");
+  // const photoPreview = document.getElementById("photoPreview");
+  // const photoError = document.getElementById("photoError");
+  // const maxFiles = 3;
+
+  // photoInput.addEventListener("change", () => {
+  //   photoPreview.innerHTML = "";
+  //   photoError.textContent = "";
+  //   let files = Array.from(photoInput.files);
+
+  //   if (files.length > maxFiles) {
+  //     photoError.textContent = `You can upload up to ${maxFiles} images.`;
+  //     files = files.slice(0, maxFiles);
+  //   }
+
+  //   files.forEach((file) => {
+  //     const reader = new FileReader();
+  //     reader.onload = function (e) {
+  //       const img = document.createElement("img");
+  //       img.src = e.target.result;
+  //       img.style.width = "80px";
+  //       img.style.height = "80px";
+  //       img.style.objectFit = "cover";
+  //       img.style.margin = "5px";
+  //       img.style.borderRadius = "4px";
+  //       photoPreview.appendChild(img);
+  //     };
+  //     reader.readAsDataURL(file);
+  //   });
+  // });
+
+  // submitBtn.addEventListener("click", (e) => {
+  //   e.preventDefault();
+
+  //   const name = document.getElementById("reviewName").value.trim();
+  //   const text = document.getElementById("reviewText").value.trim();
+
+  //   if (!name || !text || selectedRating === 0) {
+  //     alert("Please fill in your name, review, and select a rating");
+  //     return;
+  //   }
+
+  //   const newReview = document.createElement("div");
+  //   newReview.classList.add("review");
+
+  //   const date = new Date();
+  //   const formattedDate = date.toLocaleDateString("en-GB");
+
+  //   let starsHTML = "";
+  //   for (let i = 0; i < 5; i++) {
+  //     if (i < selectedRating) {
+  //       starsHTML += `<img src="./assets/icons/star-full.svg" alt="star">`;
+  //     } else {
+  //       starsHTML += `<img src="./assets/icons/star.svg" alt="star">`;
+  //     }
+  //   }
+
+  //   newReview.innerHTML = `
+  //       <div class="review-header">
+  //           <div class="review-stars">${starsHTML}</div>
+  //           <p class="review-date">${formattedDate}</p>
+  //       </div>
+  //       <div class="review__user-info">
+  //           <img src="./assets/icons/review-icon.svg" alt="user icon">
+  //           <p>${name}</p>
+  //       </div>
+  //       <p>${text}</p>
+  //   `;
+
+  //   reviewList.prepend(newReview);
+
+  //   reviewForm.classList.add("hidden");
+  //   writeBtn.textContent = "Write Your Review";
+  //   document.getElementById("reviewName").value = "";
+  //   document.getElementById("reviewText").value = "";
+  //   selectedRating = 0;
+  //   starsInput.forEach((s) => s.classList.remove("selected"));
+
+  //   const thanksMsg = document.createElement("p");
+  //   thanksMsg.textContent = "Thank you for your feedback!";
+  //   thanksMsg.style.color = "green";
+  //   reviewForm.parentElement.insertBefore(thanksMsg, reviewForm);
+  //   setTimeout(() => thanksMsg.remove(), 3000);
+  // });
+
+  // Фото с превью, лимитом и удалением
+  const photoInput = document.getElementById("reviewPhotos");
+  const photoPreview = document.getElementById("photoPreview");
+  const photoError = document.getElementById("photoError");
+  const maxFiles = 3;
+
+  photoInput.addEventListener("change", () => {
+    photoError.textContent = "";
+
+    let existingPhotos = photoPreview.querySelectorAll(".photo-item").length;
+    let files = Array.from(photoInput.files);
+
+    if (existingPhotos + files.length > maxFiles) {
+      photoError.textContent = `You can upload up to ${maxFiles} images.`;
+      files = files.slice(0, maxFiles - existingPhotos);
+    }
+
+    files.forEach((file) => {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const container = document.createElement("div");
+        container.classList.add("photo-item");
+        container.style.position = "relative";
+
+        const img = document.createElement("img");
+        img.src = e.target.result;
+
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.textContent = "×";
+        btn.addEventListener("click", () => container.remove());
+
+        container.appendChild(img);
+        container.appendChild(btn);
+        photoPreview.appendChild(container);
+      };
+      reader.readAsDataURL(file);
+    });
+  });
+
+  // Отправка отзыва
+  // const submitBtn = document.getElementById("submit-review");
+  // const reviewList = document.querySelector(".reviews-list");
+
   submitBtn.addEventListener("click", (e) => {
     e.preventDefault();
 
     const name = document.getElementById("reviewName").value.trim();
     const text = document.getElementById("reviewText").value.trim();
+    const files = Array.from(photoPreview.querySelectorAll("img"));
 
     if (!name || !text || selectedRating === 0) {
       alert("Please fill in your name, review, and select a rating");
@@ -89,31 +220,41 @@ document.addEventListener("DOMContentLoaded", function () {
 
     let starsHTML = "";
     for (let i = 0; i < 5; i++) {
-      if (i < selectedRating) {
-        starsHTML += `<img src="./assets/icons/star-full.svg" alt="star">`;
-      } else {
-        starsHTML += `<img src="./assets/icons/star.svg" alt="star">`;
-      }
+      starsHTML += `<img src="./assets/icons/${
+        i < selectedRating ? "star-full" : "star"
+      }.svg" alt="star">`;
     }
 
     newReview.innerHTML = `
-        <div class="review-header">
-            <div class="review-stars">${starsHTML}</div>
-            <p class="review-date">${formattedDate}</p>
-        </div>
-        <div class="review__user-info">
-            <img src="./assets/icons/review-icon.svg" alt="user icon">
-            <p>${name}</p>
-        </div>
-        <p>${text}</p>
-    `;
+          <div class="review-header">
+              <div class="review-stars">${starsHTML}</div>
+              <p class="review-date">${formattedDate}</p>
+          </div>
+          <div class="review__user-info">
+              <img src="./assets/icons/review-icon.svg" alt="user icon">
+              <p>${name}</p>
+          </div>
+          <p>${text}</p>
+          <div class="review-photos"></div>
+      `;
+
+    const reviewPhotosContainer = newReview.querySelector(".review-photos");
+
+    files.forEach((img) => {
+      const reviewImg = document.createElement("img");
+      reviewImg.src = img.src;
+      reviewPhotosContainer.appendChild(reviewImg);
+    });
 
     reviewList.prepend(newReview);
 
+    // Очистка формы
     reviewForm.classList.add("hidden");
     writeBtn.textContent = "Write Your Review";
     document.getElementById("reviewName").value = "";
     document.getElementById("reviewText").value = "";
+    photoPreview.innerHTML = "";
+    photoError.textContent = "";
     selectedRating = 0;
     starsInput.forEach((s) => s.classList.remove("selected"));
 
