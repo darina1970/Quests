@@ -1282,6 +1282,12 @@ nav li:hover {
     right: 30px;
 }
 
+.old-price {
+    color: #999999;
+    text-decoration: line-through;
+    margin-left: 8px;
+}
+
 .product-hero__description {
     flex: 1;
     max-width: 100%;
