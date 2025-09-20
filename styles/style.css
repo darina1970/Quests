@@ -666,7 +666,7 @@ nav li:hover {
     display: flex;
     align-items: center;
     gap: 6px;
-    font-size: 20px;
+    font-size: 18px;
 }
 
 .product-card__icon {
