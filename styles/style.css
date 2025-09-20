@@ -1289,16 +1289,22 @@ nav li:hover {
     padding-top: 30px;
 }
 
+.product-hero__text {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
 .product-hero__text h4 {
     font-size: clamp(16px, 1.042vw, 20px);
     text-transform: uppercase;
-    padding-bottom: 16px;
+    /* padding-bottom: 16px; */
     line-height: 225%;
     letter-spacing: 0.05em;
 }
 
 .product-hero__text p {
-    padding-bottom: 18px;
+    /* padding-bottom: 18px; */
     font-size: 16px;
     line-height: 131%;
 }
@@ -1307,13 +1313,19 @@ nav li:hover {
     display: flex;
     align-items: baseline;
     gap: 10px;
-    padding-bottom: 17px;
+    padding-bottom: 15px;
     line-height: 100%;
     width: 84%;
 }
 
 .hero-btn {
     margin-top: clamp(7px, 0.7vw, 11px);
+}
+
+.product-hero__title {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .rating-info {
