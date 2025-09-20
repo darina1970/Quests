@@ -1539,6 +1539,11 @@ nav li:hover {
     gap: 35px;
 }
 
+.description__wrapper p,
+.review p {
+    line-height: 1.8;
+}
+
 .tools-list li,
 .extra-tools-list li {
     position: relative;
