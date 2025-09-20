@@ -1316,6 +1316,12 @@ nav li:hover {
     margin-top: clamp(7px, 0.7vw, 11px);
 }
 
+.rating-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
 /* Product-tabs */
 .product-tabs {
     display: flex;
