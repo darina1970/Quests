@@ -1286,13 +1286,13 @@ nav li:hover {
     flex: 1;
     max-width: 100%;
     min-width: 280px;
-    padding-top: 30px;
+    padding-top: 20px;
 }
 
 .product-hero__text {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 10px;
 }
 
 .product-hero__text h4 {
@@ -1313,7 +1313,7 @@ nav li:hover {
     display: flex;
     align-items: baseline;
     gap: 10px;
-    padding-bottom: 15px;
+    padding-bottom: 10px;
     line-height: 100%;
     width: 84%;
 }
