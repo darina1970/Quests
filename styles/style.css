@@ -1542,6 +1542,7 @@ nav li:hover {
 .description__wrapper p,
 .review p {
     line-height: 1.8;
+    letter-spacing: 0.05em;
 }
 
 .tools-list li,
