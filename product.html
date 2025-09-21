@@ -118,7 +118,10 @@
                             </div>
                             <div class="photo__wrapper">
                                 <p class="text-align">UPLOAD PHOTOS</p>
-                                <input type="file" id="reviewPhotos" name="reviewPhotos" accept="image/*" multiple>
+                                <div class="file-upload">
+                                    <input type="file" id="reviewPhotos" name="reviewPhotos" accept="image/*" multiple>
+                                    <label for="reviewPhotos" class="btn btn-form cursor-scale">Выбрать файлы</label>
+                                </div>
                                 <div id="photoPreview" class="photo-preview"></div>
                                 <p id="photoError" class="photo-error" style="color: red; margin-top: 5px;"></p>
                             </div>

@@ -1736,6 +1736,15 @@ nav li:hover {
   resize: none;
 }
 
+/* скрываем стандартный input */
+.file-upload input[type="file"] {
+  display: none;
+}
+
+.file-label:hover {
+  background: #ff9900;
+}
+
 .notion {
   font-size: 16px;
   color: var(--color-gray);
