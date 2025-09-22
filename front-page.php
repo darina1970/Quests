@@ -1,0 +1,441 @@
+<?php
+get_header();
+?>
+
+<main>
+    <section class="hero section-decorated-light" id="hero">
+        <img class="hero__bg" src="<?php echo get_template_directory_uri(); ?>/assets/images/hero.webp">
+        <div class="hero__content">
+            <h1 class="hero__title">Unlock the Secrets Hidden at Home</h1>
+            <p class="hero__subtitle">The mystery begins right at your doorstep</p>
+            <a href="#products" class="btn btn-hero">See Our Products</a>
+        </div>
+    </section>
+    <section class="products section-common" id="products">
+        <div class="products__wrapper container">
+            <h2 class="text-align">Our Home mysteries</h2>
+            <div class="products__controls">
+                <div class="products__filters">
+                    <span class="products__filters-label">Filter:</span>
+                    <label for="filter-age">Age</label>
+                    <select name="filter-age" id="filter-age">
+                        <option value="">All</option>
+                        <option value="6+">6+</option>
+                        <option value="8+">8+</option>
+                        <option value="12+">12+</option>
+                    </select>
+                    <div class="filter-theme__wrapper">
+                        <label for="filter-theme">Theme</label>
+                        <select name="filter-theme" id="filter-theme">
+                            <option value="">All</option>
+                            <option value="halloween">Halloween</option>
+                            <option value="christmas">Christmas</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="products__sort">
+                    <span class="products__filters-label">Sort by:</span>
+                    <label for="sort-price">Price</label>
+                    <select name="sort-price" id="sort-price">
+                        <option value="asc">Low → High</option>
+                        <option value="desc">High → Low</option>
+                    </select>
+                </div>
+            </div>
+            <div class="product-items__wrapper">
+                <article class="product-card">
+                    <a class="product-card__image" href="<?php echo esc_url( site_url('/product') ); ?>">
+                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/card-1.webp" alt="Product card">
+                    </a>
+                    <div class="product-card__content">
+                        <a class="product-card__title-link" href="<?php echo esc_url( site_url('/product') ); ?>">
+                            <h4 class="product-card__title">Frank and his Spooky Gang</h4>
+                        </a>
+                        <div class="rating-info">
+                            <img src="<?php echo get_template_directory_uri(); ?>/assets/icons/stars.svg" alt="stars">
+                            <p>(10 reviews)</p>
+                        </div>
+                        <div class="product-card__meta">
+                            <span>Age: </span>
+                            <span>6+</span>
+                        </div>
+                        <div class="product-card__bottom">
+                            <span class="product-card__price">€20 <span class="old-price"> €30</span></span>
+                            <a href="<?php echo esc_url( site_url('/product') ); ?>" class="btn btn-card">Learn more</a>
+                        </div>
+                    </div>
+                </article>
+                <article class="product-card">
+                    <a class="product-card__image" href="<?php echo esc_url( site_url('/product') ); ?>">
+                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/card-2.webp" alt="Product card">
+                    </a>
+                    <div class="product-card__content">
+                        <a class="product-card__title-link" href="<?php echo esc_url( site_url('/product') ); ?>">
+                            <h4 class="product-card__title">Frank and his Spooky Gang</h4>
+                        </a>
+                        <div class="rating-info">
+                            <img src="<?php echo get_template_directory_uri(); ?>/assets/icons/stars.svg" alt="stars">
+                            <p>(10 reviews)</p>
+                        </div>
+                        <div class="product-card__meta">
+                            <img class="product-card__icon" src="<?php echo get_template_directory_uri(); ?>/assets/icons/user.svg" alt="User Icon">
+                            <span class="product-card__age">6+</span>
+                        </div>
+                        <div class="product-card__bottom">
+                            <span class="product-card__price">€20 <span class="old-price"> €30</span></span>
+                            <a href="<?php echo esc_url( site_url('/product') ); ?>" class="btn btn-card">Learn more</a>
+                        </div>
+                    </div>
+                </article>
+                <article class="product-card">
+                    <a class="product-card__image" href="<?php echo esc_url( site_url('/product') ); ?>">
+                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/card-3.webp" alt="Product card">
+                    </a>
+                    <div class="product-card__content">
+                        <a class="product-card__title-link" href="<?php echo esc_url( site_url('/product') ); ?>">
+                            <h4 class="product-card__title">Frank and his Spooky Gang</h4>
+                        </a>
+                        <div class="rating-info">
+                            <img src="<?php echo get_template_directory_uri(); ?>/assets/icons/stars.svg" alt="stars">
+                            <p>(10 reviews)</p>
+                        </div>
+                        <div class="product-card__meta">
+                            <span>Age: </span>
+                            <span>6+</span>
+                        </div>
+                        <div class="product-card__bottom">
+                            <span class="product-card__price">€20 <span class="old-price"> €30</span></span>
+                            <a href="<?php echo esc_url( site_url('/product') ); ?>" class="btn btn-card">Learn more</a>
+                        </div>
+                    </div>
+                </article>
+                <article class="product-card">
+                    <a class="product-card__image" href="<?php echo esc_url( site_url('/product') ); ?>">
+                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/card-4.webp" href="<?php echo esc_url( site_url('/product') ); ?>" alt="Product card">
+                    </a>
+                    <div class="product-card__content">
+                        <a class="product-card__title-link" href="<?php echo esc_url( site_url('/product') ); ?>">
+                            <h4 class="product-card__title">Frank and his Spooky Gang</h4>
+                        </a>
+                        <div class="rating-info">
+                            <img src="<?php echo get_template_directory_uri(); ?>/assets/icons/stars.svg" alt="stars">
+                            <p>(10 reviews)</p>
+                        </div>
+                        <div class="product-card__meta">
+                            <span>Age: </span>
+                            <span>6+</span>
+                        </div>
+                        <div class="product-card__bottom">
+                            <span class="product-card__price">€20</span>
+                            <a href="<?php echo esc_url( site_url('/product') ); ?>" class="btn btn-card">Learn more</a>
+                        </div>
+                    </div>
+                </article>
+                <article class="product-card">
+                    <a class="product-card__image" href="<?php echo esc_url( site_url('/product') ); ?>">
+                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/card-5.webp" alt="Product card">
+                    </a>
+                    <div class="product-card__content">
+                        <a class="product-card__title-link" href="<?php echo esc_url( site_url('/product') ); ?>">
+                            <h4 class="product-card__title">Frank and his Spooky Gang</h4>
+                        </a>
+                        <div class="rating-info">
+                            <img src="<?php echo get_template_directory_uri(); ?>/assets/icons/stars.svg" alt="stars">
+                            <p>(10 reviews)</p>
+                        </div>
+                        <div class="product-card__meta">
+                            <span>Age: </span>
+                            <span>6+</span>
+                        </div>
+                        <div class="product-card__bottom">
+                            <span class="product-card__price">€20 <span class="old-price"> €30</span></span>
+                            <a href="<?php echo esc_url( site_url('/product') ); ?>" class="btn btn-card">Learn more</a>
+                        </div>
+                    </div>
+                </article>
+                <article class="product-card">
+                    <a class="product-card__image" href="<?php echo esc_url( site_url('/product') ); ?>">
+                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/card-6.webp" alt="Product card">
+                    </a>
+                    <div class="product-card__content">
+                        <a class="product-card__title-link" href="<?php echo esc_url( site_url('/product') ); ?>">
+                            <h4 class="product-card__title">Frank and his Spooky Gang</h4>
+                        </a>
+                        <div class="rating-info">
+                            <img src="<?php echo get_template_directory_uri(); ?>/assets/icons/stars.svg" alt="stars">
+                            <p>(10 reviews)</p>
+                        </div>
+                        <div class="product-card__meta">
+                            <span>Age: </span>
+                            <span>6+</span>
+                        </div>
+                        <div class="product-card__bottom">
+                            <span class="product-card__price">€20 <span class="old-price"> €30</span></span>
+                            <a href="<?php echo esc_url( site_url('/product') ); ?>" class="btn btn-card">Learn more</a>
+                        </div>
+                    </div>
+                </article>
+                <article class="product-card">
+                    <a class="product-card__image" href="<?php echo esc_url( site_url('/product') ); ?>">
+                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/card-7.webp" alt="Product card">
+                    </a>
+                    <div class="product-card__content">
+                        <a class="product-card__title-link" href="<?php echo esc_url( site_url('/product') ); ?>">
+                            <h4 class="product-card__title">Frank and his Spooky Gang</h4>
+                        </a>
+                        <div class="rating-info">
+                            <img src="<?php echo get_template_directory_uri(); ?>/assets/icons/stars.svg" alt="stars">
+                            <p>(10 reviews)</p>
+                        </div>
+                        <div class="product-card__meta">
+                            <span>Age: </span>
+                            <span>6+</span>
+                        </div>
+                        <div class="product-card__bottom">
+                            <span class="product-card__price">€20 <span class="old-price"> €30</span></span>
+                            <a href="<?php echo esc_url( site_url('/product') ); ?>" class="btn btn-card">Learn more</a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+    <section class="reviews section-decorated-dark section-common" id="reviews">
+        <div class="container">
+            <h2 class="text-align">REVIEWS</h2>
+            <div class="reviews__slider-wrapper">
+                <div class="reviews__slider">
+                    <div class="review-card">
+                        <div class="review-card__stars">★★★★★</div>
+                        <div class="review-card__author">Julia</div>
+                        <p class="review-card__text">We hosted the quest on Saturday and it was an absolute hit!
+                            Everyone loved it — adults and kids alike. The puzzles were
+                            fun and varied, and the witty texts made us laugh throughout. Thank you for such a
+                            fantastic celebration!</p>
+                    </div>
+                    <div class="review-card">
+                        <div class="review-card__stars">★★★★★</div>
+                        <div class="review-card__author">Leo</div>
+                        <p class="review-card__text">We hosted the quest on Saturday and it was an absolute hit!
+                            Everyone loved it — adults and kids alike. The puzzles were
+                            fun and varied, and the witty texts made us laugh throughout. Thank you for such a
+                            fantastic celebration!
+                        </p>
+                    </div>
+                    <div class="review-card">
+                        <div class="review-card__stars">★★★★★</div>
+                        <div class="review-card__author">Maya</div>
+                        <p class="review-card__text">We hosted the quest on Saturday and it was an absolute hit!
+                            Everyone loved it — adults and kids alike. The puzzles were
+                            fun and varied, and the witty texts made us laugh throughout. Thank you for such a
+                            fantastic celebration!</p>
+                    </div>
+                    <div class="review-card">
+                        <div class="review-card__stars">★★★★★</div>
+                        <div class="review-card__author">Tom</div>
+                        <p class="review-card__text">We hosted the quest on Saturday and it was an absolute hit!
+                            Everyone loved it — adults and kids alike. The puzzles were
+                            fun and varied, and the witty texts made us laugh throughout. Thank you for such a
+                            fantastic celebration!
+                        </p>
+                    </div>
+                    <div class="review-card">
+                        <div class="review-card__stars">★★★★★</div>
+                        <div class="review-card__author">Anna</div>
+                        <p class="review-card__text">We hosted the quest on Saturday and it was an absolute hit!
+                            Everyone loved it — adults and kids alike. The puzzles were
+                            fun and varied, and the witty texts made us laugh throughout. Thank you for such a
+                            fantastic celebration!</p>
+                    </div>
+                    <div class="review-card">
+                        <div class="review-card__stars">★★★★★</div>
+                        <div class="review-card__author">Chris</div>
+                        <p class="review-card__text">We hosted the quest on Saturday and it was an absolute hit!
+                            Everyone loved it — adults and kids alike. The puzzles were
+                            fun and varied, and the witty texts made us laugh throughout. Thank you for such a
+                            fantastic celebration!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="blog section-special" id="blog">
+        <div class="blog__wrapper container">
+            <h2 class="text-align">Blog Posts</h2>
+            <div class="blog__items">
+                <article class="blog__item">
+                    <a href="article.html" class="blog__item-image">
+                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/card-8.webp" alt="article">
+                    </a>
+                    <a href="article.html">
+                        <h3 class="blog__item-title">How to host a home quest party</h3>
+                    </a>
+                    <p class="blog__item-date">August 28, 2025</p>
+                    <p class="blog__item-text">Bring the thrill of adventure right into your living room! Hosting a
+                        home quest party is a
+                        fun and creative way to gather friends and family, solve puzzles together, and turn an
+                        ordinary evening into an unforgettable mystery.</p>
+                </article>
+                <article class="blog__item">
+                    <a href="article.html" class="blog__item-image">
+                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/card-8.webp" alt="article">
+                    </a>
+                    <a href="article.html">
+                        <h3 class="blog__item-title">How to host a home quest party</h3>
+                    </a>
+                    <p class="blog__item-date">August 28, 2025</p>
+                    <p class="blog__item-text">Bring the thrill of adventure right into your living room! Hosting a
+                        home quest party is a
+                        fun and creative way to gather friends and family, solve puzzles together, and turn an
+                        ordinary evening into an unforgettable mystery.</p>
+                </article>
+                <article class="blog__item">
+                    <a href="article.html" class="blog__item-image">
+                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/card-8.webp" alt="article">
+                    </a>
+                    <a href="article.html">
+                        <h3 class="blog__item-title">How to host a home quest party</h3>
+                    </a>
+                    <p class="blog__item-date">August 28, 2025</p>
+                    <p class="blog__item-text">Bring the thrill of adventure right into your living room! Hosting a
+                        home quest party is a
+                        fun and creative way to gather friends and family, solve puzzles together, and turn an
+                        ordinary evening into an unforgettable mystery.</p>
+                </article>
+            </div>
+            <a href="blog.html" class="blog__link">
+                <span>Learn more in our Blog</span>
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/icons/learn-more-arrow.svg" alt="arrow right">
+            </a>
+        </div>
+    </section>
+    <section class="gallery-slider" id="gallery-slider">
+        <div class="gallery-slider__wrapper">
+            <div class="slider-track" id="slider-track">
+                <div class="slide"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/product-page/quest1-1.webp" alt="Product image" /></div>
+                <div class="slide"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/product-page/quest1-2.webp" alt="Product image" /></div>
+                <div class="slide"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/product-page/quest1-3.webp" alt="Product image" /></div>
+                <div class="slide"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/product-page/quest1-4.webp" alt="Product image" /></div>
+                <div class="slide"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/product-page/quest1-5.webp" alt="Product image" /></div>
+                <div class="slide"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/product-page/quest1-6.webp" alt="Product image" /></div>
+            </div>
+        </div>
+    </section>
+    <section class="faq section-common" id="faq">
+        <div class="faq__wrapper">
+            <h2 class="text-align">Frequently Asked Questions</h2>
+            <div class="faq-item">
+                <div class="faq-question__wrapper">
+                    <div class="faq-question cursor-scale">
+                        <img class="faq-icon" src="<?php echo get_template_directory_uri(); ?>/assets/icons/question.svg" alt="question icon">
+                        <span class="faq-text">How will I receive the quest after purchase?</span>
+                    </div>
+                    <img class="faq-arrow cursor-scale" src="<?php echo get_template_directory_uri(); ?>/assets/icons/arrow-down.svg" alt="arrow-down">
+                </div>
+                <div class="faq-answer">
+                    <p>After purchase, the quest will be sent to the email address you provided.</p>
+                    <div class="faq-video">
+                        <iframe width="100%" height="200"
+                            src="<?php echo get_template_directory_uri(); ?>/assets/6049036_Birthday_Birthday_Party_1280x720.mp4" title="FAQ Video"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question__wrapper">
+                    <div class="faq-question cursor-scale">
+                        <img class="faq-icon" src="<?php echo get_template_directory_uri(); ?>/assets/icons/question.svg" alt="question icon">
+                        <span class="faq-text">How will I receive the quest after purchase?</span>
+                    </div>
+                    <img class="faq-arrow cursor-scale" src="<?php echo get_template_directory_uri(); ?>/assets/icons/arrow-down.svg" alt="arrow-down">
+                </div>
+                <div class="faq-answer">
+                    <p>After purchase, the quest will be sent to the email address you provided.</p>
+                    <div class="faq-video">
+                        <iframe width="100%" height="200"
+                            src="<?php echo get_template_directory_uri(); ?>/assets/6049036_Birthday_Birthday_Party_1280x720.mp4" title="FAQ Video"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question__wrapper">
+                    <div class="faq-question cursor-scale">
+                        <img class="faq-icon" src="<?php echo get_template_directory_uri(); ?>/assets/icons/question.svg" alt="question icon">
+                        <span class="faq-text">How will I receive the quest after purchase?</span>
+                    </div>
+                    <img class="faq-arrow cursor-scale" src="<?php echo get_template_directory_uri(); ?>/assets/icons/arrow-down.svg" alt="arrow-down">
+                </div>
+                <div class="faq-answer">
+                    <p>After purchase, the quest will be sent to the email address you provided.</p>
+                    <div class="faq-video">
+                        <iframe width="100%" height="200"
+                            src="<?php echo get_template_directory_uri(); ?>/assets/6049036_Birthday_Birthday_Party_1280x720.mp4" title="FAQ Video"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question__wrapper">
+                    <div class="faq-question cursor-scale">
+                        <img class="faq-icon" src="<?php echo get_template_directory_uri(); ?>/assets/icons/question.svg" alt="question icon">
+                        <span class="faq-text">How will I receive the quest after purchase?</span>
+                    </div>
+                    <img class="faq-arrow cursor-scale" src="<?php echo get_template_directory_uri(); ?>/assets/icons/arrow-down.svg" alt="arrow-down">
+                </div>
+                <div class="faq-answer">
+                    <p>After purchase, the quest will be sent to the email address you provided.</p>
+                    <div class="faq-video">
+                        <iframe width="100%" height="200"
+                            src="<?php echo get_template_directory_uri(); ?>/assets/6049036_Birthday_Birthday_Party_1280x720.mp4" title="FAQ Video"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="form section-common" id="form">
+        <div class="container">
+            <div class="form__wrapper">
+                <img class="form__image" src="<?php echo get_template_directory_uri(); ?>/assets/images/printing form.png" alt="Printing form">
+                <div class="form__text">
+                    <h2 class="text-align">Keep Up with QuestTime</h2>
+                    <h3 class="text-align">Subscribe to our Newsletter</h3>
+                    <p class="text-align">Get a free quest</p>
+                </div>
+                <form>
+                    <div class="form__content">
+                        <div class="form__input">
+                            <input class="name-input" type="text" placeholder="First Name" required>
+                            <input class="adress-input" type="text" placeholder="Email Address" required>
+                        </div>
+                        <div class="form__button_wrapper">
+                            <button class="btn-form btn" type="submit">Subscribe</button>
+                        </div>
+                        <div class="checkbox">
+                            <input type="checkbox" id="agree" required>
+                            <label for="agree">By subscribing, you agree to our <a href="/privacy-policy.html"
+                                target="_blank">Privacy Policy</a></label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+</main>
+
+<?php
+get_footer();
+?>

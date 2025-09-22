@@ -1,9 +1,9 @@
 @font-face {
   font-family: "Dihjauti";
-  src: url("../assets/fonts/Dihjauti/Dihjauti-Regular.woff2") format("woff2"),
-    url("../assets/fonts/Dihjauti/Dihjauti-Regular.woff") format("woff"),
-    url("../assets/fonts/Dihjauti/Dihjauti-Regular.ttf") format("truetype"),
-    url("../assets/fonts/Dihjauti/Dihjauti-Regular.eot")
+  src: url("../fonts/Dihjauti/Dihjauti-Regular.woff2") format("woff2"),
+    url("../fonts/Dihjauti/Dihjauti-Regular.woff") format("woff"),
+    url("../fonts/Dihjauti/Dihjauti-Regular.ttf") format("truetype"),
+    url("../fonts/Dihjauti/Dihjauti-Regular.eot")
       format("embedded-opentype");
   font-weight: 400;
   font-style: normal;
@@ -12,10 +12,10 @@
 
 @font-face {
   font-family: "Dihjauti";
-  src: url("../assets/fonts/Dihjauti/Dihjauti-Bold.woff2") format("woff2"),
-    url("../assets/fonts/Dihjauti/Dihjauti-Bold.woff") format("woff"),
-    url("../assets/fonts/Dihjauti/Dihjauti-Bold.ttf") format("truetype"),
-    url("../assets/fonts/Dihjauti/Dihjauti-Bold.eot")
+  src: url("../fonts/Dihjauti/Dihjauti-Bold.woff2") format("woff2"),
+    url("../fonts/Dihjauti/Dihjauti-Bold.woff") format("woff"),
+    url("../fonts/Dihjauti/Dihjauti-Bold.ttf") format("truetype"),
+    url("../fonts/Dihjauti/Dihjauti-Bold.eot")
       format("embedded-opentype");
   font-weight: 700;
   font-style: normal;
@@ -24,10 +24,10 @@
 
 @font-face {
   font-family: "Inter";
-  src: url("../assets/fonts/Inter/Inter28pt-Regular.woff2") format("woff2"),
-    url("../assets/fonts/Inter/Inter28pt-Regular.woff") format("woff"),
-    url("../assets/fonts/Inter/Inter28pt-Regular.ttf") format("truetype"),
-    url("../assets/fonts/Inter/Inter28pt-Regular.eot")
+  src: url("../fonts/Inter/Inter28pt-Regular.woff2") format("woff2"),
+    url("../fonts/Inter/Inter28pt-Regular.woff") format("woff"),
+    url("../fonts/Inter/Inter28pt-Regular.ttf") format("truetype"),
+    url("../fonts/Inter/Inter28pt-Regular.eot")
       format("embedded-opentype");
   font-weight: 400;
   font-style: normal;
@@ -36,10 +36,10 @@
 
 @font-face {
   font-family: "Overpass";
-  src: url("../assets/fonts/Overpass/Overpass-Regular.woff2") format("woff2"),
-    url("../assets/fonts/Overpass/Overpass-Regular.woff") format("woff"),
-    url("../assets/fonts/Overpass/Overpass-Regular.ttf") format("truetype"),
-    url("../assets/fonts/Overpass/Overpass-Regular.eot")
+  src: url("../fonts/Overpass/Overpass-Regular.woff2") format("woff2"),
+    url("../fonts/Overpass/Overpass-Regular.woff") format("woff"),
+    url("../fonts/Overpass/Overpass-Regular.ttf") format("truetype"),
+    url("../fonts/Overpass/Overpass-Regular.eot")
       format("embedded-opentype");
   font-weight: 400;
   font-style: normal;
@@ -48,10 +48,10 @@
 
 @font-face {
   font-family: "Overpass";
-  src: url("../assets/fonts/Overpass/Overpass-Light.woff2") format("woff2"),
-    url("../assets/fonts/Overpass/Overpass-Light.woff") format("woff"),
-    url("../assets/fonts/Overpass/Overpass-Light.ttf") format("truetype"),
-    url("../assets/fonts/Overpass/Overpass-Light.eot")
+  src: url("../fonts/Overpass/Overpass-Light.woff2") format("woff2"),
+    url("../fonts/Overpass/Overpass-Light.woff") format("woff"),
+    url("../fonts/Overpass/Overpass-Light.ttf") format("truetype"),
+    url("../fonts/Overpass/Overpass-Light.eot")
       format("embedded-opentype");
   font-weight: 300;
   font-style: normal;
@@ -60,12 +60,12 @@
 
 @font-face {
   font-family: "Overpass Mono";
-  src: url("../assets/fonts/OverpassMono/OverpassMono-Regular.woff2")
+  src: url("../fonts/OverpassMono/OverpassMono-Regular.woff2")
       format("woff2"),
-    url("../assets/fonts/OverpassMono/OverpassMono-Regular.woff") format("woff"),
-    url("../assets/fonts/OverpassMono/OverpassMono-Regular.ttf")
+    url("../fonts/OverpassMono/OverpassMono-Regular.woff") format("woff"),
+    url("../fonts/OverpassMono/OverpassMono-Regular.ttf")
       format("truetype"),
-    url("../assets/fonts/OverpassMono/OverpassMono-Regular.eot")
+    url("../fonts/OverpassMono/OverpassMono-Regular.eot")
       format("embedded-opentype");
   font-weight: 400;
   font-style: normal;
@@ -111,7 +111,7 @@ input,
 select,
 textarea,
 .cursor-scale {
-  cursor: url("../assets/icons/magnifying-glass.svg") 16 16, auto !important;
+  cursor: url("../icons/magnifying-glass.svg") 16 16, auto !important;
 }
 
 input,
@@ -347,7 +347,7 @@ button {
   left: 0;
   width: 100%;
   height: clamp(90px, 6.25vw, 120px);
-  background: url("../assets/images/torn-border-light.png") center bottom /
+  background: url("../images/torn-border-light.png") center bottom /
     cover no-repeat;
   pointer-events: none;
 }
@@ -365,7 +365,7 @@ button {
   left: 0;
   width: 100%;
   height: var(--tear-height);
-  background: url("../assets/images/torn-border-dark.png") center bottom / cover
+  background: url("../images/torn-border-dark.png") center bottom / cover
     no-repeat;
   pointer-events: none;
 }
@@ -609,7 +609,7 @@ nav li:hover {
   border-radius: 4px;
   border: 1px solid #ccc;
   background-color: var(--color-bg);
-  background-image: url("../assets/icons/arrow-down.svg");
+  background-image: url("../icons/arrow-down.svg");
   background-repeat: no-repeat;
   background-position: right 10px center;
   background-size: 10px 6px;
@@ -1010,7 +1010,7 @@ nav li:hover {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  cursor: url("../assets/icons/magnifying-glass.svg");
+  cursor: url("../icons/magnifying-glass.svg");
 }
 
 .faq-question {
@@ -1486,7 +1486,7 @@ nav li:hover {
   position: relative;
   top: 0;
   padding: 18px 100px;
-  cursor: url("../assets/icons/magnifying-glass.svg") 16 16, auto;
+  cursor: url("../icons/magnifying-glass.svg") 16 16, auto;
   border: none;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
@@ -1788,7 +1788,7 @@ nav li:hover {
   width: 20px;
   height: 20px;
   transform: translateY(-50%);
-  background-image: url("../assets/icons/tick.svg");
+  background-image: url("../icons/tick.svg");
   background-size: contain;
   background-repeat: no-repeat;
 }
