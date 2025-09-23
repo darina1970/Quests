@@ -43,161 +43,98 @@ get_header();
                 </div>
             </div>
             <div class="product-items__wrapper">
-                <article class="product-card">
-                    <a class="product-card__image" href="<?php echo esc_url( site_url('/product') ); ?>">
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/card-1.webp" alt="Product card">
-                    </a>
-                    <div class="product-card__content">
-                        <a class="product-card__title-link" href="<?php echo esc_url( site_url('/product') ); ?>">
-                            <h4 class="product-card__title">Frank and his Spooky Gang</h4>
-                        </a>
-                        <div class="rating-info">
-                            <img src="<?php echo get_template_directory_uri(); ?>/assets/icons/stars.svg" alt="stars">
-                            <p>(10 reviews)</p>
-                        </div>
-                        <div class="product-card__meta">
-                            <span>Age: </span>
-                            <span>6+</span>
-                        </div>
-                        <div class="product-card__bottom">
-                            <span class="product-card__price">€20 <span class="old-price"> €30</span></span>
-                            <a href="<?php echo esc_url( site_url('/product') ); ?>" class="btn btn-card">Learn more</a>
-                        </div>
-                    </div>
-                </article>
-                <article class="product-card">
-                    <a class="product-card__image" href="<?php echo esc_url( site_url('/product') ); ?>">
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/card-2.webp" alt="Product card">
-                    </a>
-                    <div class="product-card__content">
-                        <a class="product-card__title-link" href="<?php echo esc_url( site_url('/product') ); ?>">
-                            <h4 class="product-card__title">Frank and his Spooky Gang</h4>
-                        </a>
-                        <div class="rating-info">
-                            <img src="<?php echo get_template_directory_uri(); ?>/assets/icons/stars.svg" alt="stars">
-                            <p>(10 reviews)</p>
-                        </div>
-                        <div class="product-card__meta">
-                            <img class="product-card__icon" src="<?php echo get_template_directory_uri(); ?>/assets/icons/user.svg" alt="User Icon">
-                            <span class="product-card__age">6+</span>
-                        </div>
-                        <div class="product-card__bottom">
-                            <span class="product-card__price">€20 <span class="old-price"> €30</span></span>
-                            <a href="<?php echo esc_url( site_url('/product') ); ?>" class="btn btn-card">Learn more</a>
-                        </div>
-                    </div>
-                </article>
-                <article class="product-card">
-                    <a class="product-card__image" href="<?php echo esc_url( site_url('/product') ); ?>">
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/card-3.webp" alt="Product card">
-                    </a>
-                    <div class="product-card__content">
-                        <a class="product-card__title-link" href="<?php echo esc_url( site_url('/product') ); ?>">
-                            <h4 class="product-card__title">Frank and his Spooky Gang</h4>
-                        </a>
-                        <div class="rating-info">
-                            <img src="<?php echo get_template_directory_uri(); ?>/assets/icons/stars.svg" alt="stars">
-                            <p>(10 reviews)</p>
-                        </div>
-                        <div class="product-card__meta">
-                            <span>Age: </span>
-                            <span>6+</span>
-                        </div>
-                        <div class="product-card__bottom">
-                            <span class="product-card__price">€20 <span class="old-price"> €30</span></span>
-                            <a href="<?php echo esc_url( site_url('/product') ); ?>" class="btn btn-card">Learn more</a>
-                        </div>
-                    </div>
-                </article>
-                <article class="product-card">
-                    <a class="product-card__image" href="<?php echo esc_url( site_url('/product') ); ?>">
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/card-4.webp" href="<?php echo esc_url( site_url('/product') ); ?>" alt="Product card">
-                    </a>
-                    <div class="product-card__content">
-                        <a class="product-card__title-link" href="<?php echo esc_url( site_url('/product') ); ?>">
-                            <h4 class="product-card__title">Frank and his Spooky Gang</h4>
-                        </a>
-                        <div class="rating-info">
-                            <img src="<?php echo get_template_directory_uri(); ?>/assets/icons/stars.svg" alt="stars">
-                            <p>(10 reviews)</p>
-                        </div>
-                        <div class="product-card__meta">
-                            <span>Age: </span>
-                            <span>6+</span>
-                        </div>
-                        <div class="product-card__bottom">
-                            <span class="product-card__price">€20</span>
-                            <a href="<?php echo esc_url( site_url('/product') ); ?>" class="btn btn-card">Learn more</a>
-                        </div>
-                    </div>
-                </article>
-                <article class="product-card">
-                    <a class="product-card__image" href="<?php echo esc_url( site_url('/product') ); ?>">
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/card-5.webp" alt="Product card">
-                    </a>
-                    <div class="product-card__content">
-                        <a class="product-card__title-link" href="<?php echo esc_url( site_url('/product') ); ?>">
-                            <h4 class="product-card__title">Frank and his Spooky Gang</h4>
-                        </a>
-                        <div class="rating-info">
-                            <img src="<?php echo get_template_directory_uri(); ?>/assets/icons/stars.svg" alt="stars">
-                            <p>(10 reviews)</p>
-                        </div>
-                        <div class="product-card__meta">
-                            <span>Age: </span>
-                            <span>6+</span>
-                        </div>
-                        <div class="product-card__bottom">
-                            <span class="product-card__price">€20 <span class="old-price"> €30</span></span>
-                            <a href="<?php echo esc_url( site_url('/product') ); ?>" class="btn btn-card">Learn more</a>
-                        </div>
-                    </div>
-                </article>
-                <article class="product-card">
-                    <a class="product-card__image" href="<?php echo esc_url( site_url('/product') ); ?>">
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/card-6.webp" alt="Product card">
-                    </a>
-                    <div class="product-card__content">
-                        <a class="product-card__title-link" href="<?php echo esc_url( site_url('/product') ); ?>">
-                            <h4 class="product-card__title">Frank and his Spooky Gang</h4>
-                        </a>
-                        <div class="rating-info">
-                            <img src="<?php echo get_template_directory_uri(); ?>/assets/icons/stars.svg" alt="stars">
-                            <p>(10 reviews)</p>
-                        </div>
-                        <div class="product-card__meta">
-                            <span>Age: </span>
-                            <span>6+</span>
-                        </div>
-                        <div class="product-card__bottom">
-                            <span class="product-card__price">€20 <span class="old-price"> €30</span></span>
-                            <a href="<?php echo esc_url( site_url('/product') ); ?>" class="btn btn-card">Learn more</a>
-                        </div>
-                    </div>
-                </article>
-                <article class="product-card">
-                    <a class="product-card__image" href="<?php echo esc_url( site_url('/product') ); ?>">
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/card-7.webp" alt="Product card">
-                    </a>
-                    <div class="product-card__content">
-                        <a class="product-card__title-link" href="<?php echo esc_url( site_url('/product') ); ?>">
-                            <h4 class="product-card__title">Frank and his Spooky Gang</h4>
-                        </a>
-                        <div class="rating-info">
-                            <img src="<?php echo get_template_directory_uri(); ?>/assets/icons/stars.svg" alt="stars">
-                            <p>(10 reviews)</p>
-                        </div>
-                        <div class="product-card__meta">
-                            <span>Age: </span>
-                            <span>6+</span>
-                        </div>
-                        <div class="product-card__bottom">
-                            <span class="product-card__price">€20 <span class="old-price"> €30</span></span>
-                            <a href="<?php echo esc_url( site_url('/product') ); ?>" class="btn btn-card">Learn more</a>
-                        </div>
-                    </div>
-                </article>
+                <?php
+                // Узнаём текущую страницу (для пагинации)
+                $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
+                // Запрос товаров
+                $args = [
+                    'post_type'      => 'product',
+                    'posts_per_page' => 10, // количество товаров на странице
+                    'paged'          => $paged
+                ];
+
+                $loop = new WP_Query($args);
+
+                if ($loop->have_posts()) :
+                    while ($loop->have_posts()) : $loop->the_post();
+                        global $product; ?>
+                        
+                        <article class="product-card">
+                            <a class="product-card__image" href="<?php the_permalink(); ?>">
+                                <?php if (has_post_thumbnail()) {
+                                    the_post_thumbnail('medium');
+                                } ?>
+                            </a>
+                            <div class="product-card__content">
+                                <a class="product-card__title-link" href="<?php the_permalink(); ?>">
+                                    <h4 class="product-card__title"><?php the_title(); ?></h4>
+                                </a>
+                                <div class="rating-info">
+                                    <div class="rating-stars">
+                                        <?php
+                                        $rating = (float) $product->get_average_rating();
+                                        $reviews_count = $product->get_review_count();
+
+                                        // 5 звёзд
+                                        for ($i = 1; $i <= 5; $i++) {
+                                            if ($i <= floor($rating)) {
+                                                // Полная звезда
+                                                echo '<img src="' . get_template_directory_uri() . '/assets/icons/star-full.svg" alt="star">';
+                                            } else {
+                                                // Пустая звезда
+                                                echo '<img src="' . get_template_directory_uri() . '/assets/icons/star.svg" alt="star">';
+                                            }
+                                        }
+                                        ?>
+                                    </div>
+                                    <p>(<?php echo $reviews_count; ?> reviews)</p>
+                                </div>
+                                <div class="product-card__meta">
+                                    <span>Age: </span>
+                                    <span>
+                                        <?php
+                                        $age = $product->get_attribute('age');
+                                        echo $age ? esc_html($age) : '—';
+                                        ?>
+                                    </span>
+                                </div>
+                                <div class="product-card__bottom">
+                                    <?php if ( $product->is_on_sale() ) : ?>
+                                        <span class="product-card__price">
+                                            €<?php echo $product->get_sale_price(); ?>
+                                            <span class="old-price">€<?php echo $product->get_regular_price(); ?></span>
+                                        </span>
+                                    <?php else : ?>
+                                        <span class="product-card__price">
+                                            €<?php echo $product->get_regular_price(); ?>
+                                        </span>
+                                    <?php endif; ?>
+
+                                    <a href="<?php echo get_permalink($product->get_id()); ?>" class="btn btn-card">Learn more</a>
+                                </div>
+                            </div>
+                        </article>
+                        
+                    <?php endwhile;
+                else :
+                    echo '<p>No products found</p>';
+                endif;
+                ?>
             </div>
+
+            <!-- Пагинация -->
+            <div class="products__pagination">
+                <?php
+                echo paginate_links([
+                    'total'   => $loop->max_num_pages,
+                    'current' => $paged,
+                    'prev_text' => '« Prev',
+                    'next_text' => 'Next »',
+                ]);
+                ?>
+            </div>
+
+            <?php wp_reset_postdata(); ?>
         </div>
     </section>
     <section class="reviews section-decorated-dark section-common" id="reviews">

@@ -573,7 +573,6 @@ nav li:hover {
 }
 
 /* Products */
-
 .products__controls {
   display: flex;
   justify-content: space-between;
@@ -714,6 +713,11 @@ nav li:hover {
 
 .product-card__price {
   font-size: 18px;
+}
+
+.rating-stars {
+  display: flex;
+  gap: 1px;
 }
 
 /* Reviews */

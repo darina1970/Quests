@@ -16,11 +16,6 @@ add_action('wp_enqueue_scripts', function () {
         wp_enqueue_script('questtime-product', get_template_directory_uri() . '/assets/js/product.js', [], null, true);
     }
 
-    // Временный путь
-    if (is_page_template('single-product.php')) {
-        wp_enqueue_script('questtime-product', get_template_directory_uri() . '/assets/js/product.js', [], null, true);
-    }
-
     // JS для 404 страницы
     if (is_404()) {
         wp_enqueue_script('questtime-404', get_template_directory_uri() . '/assets/js/404.js', [], null, true);
@@ -31,3 +26,25 @@ add_theme_support('custom-logo');
 add_theme_support('post-thumbnails');
 add_theme_support('title-tag');
 
+// === WooCommerce настройка ===
+
+// Включаем поддержку WooCommerce
+function questtime_add_woocommerce_support() {
+    add_theme_support('woocommerce');
+}
+add_action('after_setup_theme', 'questtime_add_woocommerce_support');
+
+// Убираем стандартные стили WooCommerce (чтобы они не ломали верстку)
+add_filter('woocommerce_enqueue_styles', '__return_empty_array');
+
+// AJAX-обновление иконки корзины в хедере
+add_filter('woocommerce_add_to_cart_fragments', function($fragments) {
+    ob_start(); ?>
+    <span class="cart-count"><?php echo WC()->cart->get_cart_contents_count(); ?></span>
+    <?php
+    $fragments['.cart-count'] = ob_get_clean();
+    return $fragments;
+});
+
+// (Опционально) Убираем хлебные крошки WooCommerce, если не нужны
+remove_action('woocommerce_before_main_content', 'woocommerce_breadcrumb', 20, 0);
