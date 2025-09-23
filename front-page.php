@@ -409,11 +409,22 @@ get_header();
     <section class="form section-common" id="form">
         <div class="container">
             <div class="form__wrapper">
-                <img class="form__image" src="<?php echo get_template_directory_uri(); ?>/assets/images/printing form.png" alt="Printing form">
+                <?php if ( get_field('show_form_image') ) : ?>
+                    <?php $image = get_field('form_image'); ?>
+                    <?php if( $image ) : ?>
+                        <img class="form__image" src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['alt']); ?>">
+                    <?php endif; ?>
+                <?php endif; ?>
                 <div class="form__text">
-                    <h2 class="text-align">Keep Up with QuestTime</h2>
-                    <h3 class="text-align">Subscribe to our Newsletter</h3>
-                    <p class="text-align">Get a free quest</p>
+                    <?php if ( get_field('form_title') ) : ?>
+                        <h2 class="text-align"><?php the_field('form_title'); ?></h2>
+                    <?php endif; ?>
+                    <?php if ( get_field('form_subtitle') ) : ?>
+                        <h3 class="text-align"><?php the_field('form_subtitle'); ?></h3>
+                    <?php endif; ?>
+                    <?php if ( get_field('show_form_paragraph') && get_field('form_paragraph') ) : ?>
+                        <p class="text-align"><?php the_field('form_paragraph'); ?></p>
+                    <?php endif; ?>
                 </div>
                 <form>
                     <div class="form__content">
