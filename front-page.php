@@ -426,8 +426,7 @@ get_header();
                         </div>
                         <div class="checkbox">
                             <input type="checkbox" id="agree" required>
-                            <label for="agree">By subscribing, you agree to our <a href="/privacy-policy.html"
-                                target="_blank">Privacy Policy</a></label>
+                            <label for="agree">By subscribing, you agree to our <a href="<?php echo get_permalink( get_page_by_path('privacy-policy') ); ?>" target="_blank">Privacy Policy</a></label>
                         </div>
                     </div>
                 </form>
