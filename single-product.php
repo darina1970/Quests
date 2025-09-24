@@ -1,8 +1,18 @@
 <?php
-/*
-Template Name: Product Page
-*/
 get_header();
+
+// Получаем объект продукта
+global $post;
+$product = wc_get_product( $post->ID );
+
+if ( ! $product ) {
+    echo '<p>Товар не найден</p>';
+    get_footer();
+    exit;
+}
+
+$attachment_ids = $product->get_gallery_image_ids();
+$main_image_url = $product->get_image_id() ? wp_get_attachment_url($product->get_image_id()) : '';
 ?>
 
 <main>
@@ -10,218 +20,93 @@ get_header();
         <div class="product-hero__wrapper container">
             <div class="product-hero__slider">
                 <div class="product__main-image">
-                    <img id="current" src="<?php echo get_template_directory_uri(); ?>/assets/images/product-page/quest1-1.webp" alt="Main image">
+                    <?php if ($main_image_url): ?>
+                        <img id="current" src="<?php echo esc_url($main_image_url); ?>" alt="Main image">
+                    <?php endif; ?>
                 </div>
                 <div class="images-slider">
-                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/product-page/quest1-1.webp" class="img active" alt="img">
-                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/product-page/quest1-2.webp" class="img" alt="img">
-                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/product-page/quest1-3.webp" class="img" alt="img">
-                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/product-page/quest1-4.webp" class="img" alt="img">
-                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/product-page/quest1-5.webp" class="img" alt="img">
-                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/product-page/quest1-6.webp" class="img" alt="img">
+                    <?php if ($main_image_url): ?>
+                        <img src="<?php echo esc_url($main_image_url); ?>" class="img active" alt="img">
+                    <?php endif; ?>
+                    <?php foreach ($attachment_ids as $id): ?>
+                        <img src="<?php echo wp_get_attachment_url($id); ?>" class="img" alt="img">
+                    <?php endforeach; ?>
                 </div>
-                <!-- стрелки для навигации -->
+
                 <div class="slider-arrows">
                     <button class="left-arrow"><img src="<?php echo get_template_directory_uri(); ?>/assets/icons/left-arrow.png" alt="left-arrow"></button>
                     <button class="right-arrow"><img src="<?php echo get_template_directory_uri(); ?>/assets/icons/right-arrow.png" alt="right-arrow"></button>
                 </div>
             </div>
+
             <div id="lightbox" class="lightbox">
                 <span class="btn-close">&times;</span>
                 <span class="btn-prev">&#10094;</span>
                 <img class="lightbox-content" id="lightbox-img" alt="lightbox">
                 <span class="btn-next">&#10095;</span>
             </div>
+
             <div class="product-hero__description">
                 <div class="product-hero__text">
-                    <h3 class="product-hero__title"><span>Halloween Home Quests: </span><span>Frank and his Spooky Gang (Ages 6-11)</span></h3>
+                    <h3 class="product-hero__title">
+                        <span><?php echo esc_html($product->get_attribute('theme')); ?> Home Quests: </span>
+                        <span><?php echo $product->get_name(); ?> (Ages <?php echo $product->get_attribute('age'); ?>)</span>
+                    </h3>
+
                     <div class="rating-info">
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/icons/stars.svg" alt="stars">
-                        <a href="#reviews">(10 reviews)</a>
+                        <div class="rating-stars">
+                            <?php
+                            $rating = (float) $product->get_average_rating();
+                            $reviews_count = $product->get_review_count();
+                            for ($i = 1; $i <= 5; $i++) {
+                                if ($i <= floor($rating)) {
+                                    echo '<img src="' . get_template_directory_uri() . '/assets/icons/star-full.svg" alt="star">';
+                                } else {
+                                    echo '<img src="' . get_template_directory_uri() . '/assets/icons/star.svg" alt="star">';
+                                }
+                            }
+                            ?>
+                        </div>
+                        <a href="#reviews">(<?php echo $reviews_count; ?> reviews)</a>
                     </div>
-                    <p><strong>Price:</strong> €20 <span class="old-price"> €30</span></p>
-                    <p><strong>Get a ready-made Halloween quest for your child!</strong></p>
-                    <ul>
-                        <li><img src="<?php echo get_template_directory_uri(); ?>/assets/icons/tick.svg" alt="tick"> Complete printable materials for a Halloween quest.</li>
-                        <li><img src="<?php echo get_template_directory_uri(); ?>/assets/icons/tick.svg" alt="tick"> Exciting story where the main hero is your child.</li>
-                        <li><img src="<?php echo get_template_directory_uri(); ?>/assets/icons/tick.svg" alt="tick"> Tasks tailored for different age groups.</li>
-                        <li><img src="<?php echo get_template_directory_uri(); ?>/assets/icons/tick.svg" alt="tick"> Fun video challenges from the quest characters.</li>
-                        <li><img src="<?php echo get_template_directory_uri(); ?>/assets/icons/tick.svg" alt="tick"> Detailed guide on how to prepare and run the quest.</li>
-                        <li><img src="<?php echo get_template_directory_uri(); ?>/assets/icons/tick.svg" alt="tick"> Bonus webinar recording on creating quests and turning them into a thrilling adventure. Perfect if you plan to host for several children!</li>
-                        <li><img src="<?php echo get_template_directory_uri(); ?>/assets/icons/tick.svg" alt="tick"> Payment available in RUB or any international currency via PayPal or card.</li>
-                    </ul>
-                    <p><strong>Recommended age:</strong> 6–11 years</p>
-                    <p><strong>Number of players:</strong> 1–8</p>
-                    <p><strong>Duration:</strong> ~60 minutes</p>
-                </div>
-                <button class="btn-form btn hero-btn">Add to Cart</button>
-            </div>
-        </div>
-    </section>
-    <!--<section class="product-info section-common" id="productInfo"></section>-->
-    <section class="product-tabs__info section-common" id="productTabsInfo">
-        <div class="product-tabs__wrapper container">
-            <div class="product-tabs">
-                <div class="product-tab active" data-tab="reviews">Reviews</div>
-                <div class="product-tab" data-tab="description">Description</div>
-            </div>
-            <div class="tab-content active" id="reviews">
-                <div class="reviews-header">
-                    <p class="reviews-header-title"><span id="reviewsCount">3 REVIEWS on </span><span class="review-game-name">Halloween Home Quest: Frank and his Spooky Gang (Ages 6-11)</span></p>
-                    <button class="btn btn-form btn-review-form" id="writeReview">Write Your Review</button>
-                </div>
-                <div id="reviewForm" class="review-form hidden">
-                    <img class="form-bg" src="<?php echo get_template_directory_uri(); ?>/assets/images/product-page/piece-of-paper.png" alt="Form background">
-                    <form class="review-form__overlay">
-                        <div class="rating__wrapper">
-                            <p class="text-align">RATING *</p>
-                            <div class="stars-input">
-                                <span data-value="1"><img src="<?php echo get_template_directory_uri(); ?>/assets/icons/star-full.svg" alt="star one"></span>
-                                <span data-value="2"><img src="<?php echo get_template_directory_uri(); ?>/assets/icons/star-full.svg" alt="star two"></span>
-                                <span data-value="3"><img src="<?php echo get_template_directory_uri(); ?>/assets/icons/star-full.svg" alt="star three"></span>
-                                <span data-value="4"><img src="<?php echo get_template_directory_uri(); ?>/assets/icons/star-full.svg" alt="star four"></span>
-                                <span data-value="5"><img src="<?php echo get_template_directory_uri(); ?>/assets/icons/star-full.svg" alt="star five"></span>
-                            </div>
-                        </div>
-                        <div class="review__wrapper">
-                            <p class="text-align">REVIEW *</p>
-                            <textarea class="review-text" name="review-text" id="reviewText" placeholder="Text your message here"></textarea>
-                        </div>
-                        <div class="photo__wrapper">
-                            <p class="text-align">UPLOAD PHOTOS</p>
-                            <div class="file-upload">
-                                <input type="file" id="reviewPhotos" name="reviewPhotos" accept="image/*" multiple>
-                                <label for="reviewPhotos" class="btn btn-form cursor-scale">Выбрать файлы</label>
-                            </div>
-                            <div id="photoPreview" class="photo-preview"></div>
-                            <p id="photoError" class="photo-error" style="color: red; margin-top: 5px;"></p>
-                        </div>
-                        <div class="name__wrapper">
-                            <p class="text-align">YOUR NAME</p>
-                            <input type="text" id="reviewName" placeholder="Your name">
-                        </div>
-                        <div class="email__wrapper">
-                            <p class="text-align">YOUR EMAIL </p>
-                            <input type="email" id="reviewEmail" placeholder="Your email">
-                        </div>
-                        <p class="text-align notion">Your email address will not be published. Required fields are marked *</p>
-                        <button class="btn btn-form btn-review-form" id="submit-review">Submit Your Review</button>
-                    </form>
-                </div>    
-                <div class="reviews-list">
-                    <div class="review">
-                        <div class="review-header">
-                            <img src="<?php echo get_template_directory_uri(); ?>/assets/icons/stars.svg" alt="stars">
-                            <p class="review-date">10/01/24</p>
-                        </div>
-                        <div class="review__user-info">
-                            <img src="<?php echo get_template_directory_uri(); ?>/assets/icons/review-icon.svg" alt="user icon">
-                            <p>Catherine</p>
-                        </div>
-                        <p>On New Year’s, we traditionally organized a quest for the kids from Natasha. This time it was “The  Strange Story of Professor Wondermaker.” Since we celebrated with a big group, there were five kids, and we decided to split them into two teams.To even things out, we involved one adult as well. Accordingly, all the tasks were printed in duplicate (and placed into ifferent envelopes — white ones for one team, kraft ones for the other).The children happily dove right into the comic book — they had never seen anything like that in a quest before! Then they moved on to the tasks — some of them weren’t easy at all, there were even some spy-style listenings to check whether the other team had solved a challenge.It was exciting for everyone — from ages 10–17 and even 40+. They were absorbed for about an hour and a half, maybe more — time just flew by, and everyone was happy!Natasha, thank you for helping us create such a wonderful adventure for the kids with minimal effort!
-                        </p>
-                    </div>
-                    <div class="review">
-                        <div class="review-header">
-                            <img src="<?php echo get_template_directory_uri(); ?>/assets/icons/stars.svg" alt="stars">
-                            <p class="review-date">10/01/24</p>
-                        </div>
-                        <div class="review__user-info">
-                            <img src="<?php echo get_template_directory_uri(); ?>/assets/icons/review-icon.svg" alt="user icon">
-                            <p>Catherine</p>
-                        </div>
-                        <p>On New Year’s, we traditionally organized a quest for the kids from Natasha. This time it was “The  Strange Story of Professor Wondermaker.” Since we celebrated with a big group, there were five kids, and we decided to split them into two teams.To even things out, we involved one adult as well. Accordingly, all the tasks were printed in duplicate (and placed into ifferent envelopes — white ones for one team, kraft ones for the other).The children happily dove right into the comic book — they had never seen anything like that in a quest before! Then they moved on to the tasks — some of them weren’t easy at all, there were even some spy-style listenings to check whether the other team had solved a challenge.It was exciting for everyone — from ages 10–17 and even 40+. They were absorbed for about an hour and a half, maybe more — time just flew by, and everyone was happy!Natasha, thank you for helping us create such a wonderful adventure for the kids with minimal effort!
-                        </p>
-                    </div>
-                    <div class="review">
-                        <div class="review-header">
-                            <img src="<?php echo get_template_directory_uri(); ?>/assets/icons/stars.svg" alt="stars">
-                            <p class="review-date">10/01/24</p>
-                        </div>
-                        <div class="review__user-info">
-                            <img src="<?php echo get_template_directory_uri(); ?>/assets/icons/review-icon.svg" alt="user icon">
-                            <p>Catherine</p>
-                        </div>
-                        <p>On New Year’s, we traditionally organized a quest for the kids from Natasha. This time it was “The  Strange Story of Professor Wondermaker.” Since we celebrated with a big group, there were five kids, and we decided to split them into two teams.To even things out, we involved one adult as well. Accordingly, all the tasks were printed in duplicate (and placed into ifferent envelopes — white ones for one team, kraft ones for the other).The children happily dove right into the comic book — they had never seen anything like that in a quest before! Then they moved on to the tasks — some of them weren’t easy at all, there were even some spy-style listenings to check whether the other team had solved a challenge.It was exciting for everyone — from ages 10–17 and even 40+. They were absorbed for about an hour and a half, maybe more — time just flew by, and everyone was happy!Natasha, thank you for helping us create such a wonderful adventure for the kids with minimal effort!
-                        </p>
+
+                    <p>
+                        <strong>Price:</strong> 
+                        <?php if ($product->is_on_sale()): ?>
+                            €<?php echo $product->get_sale_price(); ?>
+                            <span class="old-price">€<?php echo $product->get_regular_price(); ?></span>
+                        <?php else: ?>
+                            €<?php echo $product->get_regular_price(); ?>
+                        <?php endif; ?>
+                    </p>
+                    <p><strong>Get a ready-made <?php echo esc_html($product->get_attribute('theme')); ?> quest for your child!</strong></p>
+
+                    <?php
+                    $features = get_post_meta($product->get_id(), 'features', true);
+                    if ($features) {
+                        $items = explode("\n", $features);
+                        echo '<ul>';
+                        foreach ($items as $item) {
+                            $item = trim($item);
+                            if ($item) {
+                                echo '<li><img src="' . get_template_directory_uri() . '/assets/icons/tick.svg" alt="tick"> ' . esc_html($item) . '</li>';
+                            }
+                        }
+                        echo '</ul>';
+                    }
+                    ?>
+
+                    <p><strong>Recommended age:</strong> <?php echo esc_html($product->get_attribute('age')); ?> years</p>
+                    <p><strong>Number of players:</strong> <?php echo esc_html($product->get_attribute('players')); ?></p>
+                    <p><strong>Duration:</strong> ~<?php echo esc_html($product->get_attribute('duration')); ?> minutes</p>
+
+                    <div class="product-hero__add-to-cart">
+                        <?php woocommerce_template_single_add_to_cart(); ?>
                     </div>
                 </div>
-                
-            </div>
-            <div class="tab-content" id="description">
-                <div class="description__wrapper">
-                    <p>At the beginning of the quest, the children receive an audio message from the ghost of Blackmore and learn that he is trapped somewhere in the castle, while a suspicious double has taken his place. To Blackmore’s surprise, neither his daughter Amalia, nor Aunt Ginny, nor his closest friends noticed the substitution. He tries to reach out to his relatives with his thoughts, since family ties are a great power. The children must visit each of them, piece together the fragments of his thoughts, and discover where Count Blackmore is being held. Naturally, the information will be encrypted with riddles and puzzles. By showing courage and ingenuity, the children will rescue Count Blackmore, uncover who his mysterious double really is, and of course, receive gifts from the ghost.The quest is available in two versions: with props and creative tasks, or as a fully printable version.</p>
-                    <p>For the printable version, you will need to print the tasks on a color printer or at a print shop, as well as:</p>
-                    <ul class="tools-list">
-                        <li>Scissors</li>
-                        <li>10 envelopes</li>
-                        <li>Double-sided tape, painter’s tape, or adhesive putty (e.g. Blu Tack)</li>
-                        <li>A pen or pencil for solving tasks</li>
-                        <li>A phone or tablet for scanning QR codes</li>
-                        <li>Several books</li>
-                        <li>Black or orange wool yarn</li>
-                        <li>Sweets (or other prizes) for the finale</li>
-                    </ul>
-                    <p>If you want to add a spooky atmosphere, we recommend the “with props” version. In addition to the items listed above, you will also need:</p>
-                    <ul class="extra-tools-list">
-                        <li>5 clean bottles, vials, or glasses (glass or plastic)</li>
-                        <li>a cup, spoon, or measuring cup</li>
-                        <li>juices, fruit drinks, water (5 different kinds)</li>
-                        <li>wool gloves (one pair per participant)</li>
-                        <li>glue pads or needle and thread (one set per participant)</li>
-                        <li>buttons, pieces of felt, or any decorative materials you have on hand for customizing the gloves.</li>
-                    </ul>
-                    <p>So, read the guide, print out the letters, tasks, and puzzles, cut out the necessary elements, and place them around your home (garden, studio) according to the plan. Get ready for a magical evening filled with the delighted shouts and laughter of children. Preparation will take no more than 1.5 hours. Some elements need to be added during the quest itself, so it’s important to stay nearby. This way, you’ll also be able to share the adventure together with your child (or children).</p>
-                    <p><strong>Quest authors:</strong> Dina Artemkina and Natalia Minskaya</p>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="product-recommend section-common" id="productRecommend">
-        <div class="products__wrapper container">
-            <h3 class="recommend-title">You may also like</h3>
-            <div class="product-items__wrapper">
-                <article class="product-card">
-                    <a class="product-card__image" href="product.html">
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/card-1.webp" alt="Product card">
-                    </a>
-                    <div class="product-card__content">
-                        <a class="product-card__title-link" href="product.html">
-                            <h4 class="product-card__title">Frank and his Spooky Gang</h4>
-                        </a>
-                        <div class="product-card__meta">
-                            <img class="product-card__icon" src="<?php echo get_template_directory_uri(); ?>/assets/icons/user.svg" alt="User Icon">
-                            <span class="product-card__age">6+</span>
-                        </div>
-                        <div class="product-card__bottom">
-                            <span class="product-card__price">€20</span>
-                            <a href="product.html" class="btn btn-card">Learn more</a>
-                        </div>
-                    </div>
-                </article>
-                <article class="product-card">
-                    <a class="product-card__image" href="product.html">
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/card-2.webp" alt="Product card">
-                    </a>
-                    <div class="product-card__content">
-                        <a class="product-card__title-link" href="product.html">
-                            <h4 class="product-card__title">Frank and his Spooky Gang</h4>
-                        </a>
-                        <div class="product-card__meta">
-                            <img class="product-card__icon" src="<?php echo get_template_directory_uri(); ?>/assets/icons/user.svg" alt="User Icon">
-                            <span class="product-card__age">6+</span>
-                        </div>
-                        <div class="product-card__bottom">
-                            <span class="product-card__price">€20</span>
-                            <a href="product.html" class="btn btn-card">Learn more</a>
-                        </div>
-                    </div>
-                </article>
             </div>
         </div>
     </section>
 </main>
 
-<?php
-get_footer();
-?>
+<?php get_footer(); ?>
