@@ -200,22 +200,31 @@ get_header();
             </div>
         </div>
     </section>
+    <?php
+    $reviews = new WP_Query(array(
+        'post_type' => 'review',
+        'posts_per_page' => -1
+    ));
+
+    if ($reviews->have_posts()) :
+    ?>
     <section class="reviews section-decorated-dark section-common" id="reviews">
         <div class="container">
             <h2 class="text-align">REVIEWS</h2>
             <div class="reviews__slider-wrapper">
-            <div class="reviews__slider">
-                <?php while (have_rows('reviews_list')) : the_row(); ?>
-                <div class="review-card">
-                    <div class="review-card__stars">★★★★★</div>
-                    <div class="review-card__author"><?php echo esc_html(get_sub_field('author')); ?></div>
-                    <p class="review-card__text"><?php echo esc_html(get_sub_field('text')); ?></p>
+                <div class="reviews__slider">
+                    <?php while ($reviews->have_posts()) : $reviews->the_post(); ?>
+                        <div class="review-card">
+                            <div class="review-card__stars">★★★★★</div>
+                            <div class="review-card__author"><?php the_title(); ?></div>
+                            <p class="review-card__text"><?php the_content(); ?></p>
+                        </div>
+                    <?php endwhile; ?>
                 </div>
-                <?php endwhile; ?>
-            </div>
             </div>
         </div>
     </section>
+    <?php endif; wp_reset_postdata(); ?>
     <section class="blog section-special" id="blog">
         <div class="blog__wrapper container">
             <h2 class="text-align">Blog Posts</h2>

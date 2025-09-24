@@ -31,3 +31,27 @@ add_theme_support('custom-logo');
 add_theme_support('post-thumbnails');
 add_theme_support('title-tag');
 
+// Регистрируем кастомный тип записей "Отзывы"
+function register_reviews_cpt() {
+    register_post_type('review', array(
+        'labels' => array(
+            'name' => 'Отзывы',
+            'singular_name' => 'Отзыв',
+            'add_new' => 'Добавить отзыв',
+            'add_new_item' => 'Добавить новый отзыв',
+            'edit_item' => 'Редактировать отзыв',
+            'new_item' => 'Новый отзыв',
+            'view_item' => 'Просмотреть отзыв',
+            'search_items' => 'Искать отзывы',
+            'not_found' => 'Не найдено',
+            'not_found_in_trash' => 'В корзине не найдено',
+        ),
+        'public' => true,
+        'has_archive' => false,
+        'menu_icon' => 'dashicons-format-chat',
+        'supports' => array('title', 'editor'),
+        'show_in_rest' => true,
+    ));
+}
+add_action('init', 'register_reviews_cpt');
+
