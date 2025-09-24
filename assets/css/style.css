@@ -1493,6 +1493,38 @@ nav li:hover {
   gap: 10px;
 }
 
+.product-hero__add-to-cart .cart {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.product-hero__add-to-cart .quantity input.qty {
+  width: 60px;
+  height: 100%;
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid var(--color-orange);
+  text-align: center;
+}
+
+
+.product-hero__add-to-cart .single_add_to_cart_button {
+    background-color: rgba(215, 83, 0, 0.6);
+    color: var(--color-white);
+    border: none;
+    padding: 11px 42px;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.product-hero__add-to-cart .single_add_to_cart_button:hover {
+    background-color: var(--color-orange);
+    transform: scale(1.05);
+}
+
 /* Product-tabs */
 .product-tabs {
   display: flex;

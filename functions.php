@@ -46,5 +46,9 @@ add_filter('woocommerce_add_to_cart_fragments', function($fragments) {
     return $fragments;
 });
 
+add_filter( 'woocommerce_product_single_add_to_cart_text', function() {
+    return __( 'Add to Cart', 'woocommerce' );
+});
+
 // (Опционально) Убираем хлебные крошки WooCommerce, если не нужны
 remove_action('woocommerce_before_main_content', 'woocommerce_breadcrumb', 20, 0);
