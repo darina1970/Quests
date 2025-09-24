@@ -423,6 +423,26 @@ nav li:hover {
   height: clamp(30px, 1.771vw, 34px);
 }
 
+.header__cart {
+  position: relative;
+  display: inline-block;
+}
+
+.header__cart .cart-count {
+  position: absolute;
+  top: -12px;
+  right: -12px;
+  background: var(--color-orange);
+  color: var(--color-white);
+  font-size: 12px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .header__cart img:hover {
   transform: scale(1.1);
 }
@@ -573,7 +593,6 @@ nav li:hover {
 }
 
 /* Products */
-
 .products__controls {
   display: flex;
   justify-content: space-between;
@@ -640,7 +659,7 @@ nav li:hover {
 .product-card__content {
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  flex-grow: 1;
 }
 
 .product-card:hover {
@@ -681,9 +700,24 @@ nav li:hover {
   background: rgba(106, 57, 14, 0);
 }
 
+.product-card__title-link {
+  margin-bottom: 10px;
+}
+
 /* Название продукта */
 .product-card__title {
-  flex-grow: 1;
+  min-height: 2.8em;
+  line-height: 1.4em;
+}
+
+.product-card__middle {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: start;
+  margin-bottom: 15px;
+  margin-top: auto;
+  gap: 10px;
 }
 
 /* Мета (иконка + возраст) */
@@ -692,6 +726,7 @@ nav li:hover {
   align-items: center;
   gap: 6px;
   font-size: 18px;
+  margin-top: 25px;
 }
 
 .product-card__icon {
@@ -707,6 +742,7 @@ nav li:hover {
 }
 
 .product-card__bottom {
+  margin-top: auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -714,6 +750,11 @@ nav li:hover {
 
 .product-card__price {
   font-size: 18px;
+}
+
+.rating-stars {
+  display: flex;
+  gap: 1px;
 }
 
 /* Reviews */
@@ -1470,6 +1511,38 @@ nav li:hover {
   display: flex;
   align-items: center;
   gap: 10px;
+}
+
+.product-hero__add-to-cart .cart {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.product-hero__add-to-cart .quantity input.qty {
+  width: 60px;
+  height: 100%;
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid var(--color-orange);
+  text-align: center;
+}
+
+
+.product-hero__add-to-cart .single_add_to_cart_button {
+    background-color: rgba(215, 83, 0, 0.6);
+    color: var(--color-white);
+    border: none;
+    padding: 11px 42px;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.product-hero__add-to-cart .single_add_to_cart_button:hover {
+    background-color: var(--color-orange);
+    transform: scale(1.05);
 }
 
 /* Product-tabs */
