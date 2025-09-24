@@ -204,58 +204,15 @@ get_header();
         <div class="container">
             <h2 class="text-align">REVIEWS</h2>
             <div class="reviews__slider-wrapper">
-                <div class="reviews__slider">
-                    <div class="review-card">
-                        <div class="review-card__stars">★★★★★</div>
-                        <div class="review-card__author">Julia</div>
-                        <p class="review-card__text">We hosted the quest on Saturday and it was an absolute hit!
-                            Everyone loved it — adults and kids alike. The puzzles were
-                            fun and varied, and the witty texts made us laugh throughout. Thank you for such a
-                            fantastic celebration!</p>
-                    </div>
-                    <div class="review-card">
-                        <div class="review-card__stars">★★★★★</div>
-                        <div class="review-card__author">Leo</div>
-                        <p class="review-card__text">We hosted the quest on Saturday and it was an absolute hit!
-                            Everyone loved it — adults and kids alike. The puzzles were
-                            fun and varied, and the witty texts made us laugh throughout. Thank you for such a
-                            fantastic celebration!
-                        </p>
-                    </div>
-                    <div class="review-card">
-                        <div class="review-card__stars">★★★★★</div>
-                        <div class="review-card__author">Maya</div>
-                        <p class="review-card__text">We hosted the quest on Saturday and it was an absolute hit!
-                            Everyone loved it — adults and kids alike. The puzzles were
-                            fun and varied, and the witty texts made us laugh throughout. Thank you for such a
-                            fantastic celebration!</p>
-                    </div>
-                    <div class="review-card">
-                        <div class="review-card__stars">★★★★★</div>
-                        <div class="review-card__author">Tom</div>
-                        <p class="review-card__text">We hosted the quest on Saturday and it was an absolute hit!
-                            Everyone loved it — adults and kids alike. The puzzles were
-                            fun and varied, and the witty texts made us laugh throughout. Thank you for such a
-                            fantastic celebration!
-                        </p>
-                    </div>
-                    <div class="review-card">
-                        <div class="review-card__stars">★★★★★</div>
-                        <div class="review-card__author">Anna</div>
-                        <p class="review-card__text">We hosted the quest on Saturday and it was an absolute hit!
-                            Everyone loved it — adults and kids alike. The puzzles were
-                            fun and varied, and the witty texts made us laugh throughout. Thank you for such a
-                            fantastic celebration!</p>
-                    </div>
-                    <div class="review-card">
-                        <div class="review-card__stars">★★★★★</div>
-                        <div class="review-card__author">Chris</div>
-                        <p class="review-card__text">We hosted the quest on Saturday and it was an absolute hit!
-                            Everyone loved it — adults and kids alike. The puzzles were
-                            fun and varied, and the witty texts made us laugh throughout. Thank you for such a
-                            fantastic celebration!</p>
-                    </div>
+            <div class="reviews__slider">
+                <?php while (have_rows('reviews_list')) : the_row(); ?>
+                <div class="review-card">
+                    <div class="review-card__stars">★★★★★</div>
+                    <div class="review-card__author"><?php echo esc_html(get_sub_field('author')); ?></div>
+                    <p class="review-card__text"><?php echo esc_html(get_sub_field('text')); ?></p>
                 </div>
+                <?php endwhile; ?>
+            </div>
             </div>
         </div>
     </section>
