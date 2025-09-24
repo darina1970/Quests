@@ -43,8 +43,9 @@
                 <?php endif; ?>
             </nav>
             <div class="header__icons">
-                <a href="#" class="header__cart">
-                    <img src="<?php echo get_template_directory_uri(); ?>/assets/icons/cart.svg" alt="product cart" />
+                <a href="<?php echo wc_get_cart_url(); ?>" class="header__cart">
+                    <img src="<?php echo get_template_directory_uri(); ?>/assets/icons/cart.svg" alt="Cart">
+                    <span class="cart-count"><?php echo WC()->cart->get_cart_contents_count(); ?></span>
                 </a>
                 <?php if ( is_front_page() ) : ?>
                     <button class="header__burger" aria-label="menu">
