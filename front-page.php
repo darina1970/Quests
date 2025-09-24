@@ -44,13 +44,12 @@ get_header();
             </div>
             <div class="product-items__wrapper">
                 <?php
-                // Узнаём текущую страницу (для пагинации)
-                $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
-                // Запрос товаров
+                
                 $args = [
                     'post_type'      => 'product',
-                    'posts_per_page' => 10, // количество товаров на странице
-                    'paged'          => $paged
+                    'posts_per_page' => -1,
+                    'orderby'        => 'date',
+                    'order'          => 'DESC',
                 ];
 
                 $loop = new WP_Query($args);
@@ -76,13 +75,10 @@ get_header();
                                             $rating = (float) $product->get_average_rating();
                                             $reviews_count = $product->get_review_count();
 
-                                            // 5 звёзд
                                             for ($i = 1; $i <= 5; $i++) {
                                                 if ($i <= floor($rating)) {
-                                                    // Полная звезда
                                                     echo '<img src="' . get_template_directory_uri() . '/assets/icons/star-full.svg" alt="star">';
                                                 } else {
-                                                    // Пустая звезда
                                                     echo '<img src="' . get_template_directory_uri() . '/assets/icons/star.svg" alt="star">';
                                                 }
                                             }
@@ -121,22 +117,11 @@ get_header();
                 else :
                     echo '<p>No products found</p>';
                 endif;
+
+                wp_reset_postdata(); 
+                
                 ?>
             </div>
-
-            <!-- Пагинация -->
-            <div class="products__pagination">
-                <?php
-                echo paginate_links([
-                    'total'   => $loop->max_num_pages,
-                    'current' => $paged,
-                    'prev_text' => '« Prev',
-                    'next_text' => 'Next »',
-                ]);
-                ?>
-            </div>
-
-            <?php wp_reset_postdata(); ?>
         </div>
     </section>
     <section class="reviews section-decorated-dark section-common" id="reviews">
