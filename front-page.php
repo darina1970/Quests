@@ -69,34 +69,36 @@ get_header();
                                 <a class="product-card__title-link" href="<?php the_permalink(); ?>">
                                     <h4 class="product-card__title"><?php the_title(); ?></h4>
                                 </a>
-                                <div class="rating-info">
-                                    <div class="rating-stars">
-                                        <?php
-                                        $rating = (float) $product->get_average_rating();
-                                        $reviews_count = $product->get_review_count();
+                                <div class="product-card__middle">
+                                    <div class="rating-info">
+                                        <div class="rating-stars">
+                                            <?php
+                                            $rating = (float) $product->get_average_rating();
+                                            $reviews_count = $product->get_review_count();
 
-                                        // 5 звёзд
-                                        for ($i = 1; $i <= 5; $i++) {
-                                            if ($i <= floor($rating)) {
-                                                // Полная звезда
-                                                echo '<img src="' . get_template_directory_uri() . '/assets/icons/star-full.svg" alt="star">';
-                                            } else {
-                                                // Пустая звезда
-                                                echo '<img src="' . get_template_directory_uri() . '/assets/icons/star.svg" alt="star">';
+                                            // 5 звёзд
+                                            for ($i = 1; $i <= 5; $i++) {
+                                                if ($i <= floor($rating)) {
+                                                    // Полная звезда
+                                                    echo '<img src="' . get_template_directory_uri() . '/assets/icons/star-full.svg" alt="star">';
+                                                } else {
+                                                    // Пустая звезда
+                                                    echo '<img src="' . get_template_directory_uri() . '/assets/icons/star.svg" alt="star">';
+                                                }
                                             }
-                                        }
-                                        ?>
+                                            ?>
+                                        </div>
+                                        <p>(<?php echo $reviews_count; ?> reviews)</p>
                                     </div>
-                                    <p>(<?php echo $reviews_count; ?> reviews)</p>
-                                </div>
-                                <div class="product-card__meta">
-                                    <span>Age: </span>
-                                    <span>
-                                        <?php
-                                        $age = $product->get_attribute('age');
-                                        echo $age ? esc_html($age) : '—';
-                                        ?>
-                                    </span>
+                                    <div class="product-card__meta">
+                                        <span>Age: </span>
+                                        <span>
+                                            <?php
+                                            $age = $product->get_attribute('age');
+                                            echo $age ? esc_html($age) : '—';
+                                            ?>
+                                        </span>
+                                    </div>
                                 </div>
                                 <div class="product-card__bottom">
                                     <?php if ( $product->is_on_sale() ) : ?>
