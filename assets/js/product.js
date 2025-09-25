@@ -114,6 +114,51 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
+  const writeReviewBtn = document.getElementById("writeReview");
+  const reviewFormContainer = document.getElementById("reviewForm");
+  if (writeReviewBtn && reviewFormContainer) {
+    writeReviewBtn.addEventListener("click", () => {
+      reviewFormContainer.classList.toggle("hidden");
+    });
+  }
+
+  // Звёздочки
+  const stars = document.querySelectorAll(".stars-input span");
+  const ratingInput = document.getElementById("ratingValue");
+  stars.forEach((star) => {
+    star.addEventListener("click", () => {
+      ratingInput.value = star.dataset.value;
+      stars.forEach((s) => s.classList.remove("selected"));
+      for (let i = 0; i < star.dataset.value; i++) {
+        stars[i].classList.add("selected");
+      }
+    });
+  });
+
+  // Превью фото
+  const photoInput = document.querySelector('input[name="review_photos[]"]');
+  const photoPreview = document.getElementById("photoPreview");
+  photoInput.addEventListener("change", () => {
+    photoPreview.innerHTML = "";
+    if (photoInput.files.length > 3) {
+      alert("You can upload up to 3 photos");
+      photoInput.value = "";
+      return;
+    }
+    Array.from(photoInput.files).forEach((file) => {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const img = document.createElement("img");
+        img.src = e.target.result;
+        img.style.width = "80px";
+        img.style.marginRight = "5px";
+        img.style.marginBottom = "5px";
+        photoPreview.appendChild(img);
+      };
+      reader.readAsDataURL(file);
+    });
+  });
+
   // const reviewLink = document.querySelector('a[href="#reviews"]');
   // if (reviewLink) {
   //   reviewLink.addEventListener("click", (e) => {

@@ -81,3 +81,75 @@ add_filter('locale', function($locale) {
 });
 // Убираем хлебные крошки WooCommerce
 remove_action('woocommerce_before_main_content', 'woocommerce_breadcrumb', 20, 0);
+
+// 1. Вывод кастомных полей (рейтинг и фото) в форме
+add_action('comment_form_logged_in_after', 'custom_review_fields');
+add_action('comment_form_after_fields', 'custom_review_fields');
+function custom_review_fields() {
+    ?>
+
+    <div class="rating__wrapper">
+        <p class="text-align">RATING *</p>
+        <div class="stars-input">
+            <span data-value="1"><img src="<?php echo get_template_directory_uri(); ?>/assets/icons/star-full.svg" alt="1"></span>
+            <span data-value="2"><img src="<?php echo get_template_directory_uri(); ?>/assets/icons/star-full.svg" alt="2"></span>
+            <span data-value="3"><img src="<?php echo get_template_directory_uri(); ?>/assets/icons/star-full.svg" alt="3"></span>
+            <span data-value="4"><img src="<?php echo get_template_directory_uri(); ?>/assets/icons/star-full.svg" alt="4"></span>
+            <span data-value="5"><img src="<?php echo get_template_directory_uri(); ?>/assets/icons/star-full.svg" alt="5"></span>
+        </div>
+        <input type="hidden" name="rating" id="ratingValue" value="0" required>
+    </div>
+
+    <div class="photo__wrapper">
+        <p class="text-align">UPLOAD PHOTOS (up to 3)</p>
+        <input type="file" name="review_photos[]" accept="image/*" multiple>
+        <div id="photoPreview" class="photo-preview"></div>
+    </div>
+    <?php
+}
+
+// 2. Сохраняем кастомные поля (рейтинг и фото) при отправке отзыва
+add_action('comment_post', function($comment_id, $comment_approved, $commentdata){
+    // рейтинг
+    if ( isset($_POST['rating']) ) {
+        update_comment_meta($comment_id, 'rating', intval($_POST['rating']));
+    }
+
+    // фото
+    if ( isset($_FILES['review_photos']) && !empty($_FILES['review_photos']['name'][0]) ) {
+        require_once(ABSPATH . 'wp-admin/includes/file.php');
+        $files = $_FILES['review_photos'];
+        $attachments = [];
+        for ($i=0; $i<count($files['name']); $i++) {
+            if ($files['error'][$i] === 0) {
+                $file_array = ['name'=>$files['name'][$i],'tmp_name'=>$files['tmp_name'][$i]];
+                $upload = wp_handle_upload($file_array, ['test_form'=>false]);
+                if (!isset($upload['error'])) $attachments[] = $upload['url'];
+            }
+        }
+        if ($attachments) update_comment_meta($comment_id, 'review_photos', $attachments);
+    }
+}, 10, 3);
+
+// 3. Вывод кастомной формы под твою верстку вместо стандартной
+remove_action('woocommerce_review_before_comment_form', 'woocommerce_review_form', 10);
+add_action('woocommerce_review_before_comment_form', function() {
+    comment_form([
+        'title_reply' => 'Write Your Review',
+        'fields' => [
+            'author' => '<div class="name__wrapper"><p class="text-align">YOUR NAME</p><input type="text" name="author" placeholder="Your name"></div>',
+            'email'  => '<div class="email__wrapper"><p class="text-align">YOUR EMAIL</p><input type="email" name="email" placeholder="Your email"></div>'
+        ],
+        'comment_field' => '<div class="review__wrapper"><p class="text-align">REVIEW *</p><textarea name="comment" placeholder="Text your message here" required></textarea></div>
+                            <div class="photo__wrapper">
+                                <p class="text-align">UPLOAD PHOTOS (up to 3)</p>
+                                <input type="file" name="review_photos[]" accept="image/*" multiple>
+                            </div>',
+        'submit_field' => '<p class="form-submit">%1$s %2$s</p>',
+        'class_submit' => 'btn btn-form btn-review-form',
+        'form_id'      => 'commentform',
+        'class_form'   => 'custom-comment-form',
+        'enctype'      => 'multipart/form-data', // вот это важно!
+    ]);
+});
+

@@ -118,80 +118,64 @@ $main_image_url = $product->get_image_id() ? wp_get_attachment_url($product->get
                     <p class="reviews-header-title"><span id="reviewsCount">3 REVIEWS on </span><span class="review-game-name">Halloween Home Quest: Frank and his Spooky Gang (Ages 6-11)</span></p>
                     <button class="btn btn-form btn-review-form" id="writeReview">Write Your Review</button>
                 </div>
-                <div id="reviewForm" class="review-form hidden">
-                    <img class="form-bg" src="./assets/images/product-page/piece-of-paper.png" alt="Form background">
-                    <form class="review-form__overlay">
-                        <div class="rating__wrapper">
-                            <p class="text-align">RATING *</p>
-                            <div class="stars-input">
-                                <span data-value="1"><img src="./assets/icons/star-full.svg" alt="star one"></span>
-                                <span data-value="2"><img src="./assets/icons/star-full.svg" alt="star two"></span>
-                                <span data-value="3"><img src="./assets/icons/star-full.svg" alt="star three"></span>
-                                <span data-value="4"><img src="./assets/icons/star-full.svg" alt="star four"></span>
-                                <span data-value="5"><img src="./assets/icons/star-full.svg" alt="star five"></span>
-                            </div>
-                        </div>
-                        <div class="review__wrapper">
-                            <p class="text-align">REVIEW *</p>
-                            <textarea class="review-text" name="review-text" id="reviewText" placeholder="Text your message here"></textarea>
-                        </div>
-                        <div class="photo__wrapper">
-                            <p class="text-align">UPLOAD PHOTOS</p>
-                            <div class="file-upload">
-                                <input type="file" id="reviewPhotos" name="reviewPhotos" accept="image/*" multiple>
-                                <label for="reviewPhotos" class="btn btn-form cursor-scale">Выбрать файлы</label>
-                            </div>
-                            <div id="photoPreview" class="photo-preview"></div>
-                            <p id="photoError" class="photo-error" style="color: red; margin-top: 5px;"></p>
-                        </div>
-                        <div class="name__wrapper">
-                            <p class="text-align">YOUR NAME</p>
-                            <input type="text" id="reviewName" placeholder="Your name">
-                        </div>
-                        <div class="email__wrapper">
-                            <p class="text-align">YOUR EMAIL </p>
-                            <input type="email" id="reviewEmail" placeholder="Your email">
-                        </div>
-                        <p class="text-align notion">Your email address will not be published. Required fields are marked *</p>
-                        <button class="btn btn-form btn-review-form" id="submit-review">Submit Your Review</button>
-                    </form>
-                </div>    
+                <div id="reviewForm" class="review-form">
+                    <img class="form-bg" src="<?php echo get_template_directory_uri(); ?>/assets/images/product-page/piece-of-paper.png" alt="Form background">
+                    <div class="review-form__overlay">
+                    <?php
+                    // здесь WooCommerce вставит форму с помощью comment_form()
+                    do_action('woocommerce_review_before_comment_form');
+                    ?>
+                    </div>
+                </div>
                 <div class="reviews-list">
-                    <div class="review">
-                        <div class="review-header">
-                            <img src="./assets/icons/stars.svg" alt="stars">
-                            <p class="review-date">10/01/24</p>
-                        </div>
-                        <div class="review__user-info">
-                            <img src="./assets/icons/review-icon.svg" alt="user icon">
-                            <p>Catherine</p>
-                        </div>
-                        <p>On New Year’s, we traditionally organized a quest for the kids from Natasha. This time it was “The  Strange Story of Professor Wondermaker.” Since we celebrated with a big group, there were five kids, and we decided to split them into two teams.To even things out, we involved one adult as well. Accordingly, all the tasks were printed in duplicate (and placed into ifferent envelopes — white ones for one team, kraft ones for the other).The children happily dove right into the comic book — they had never seen anything like that in a quest before! Then they moved on to the tasks — some of them weren’t easy at all, there were even some spy-style listenings to check whether the other team had solved a challenge.It was exciting for everyone — from ages 10–17 and even 40+. They were absorbed for about an hour and a half, maybe more — time just flew by, and everyone was happy!Natasha, thank you for helping us create such a wonderful adventure for the kids with minimal effort!
-                        </p>
-                    </div>
-                    <div class="review">
-                        <div class="review-header">
-                            <img src="./assets/icons/stars.svg" alt="stars">
-                            <p class="review-date">10/01/24</p>
-                        </div>
-                        <div class="review__user-info">
-                            <img src="./assets/icons/review-icon.svg" alt="user icon">
-                            <p>Catherine</p>
-                        </div>
-                        <p>On New Year’s, we traditionally organized a quest for the kids from Natasha. This time it was “The  Strange Story of Professor Wondermaker.” Since we celebrated with a big group, there were five kids, and we decided to split them into two teams.To even things out, we involved one adult as well. Accordingly, all the tasks were printed in duplicate (and placed into ifferent envelopes — white ones for one team, kraft ones for the other).The children happily dove right into the comic book — they had never seen anything like that in a quest before! Then they moved on to the tasks — some of them weren’t easy at all, there were even some spy-style listenings to check whether the other team had solved a challenge.It was exciting for everyone — from ages 10–17 and even 40+. They were absorbed for about an hour and a half, maybe more — time just flew by, and everyone was happy!Natasha, thank you for helping us create such a wonderful adventure for the kids with minimal effort!
-                        </p>
-                    </div>
-                    <div class="review">
-                        <div class="review-header">
-                            <img src="./assets/icons/stars.svg" alt="stars">
-                            <p class="review-date">10/01/24</p>
-                        </div>
-                        <div class="review__user-info">
-                            <img src="./assets/icons/review-icon.svg" alt="user icon">
-                            <p>Catherine</p>
-                        </div>
-                        <p>On New Year’s, we traditionally organized a quest for the kids from Natasha. This time it was “The  Strange Story of Professor Wondermaker.” Since we celebrated with a big group, there were five kids, and we decided to split them into two teams.To even things out, we involved one adult as well. Accordingly, all the tasks were printed in duplicate (and placed into ifferent envelopes — white ones for one team, kraft ones for the other).The children happily dove right into the comic book — they had never seen anything like that in a quest before! Then they moved on to the tasks — some of them weren’t easy at all, there were even some spy-style listenings to check whether the other team had solved a challenge.It was exciting for everyone — from ages 10–17 and even 40+. They were absorbed for about an hour and a half, maybe more — time just flew by, and everyone was happy!Natasha, thank you for helping us create such a wonderful adventure for the kids with minimal effort!
-                        </p>
+                    <div class="reviews-list">
+                        <?php
+                        $comments = get_comments([
+                            'post_id' => get_the_ID(),
+                            'status' => 'approve',
+                            'type' => ['review', 'comment'],
+                            'number' => 0,
+                            'order' => 'DESC',
+                        ]);
+
+                        if ($comments) {
+                            foreach ($comments as $comment) :
+                                $rating = get_comment_meta($comment->comment_ID, 'rating', true);
+                                $photos = get_comment_meta($comment->comment_ID, 'review_photos', true);
+                                ?>
+                                <div class="review">
+                                    <div class="review-header">
+                                        <div class="review-stars">
+                                            <?php for ($i = 1; $i <= 5; $i++) : ?>
+                                                <img src="<?php echo get_template_directory_uri(); ?>/assets/icons/star-full.svg"
+                                                    class="<?php echo ($i <= $rating) ? 'star-active' : 'star-inactive'; ?>"
+                                                    alt="star">
+                                            <?php endfor; ?>
+                                        </div>
+                                        <p class="review-date"><?php echo get_comment_date('d/m/y', $comment); ?></p>
+                                    </div>
+
+                                    <div class="review__user-info">
+                                        <img src="<?php echo get_template_directory_uri(); ?>/assets/icons/review-icon.svg" alt="user icon">
+                                        <p><?php echo esc_html($comment->comment_author); ?></p>
+                                    </div>
+
+                                    <p><?php echo esc_html($comment->comment_content); ?></p>
+
+                                    <?php if ($photos && is_array($photos)) : ?>
+                                        <div class="review-photos">
+                                            <?php foreach ($photos as $photo) : ?>
+                                                <img src="<?php echo esc_url($photo); ?>" alt="review photo">
+                                            <?php endforeach; ?>
+                                        </div>
+                                    <?php endif; ?>
+                                </div>
+                            <?php
+                            endforeach;
+                        } else {
+                            echo '<p>No reviews yet.</p>';
+                        }
+                        ?>
                     </div>
                 </div>
                 
