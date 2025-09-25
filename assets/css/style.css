@@ -1529,7 +1529,8 @@ nav li:hover {
 }
 
 
-.product-hero__add-to-cart .single_add_to_cart_button {
+.product-hero__add-to-cart .single_add_to_cart_button,
+.btn-go-cart {
     background-color: rgba(215, 83, 0, 0.6);
     color: var(--color-white);
     border: none;
@@ -1540,7 +1541,8 @@ nav li:hover {
     box-shadow 0.3s ease;
 }
 
-.product-hero__add-to-cart .single_add_to_cart_button:hover {
+.product-hero__add-to-cart .single_add_to_cart_button:hover,
+.btn-go-cart:hover {
     background-color: var(--color-orange);
     transform: scale(1.05);
 }

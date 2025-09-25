@@ -31,6 +31,26 @@ function questtime_add_woocommerce_support() {
     add_theme_support('woocommerce');
 }
 add_action('after_setup_theme', 'questtime_add_woocommerce_support');
+add_action('woocommerce_after_add_to_cart_button', function() {
+    global $product;
+
+    // Получаем ID текущего товара
+    $product_id = $product->get_id();
+
+    // Проверяем корзину на наличие этого товара
+    $in_cart = false;
+    foreach ( WC()->cart->get_cart() as $cart_item ) {
+        if ( $cart_item['product_id'] == $product_id ) {
+            $in_cart = true;
+            break;
+        }
+    }
+
+    // Если товар в корзине, показываем кнопку
+    if ( $in_cart ) {
+        echo '<a href="' . esc_url( wc_get_cart_url() ) . '" class="btn btn-go-cart" style="margin-left:10px;">Go to Cart</a>';
+    }
+});
 
 // Убираем стандартные стили WooCommerce (чтобы они не ломали верстку)
 add_filter('woocommerce_enqueue_styles', '__return_empty_array');
