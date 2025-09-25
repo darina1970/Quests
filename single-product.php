@@ -120,12 +120,47 @@ $main_image_url = $product->get_image_id() ? wp_get_attachment_url($product->get
                 </div>
                 <div id="reviewForm" class="review-form">
                     <img class="form-bg" src="<?php echo get_template_directory_uri(); ?>/assets/images/product-page/piece-of-paper.png" alt="Form background">
-                    <div class="review-form__overlay">
-                    <?php
-                    // здесь WooCommerce вставит форму с помощью comment_form()
-                    do_action('woocommerce_review_before_comment_form');
-                    ?>
-                    </div>
+                    <form id="customReviewForm" class="review-form__overlay" enctype="multipart/form-data">
+                        <div class="rating__wrapper">
+                            <p class="text-align">RATING *</p>
+                            <div class="stars-input">
+                                <span data-value="1"><img src="<?php echo get_template_directory_uri(); ?>/assets/icons/star-full.svg" alt="star one"></span>
+                                <span data-value="2"><img src="<?php echo get_template_directory_uri(); ?>/assets/icons/star-full.svg" alt="star two"></span>
+                                <span data-value="3"><img src="<?php echo get_template_directory_uri(); ?>/assets/icons/star-full.svg" alt="star three"></span>
+                                <span data-value="4"><img src="<?php echo get_template_directory_uri(); ?>/assets/icons/star-full.svg" alt="star four"></span>
+                                <span data-value="5"><img src="<?php echo get_template_directory_uri(); ?>/assets/icons/star-full.svg" alt="star five"></span>
+                            </div>
+                            <input type="hidden" id="reviewRating" name="reviewRating" value="0">
+                        </div>
+
+                        <div class="review__wrapper">
+                            <p class="text-align">REVIEW *</p>
+                            <textarea class="review-text" name="reviewText" id="reviewText" placeholder="Text your message here"></textarea>
+                        </div>
+
+                        <div class="photo__wrapper">
+                            <p class="text-align">UPLOAD PHOTOS</p>
+                            <div class="file-upload">
+                                <input type="file" id="reviewPhotos" name="reviewPhotos[]" accept="image/*" multiple>
+                                <label for="reviewPhotos" class="btn btn-form cursor-scale">Выбрать файлы</label>
+                            </div>
+                            <div id="photoPreview" class="photo-preview"></div>
+                            <p id="photoError" class="photo-error" style="color: red; margin-top: 5px;"></p>
+                        </div>
+
+                        <div class="name__wrapper">
+                            <p class="text-align">YOUR NAME</p>
+                            <input type="text" id="reviewName" name="reviewName" placeholder="Your name">
+                        </div>
+
+                        <div class="email__wrapper">
+                            <p class="text-align">YOUR EMAIL</p>
+                            <input type="email" id="reviewEmail" name="reviewEmail" placeholder="Your email">
+                        </div>
+
+                        <p class="text-align notion">Your email address will not be published. Required fields are marked *</p>
+                        <button type="submit" class="btn btn-form btn-review-form" id="submitReview">Submit Your Review</button>
+                    </form>
                 </div>
                 <div class="reviews-list">
                     <div class="reviews-list">

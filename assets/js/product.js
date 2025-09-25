@@ -122,41 +122,92 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // Звёздочки
   const stars = document.querySelectorAll(".stars-input span");
-  const ratingInput = document.getElementById("ratingValue");
+  const ratingInput = document.getElementById("reviewRating");
+
   stars.forEach((star) => {
-    star.addEventListener("click", () => {
-      ratingInput.value = star.dataset.value;
-      stars.forEach((s) => s.classList.remove("selected"));
-      for (let i = 0; i < star.dataset.value; i++) {
-        stars[i].classList.add("selected");
-      }
+    star.addEventListener("click", function () {
+      const value = parseInt(this.dataset.value);
+      ratingInput.value = value;
+
+      // Добавляем класс selected всем звёздам до выбранной
+      stars.forEach((s) => {
+        if (parseInt(s.dataset.value) <= value) {
+          s.classList.add("selected");
+        } else {
+          s.classList.remove("selected");
+        }
+      });
     });
   });
 
-  // Превью фото
-  const photoInput = document.querySelector('input[name="review_photos[]"]');
+  const photoInput = document.getElementById("reviewPhotos");
   const photoPreview = document.getElementById("photoPreview");
-  photoInput.addEventListener("change", () => {
+  const photoError = document.getElementById("photoError");
+
+  photoInput.addEventListener("change", function () {
     photoPreview.innerHTML = "";
-    if (photoInput.files.length > 3) {
-      alert("You can upload up to 3 photos");
-      photoInput.value = "";
+    photoError.textContent = "";
+    const files = Array.from(this.files);
+
+    if (files.length > 3) {
+      photoError.textContent = "You can upload up to 3 photos only.";
+      this.value = "";
       return;
     }
-    Array.from(photoInput.files).forEach((file) => {
+
+    files.forEach((file) => {
+      if (!file.type.startsWith("image/")) return;
       const reader = new FileReader();
-      reader.onload = (e) => {
+      reader.onload = function (e) {
         const img = document.createElement("img");
         img.src = e.target.result;
         img.style.width = "80px";
         img.style.marginRight = "5px";
-        img.style.marginBottom = "5px";
         photoPreview.appendChild(img);
       };
       reader.readAsDataURL(file);
     });
+  });
+
+  // 📤 Отправка формы через AJAX
+  const reviewForm = document.getElementById("customReviewForm");
+  reviewForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const formData = new FormData();
+    formData.append("action", "submit_custom_review");
+    formData.append("product_id", woocommerce_params.product_id);
+    formData.append("reviewRating", ratingInput.value);
+    formData.append("reviewName", document.getElementById("reviewName").value);
+    formData.append(
+      "reviewEmail",
+      document.getElementById("reviewEmail").value
+    );
+    formData.append("reviewText", document.getElementById("reviewText").value);
+
+    const files = photoInput.files;
+    for (let i = 0; i < files.length; i++) {
+      formData.append("reviewPhotos[]", files[i]);
+    }
+
+    fetch(woocommerce_params.ajax_url, {
+      method: "POST",
+      body: formData,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          alert("Review submitted! It will appear after moderation.");
+          reviewForm.reset();
+          photoPreview.innerHTML = "";
+          ratingInput.value = 0;
+          stars.forEach((s) => s.classList.remove("selected"));
+        } else {
+          alert(data.data || "Error submitting review.");
+        }
+      })
+      .catch(() => alert("AJAX request failed."));
   });
 
   // const reviewLink = document.querySelector('a[href="#reviews"]');

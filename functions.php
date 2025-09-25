@@ -1,22 +1,23 @@
 <?php
 // Подключаем стили и скрипты
 add_action('wp_enqueue_scripts', function () {
-
-    // Общие стили
     wp_enqueue_style('questtime-style', get_stylesheet_uri());
     wp_enqueue_style('questtime-main', get_template_directory_uri() . '/assets/css/style.css', [], null);
 
-    // JS для главной страницы
     if (is_front_page()) {
         wp_enqueue_script('questtime-home', get_template_directory_uri() . '/assets/js/main.js', [], null, true);
     }
 
-    // JS для страницы продукта
     if (is_singular('product')) {
-        wp_enqueue_script('questtime-product', get_template_directory_uri() . '/assets/js/product.js', [], null, true);
+        wp_enqueue_script('questtime-product', get_template_directory_uri() . '/assets/js/product.js', ['jquery'], null, true);
+
+        // Передаём AJAX и ID товара в JS
+        wp_localize_script('questtime-product', 'woocommerce_params', [
+            'ajax_url'   => admin_url('admin-ajax.php'),
+            'product_id' => get_the_ID(),
+        ]);
     }
 
-    // JS для 404 страницы
     if (is_404()) {
         wp_enqueue_script('questtime-404', get_template_directory_uri() . '/assets/js/404.js', [], null, true);
     }
@@ -26,36 +27,16 @@ add_theme_support('custom-logo');
 add_theme_support('post-thumbnails');
 add_theme_support('title-tag');
 
-// Включаем поддержку WooCommerce
+// Поддержка WooCommerce
 function questtime_add_woocommerce_support() {
     add_theme_support('woocommerce');
 }
 add_action('after_setup_theme', 'questtime_add_woocommerce_support');
-add_action('woocommerce_after_add_to_cart_button', function() {
-    global $product;
 
-    // Получаем ID текущего товара
-    $product_id = $product->get_id();
-
-    // Проверяем корзину на наличие этого товара
-    $in_cart = false;
-    foreach ( WC()->cart->get_cart() as $cart_item ) {
-        if ( $cart_item['product_id'] == $product_id ) {
-            $in_cart = true;
-            break;
-        }
-    }
-
-    // Если товар в корзине, показываем кнопку
-    if ( $in_cart ) {
-        echo '<a href="' . esc_url( wc_get_cart_url() ) . '" class="btn btn-go-cart" style="margin-left:10px;">Go to Cart</a>';
-    }
-});
-
-// Убираем стандартные стили WooCommerce (чтобы они не ломали верстку)
+// Убираем стандартные стили WooCommerce
 add_filter('woocommerce_enqueue_styles', '__return_empty_array');
 
-// AJAX-обновление иконки корзины в хедере
+// AJAX обновление корзины
 add_filter('woocommerce_add_to_cart_fragments', function($fragments) {
     ob_start(); ?>
     <span class="cart-count"><?php echo WC()->cart->get_cart_contents_count(); ?></span>
@@ -64,92 +45,138 @@ add_filter('woocommerce_add_to_cart_fragments', function($fragments) {
     return $fragments;
 });
 
-add_filter( 'woocommerce_product_single_add_to_cart_text', function() {
-    return __( 'Add to Cart', 'woocommerce' );
-});
-
-add_filter('locale', function($locale) {
-    if (is_admin()) {
-        return $locale;
-    }
-
-    if (is_woocommerce() || is_cart() || is_checkout() || is_account_page() || is_product()) {
-        return 'en_US';
-    }
-
-    return $locale;
-});
-// Убираем хлебные крошки WooCommerce
-remove_action('woocommerce_before_main_content', 'woocommerce_breadcrumb', 20, 0);
-
-// 1. Вывод кастомных полей (рейтинг и фото) в форме
-add_action('comment_form_logged_in_after', 'custom_review_fields');
-add_action('comment_form_after_fields', 'custom_review_fields');
-function custom_review_fields() {
-    ?>
-
-    <div class="rating__wrapper">
-        <p class="text-align">RATING *</p>
-        <div class="stars-input">
-            <span data-value="1"><img src="<?php echo get_template_directory_uri(); ?>/assets/icons/star-full.svg" alt="1"></span>
-            <span data-value="2"><img src="<?php echo get_template_directory_uri(); ?>/assets/icons/star-full.svg" alt="2"></span>
-            <span data-value="3"><img src="<?php echo get_template_directory_uri(); ?>/assets/icons/star-full.svg" alt="3"></span>
-            <span data-value="4"><img src="<?php echo get_template_directory_uri(); ?>/assets/icons/star-full.svg" alt="4"></span>
-            <span data-value="5"><img src="<?php echo get_template_directory_uri(); ?>/assets/icons/star-full.svg" alt="5"></span>
+// Кастомная форма отзывов
+remove_action('woocommerce_review_before_comment_form', 'woocommerce_review_form', 10);
+add_action('woocommerce_review_before_comment_form', function() { ?>
+    <form id="customReviewForm" class="review-form__overlay" enctype="multipart/form-data">
+        <div class="rating__wrapper">
+            <p class="text-align">RATING *</p>
+            <div class="stars-input">
+                <?php for($i=1;$i<=5;$i++): ?>
+                    <span data-value="<?php echo $i; ?>">
+                        <img src="<?php echo get_template_directory_uri(); ?>/assets/icons/star-full.svg" alt="star <?php echo $i; ?>">
+                    </span>
+                <?php endfor; ?>
+            </div>
+            <input type="hidden" id="reviewRating" name="reviewRating" value="0">
         </div>
-        <input type="hidden" name="rating" id="ratingValue" value="0" required>
-    </div>
 
-    <div class="photo__wrapper">
-        <p class="text-align">UPLOAD PHOTOS (up to 3)</p>
-        <input type="file" name="review_photos[]" accept="image/*" multiple>
-        <div id="photoPreview" class="photo-preview"></div>
-    </div>
-    <?php
-}
+        <div class="review__wrapper">
+            <p class="text-align">REVIEW *</p>
+            <textarea class="review-text" name="reviewText" id="reviewText" placeholder="Text your message here"></textarea>
+        </div>
 
-// 2. Сохраняем кастомные поля (рейтинг и фото) при отправке отзыва
-add_action('comment_post', function($comment_id, $comment_approved, $commentdata){
-    // рейтинг
-    if ( isset($_POST['rating']) ) {
-        update_comment_meta($comment_id, 'rating', intval($_POST['rating']));
-    }
+        <div class="photo__wrapper">
+            <p class="text-align">UPLOAD PHOTOS</p>
+            <div class="file-upload">
+                <input type="file" id="reviewPhotos" name="reviewPhotos[]" accept="image/*" multiple>
+                <label for="reviewPhotos" class="btn btn-form cursor-scale">Выбрать файлы</label>
+            </div>
+            <div id="photoPreview" class="photo-preview"></div>
+            <p id="photoError" class="photo-error" style="color: red; margin-top: 5px;"></p>
+        </div>
 
-    // фото
-    if ( isset($_FILES['review_photos']) && !empty($_FILES['review_photos']['name'][0]) ) {
+        <div class="name__wrapper">
+            <p class="text-align">YOUR NAME</p>
+            <input type="text" id="reviewName" name="reviewName" placeholder="Your name">
+        </div>
+
+        <div class="email__wrapper">
+            <p class="text-align">YOUR EMAIL</p>
+            <input type="email" id="reviewEmail" name="reviewEmail" placeholder="Your email">
+        </div>
+
+        <p class="text-align notion">Your email address will not be published. Required fields are marked *</p>
+        <button type="submit" class="btn btn-form btn-review-form" id="submitReview">Submit Your Review</button>
+    </form>
+<?php });
+
+// AJAX обработка отправки отзыва
+add_action('wp_ajax_submit_custom_review', 'handle_custom_review');
+add_action('wp_ajax_nopriv_submit_custom_review', 'handle_custom_review');
+function handle_custom_review() {
+    if (!isset($_POST['product_id'])) wp_send_json_error("Product ID missing.");
+
+    $product_id = intval($_POST['product_id']);
+    $author     = sanitize_text_field($_POST['reviewName']);
+    $email      = sanitize_email($_POST['reviewEmail']);
+    $content    = sanitize_textarea_field($_POST['reviewText']);
+    $rating     = intval($_POST['reviewRating']);
+
+    if (!$content || !$rating) wp_send_json_error("Please fill in review and rating.");
+
+    $commentdata = [
+        'comment_post_ID'      => $product_id,
+        'comment_author'       => $author,
+        'comment_author_email' => $email,
+        'comment_content'      => $content,
+        'comment_type'         => 'review',
+        'comment_approved'     => 0, // модерация
+    ];
+
+    $comment_id = wp_insert_comment($commentdata);
+    update_comment_meta($comment_id, 'rating', $rating);
+
+    // Сохраняем фото
+    if (isset($_FILES['reviewPhotos'])) {
         require_once(ABSPATH . 'wp-admin/includes/file.php');
-        $files = $_FILES['review_photos'];
+        $files = $_FILES['reviewPhotos'];
         $attachments = [];
         for ($i=0; $i<count($files['name']); $i++) {
             if ($files['error'][$i] === 0) {
-                $file_array = ['name'=>$files['name'][$i],'tmp_name'=>$files['tmp_name'][$i]];
+                $file_array = ['name'=>$files['name'][$i], 'tmp_name'=>$files['tmp_name'][$i]];
                 $upload = wp_handle_upload($file_array, ['test_form'=>false]);
                 if (!isset($upload['error'])) $attachments[] = $upload['url'];
             }
         }
         if ($attachments) update_comment_meta($comment_id, 'review_photos', $attachments);
     }
-}, 10, 3);
 
-// 3. Вывод кастомной формы под твою верстку вместо стандартной
-remove_action('woocommerce_review_before_comment_form', 'woocommerce_review_form', 10);
-add_action('woocommerce_review_before_comment_form', function() {
-    comment_form([
-        'title_reply' => 'Write Your Review',
-        'fields' => [
-            'author' => '<div class="name__wrapper"><p class="text-align">YOUR NAME</p><input type="text" name="author" placeholder="Your name"></div>',
-            'email'  => '<div class="email__wrapper"><p class="text-align">YOUR EMAIL</p><input type="email" name="email" placeholder="Your email"></div>'
-        ],
-        'comment_field' => '<div class="review__wrapper"><p class="text-align">REVIEW *</p><textarea name="comment" placeholder="Text your message here" required></textarea></div>
-                            <div class="photo__wrapper">
-                                <p class="text-align">UPLOAD PHOTOS (up to 3)</p>
-                                <input type="file" name="review_photos[]" accept="image/*" multiple>
-                            </div>',
-        'submit_field' => '<p class="form-submit">%1$s %2$s</p>',
-        'class_submit' => 'btn btn-form btn-review-form',
-        'form_id'      => 'commentform',
-        'class_form'   => 'custom-comment-form',
-        'enctype'      => 'multipart/form-data', // вот это важно!
-    ]);
-});
+    wp_send_json_success("Review submitted.");
+}
 
+// Вывод всех отзывов с фото и рейтингом
+function render_reviews_list() { ?>
+    <div class="reviews-list">
+        <?php
+        $comments = get_comments([
+            'post_id'  => get_the_ID(),
+            'status'   => 'approve',
+            'type__in' => ['comment','review'],
+            'number'   => 0,
+            'order'    => 'DESC',
+        ]);
+
+        if ($comments) {
+            foreach($comments as $comment):
+                $rating = get_comment_meta($comment->comment_ID, 'rating', true);
+                $photos = get_comment_meta($comment->comment_ID, 'review_photos', true);
+                ?>
+                <div class="review">
+                    <div class="review-header">
+                        <div class="review-stars">
+                            <?php for($i=1;$i<=5;$i++): ?>
+                                <img src="<?php echo get_template_directory_uri(); ?>/assets/icons/star-full.svg" class="<?php echo ($i <= $rating) ? 'selected' : ''; ?>" alt="star">
+                            <?php endfor; ?>
+                        </div>
+                        <p class="review-date"><?php echo get_comment_date('d/m/y', $comment); ?></p>
+                    </div>
+                    <div class="review__user-info">
+                        <img src="<?php echo get_template_directory_uri(); ?>/assets/icons/review-icon.svg" alt="user icon">
+                        <p><?php echo esc_html($comment->comment_author); ?></p>
+                    </div>
+                    <p><?php echo esc_html($comment->comment_content); ?></p>
+                    <?php if ($photos && is_array($photos)): ?>
+                        <div class="review-photos">
+                            <?php foreach($photos as $photo): ?>
+                                <img src="<?php echo esc_url($photo); ?>" alt="review photo">
+                            <?php endforeach; ?>
+                        </div>
+                    <?php endif; ?>
+                </div>
+            <?php endforeach;
+        } else {
+            echo '<p>No reviews yet.</p>';
+        } ?>
+    </div>
+<?php }
