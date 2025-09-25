@@ -115,7 +115,7 @@ function handle_custom_review() {
         'comment_author_email' => $email,
         'comment_content'      => $content,
         'comment_type'         => 'review',
-        'comment_approved'     => 0, // модерация
+        'comment_approved'     => 0,
     ];
     $comment_id = wp_insert_comment($commentdata);
     if (!$comment_id) wp_send_json_error("Can't insert comment.");
@@ -145,7 +145,7 @@ function handle_custom_review() {
                 $upload = wp_handle_upload($file, ['test_form' => false]);
 
                 if (!isset($upload['error']) && isset($upload['url'])) {
-                    // Можно добавить в медиатеку
+
                     $attachments[] = $upload['url'];
                 } else {
                     error_log('Upload error: ' . ($upload['error'] ?? 'unknown'));

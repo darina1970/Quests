@@ -118,6 +118,7 @@ $main_image_url = $product->get_image_id() ? wp_get_attachment_url($product->get
                     <p class="reviews-header-title"><span id="reviewsCount">3 REVIEWS on </span><span class="review-game-name">Halloween Home Quest: Frank and his Spooky Gang (Ages 6-11)</span></p>
                     <button class="btn btn-form btn-review-form" id="writeReview">Write Your Review</button>
                 </div>
+                <div id="reviewMessage" class="review-message"></div>
                 <div id="reviewForm" class="review-form">
                     <img class="form-bg" src="<?php echo get_template_directory_uri(); ?>/assets/images/product-page/piece-of-paper.png" alt="Form background">
                     <form id="customReviewForm" class="review-form__overlay" enctype="multipart/form-data">
