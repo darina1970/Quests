@@ -236,12 +236,27 @@ get_header();
     <section class="gallery-slider" id="gallery-slider">
         <div class="gallery-slider__wrapper">
             <div class="slider-track" id="slider-track">
-                <div class="slide"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/product-page/quest1-1.webp" alt="Product image" /></div>
-                <div class="slide"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/product-page/quest1-2.webp" alt="Product image" /></div>
-                <div class="slide"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/product-page/quest1-3.webp" alt="Product image" /></div>
-                <div class="slide"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/product-page/quest1-4.webp" alt="Product image" /></div>
-                <div class="slide"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/product-page/quest1-5.webp" alt="Product image" /></div>
-                <div class="slide"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/product-page/quest1-6.webp" alt="Product image" /></div>
+                <?php
+                $gallery_query = new WP_Query(array(
+                    'post_type'      => 'gallery_slider',
+                    'posts_per_page' => -1, // без ограничения
+                    'orderby'        => 'date',
+                    'order'          => 'ASC'
+                ));
+                
+                if ($gallery_query->have_posts()) :
+                    while ($gallery_query->have_posts()) : $gallery_query->the_post();
+                    if (has_post_thumbnail()) :
+                    ?>
+                    <div class="slide">
+                        <?php the_post_thumbnail('large', array('alt' => get_the_title())); ?>
+                    </div>
+                    <?php
+                    endif;
+                    endwhile;
+                    wp_reset_postdata();
+                    endif;
+                ?>
             </div>
         </div>
     </section>

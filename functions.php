@@ -26,8 +26,6 @@ add_theme_support('custom-logo');
 add_theme_support('post-thumbnails');
 add_theme_support('title-tag');
 
-// === WooCommerce настройка ===
-
 // Включаем поддержку WooCommerce
 function questtime_add_woocommerce_support() {
     add_theme_support('woocommerce');
@@ -50,5 +48,16 @@ add_filter( 'woocommerce_product_single_add_to_cart_text', function() {
     return __( 'Add to Cart', 'woocommerce' );
 });
 
-// (Опционально) Убираем хлебные крошки WooCommerce, если не нужны
+add_filter('locale', function($locale) {
+    if (is_admin()) {
+        return $locale;
+    }
+
+    if (is_woocommerce() || is_cart() || is_checkout() || is_account_page() || is_product()) {
+        return 'en_US';
+    }
+
+    return $locale;
+});
+// Убираем хлебные крошки WooCommerce
 remove_action('woocommerce_before_main_content', 'woocommerce_breadcrumb', 20, 0);
