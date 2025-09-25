@@ -94,17 +94,21 @@ add_action('woocommerce_review_before_comment_form', function() { ?>
 // AJAX обработка отправки отзыва
 add_action('wp_ajax_submit_custom_review', 'handle_custom_review');
 add_action('wp_ajax_nopriv_submit_custom_review', 'handle_custom_review');
-function handle_custom_review() {
-    if (!isset($_POST['product_id'])) wp_send_json_error("Product ID missing.");
 
+function handle_custom_review() {
+    // Проверка Product ID
+    if (!isset($_POST['product_id'])) wp_send_json_error("Product ID missing.");
     $product_id = intval($_POST['product_id']);
-    $author     = sanitize_text_field($_POST['reviewName']);
-    $email      = sanitize_email($_POST['reviewEmail']);
-    $content    = sanitize_textarea_field($_POST['reviewText']);
-    $rating     = intval($_POST['reviewRating']);
+
+    // Сбор и очистка данных
+    $author  = sanitize_text_field($_POST['reviewName'] ?? '');
+    $email   = sanitize_email($_POST['reviewEmail'] ?? '');
+    $content = sanitize_textarea_field($_POST['reviewText'] ?? '');
+    $rating  = intval($_POST['reviewRating'] ?? 0);
 
     if (!$content || !$rating) wp_send_json_error("Please fill in review and rating.");
 
+    // Вставляем комментарий (отзыв)
     $commentdata = [
         'comment_post_ID'      => $product_id,
         'comment_author'       => $author,
@@ -113,28 +117,49 @@ function handle_custom_review() {
         'comment_type'         => 'review',
         'comment_approved'     => 0, // модерация
     ];
-
     $comment_id = wp_insert_comment($commentdata);
+    if (!$comment_id) wp_send_json_error("Can't insert comment.");
+
+    // Сохраняем рейтинг
     update_comment_meta($comment_id, 'rating', $rating);
 
-    // Сохраняем фото
-    if (isset($_FILES['reviewPhotos'])) {
+    // --- Обработка файлов ---
+    if (!empty($_FILES['reviewPhotos']['name'][0])) {
         require_once(ABSPATH . 'wp-admin/includes/file.php');
+        require_once(ABSPATH . 'wp-admin/includes/image.php');
+        require_once(ABSPATH . 'wp-admin/includes/media.php');
+
         $files = $_FILES['reviewPhotos'];
         $attachments = [];
-        for ($i=0; $i<count($files['name']); $i++) {
-            if ($files['error'][$i] === 0) {
-                $file_array = ['name'=>$files['name'][$i], 'tmp_name'=>$files['tmp_name'][$i]];
-                $upload = wp_handle_upload($file_array, ['test_form'=>false]);
-                if (!isset($upload['error'])) $attachments[] = $upload['url'];
+
+        foreach ($files['name'] as $key => $value) {
+            if ($files['error'][$key] === 0) {
+                $file = [
+                    'name'     => $files['name'][$key],
+                    'type'     => $files['type'][$key],
+                    'tmp_name' => $files['tmp_name'][$key],
+                    'error'    => $files['error'][$key],
+                    'size'     => $files['size'][$key] ?? 0,
+                ];
+
+                $upload = wp_handle_upload($file, ['test_form' => false]);
+
+                if (!isset($upload['error']) && isset($upload['url'])) {
+                    // Можно добавить в медиатеку
+                    $attachments[] = $upload['url'];
+                } else {
+                    error_log('Upload error: ' . ($upload['error'] ?? 'unknown'));
+                }
             }
         }
-        if ($attachments) update_comment_meta($comment_id, 'review_photos', $attachments);
+
+        if (!empty($attachments)) {
+            update_comment_meta($comment_id, 'review_photos', $attachments);
+        }
     }
 
     wp_send_json_success("Review submitted.");
 }
-
 // Вывод всех отзывов с фото и рейтингом
 function render_reviews_list() { ?>
     <div class="reviews-list">

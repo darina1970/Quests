@@ -172,24 +172,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // 📤 Отправка формы через AJAX
   const reviewForm = document.getElementById("customReviewForm");
+
   reviewForm.addEventListener("submit", function (e) {
     e.preventDefault();
 
-    const formData = new FormData();
+    const formData = new FormData(reviewForm); // ✅ собираем все поля и файлы
     formData.append("action", "submit_custom_review");
     formData.append("product_id", woocommerce_params.product_id);
-    formData.append("reviewRating", ratingInput.value);
-    formData.append("reviewName", document.getElementById("reviewName").value);
-    formData.append(
-      "reviewEmail",
-      document.getElementById("reviewEmail").value
-    );
-    formData.append("reviewText", document.getElementById("reviewText").value);
-
-    const files = photoInput.files;
-    for (let i = 0; i < files.length; i++) {
-      formData.append("reviewPhotos[]", files[i]);
-    }
 
     fetch(woocommerce_params.ajax_url, {
       method: "POST",
@@ -200,9 +189,11 @@ document.addEventListener("DOMContentLoaded", function () {
         if (data.success) {
           alert("Review submitted! It will appear after moderation.");
           reviewForm.reset();
-          photoPreview.innerHTML = "";
-          ratingInput.value = 0;
-          stars.forEach((s) => s.classList.remove("selected"));
+          document.getElementById("photoPreview").innerHTML = "";
+          document.getElementById("reviewRating").value = 0;
+          document
+            .querySelectorAll(".stars-input span")
+            .forEach((s) => s.classList.remove("selected"));
         } else {
           alert(data.data || "Error submitting review.");
         }
