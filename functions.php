@@ -45,6 +45,18 @@ add_filter('woocommerce_add_to_cart_fragments', function($fragments) {
     return $fragments;
 });
 
+add_filter('locale', function($locale) {
+    if (is_admin()) {
+        return $locale;
+    }
+
+    if (is_woocommerce() || is_cart() || is_checkout() || is_account_page() || is_product()) {
+        return 'en_US';
+    }
+
+    return $locale;
+});
+
 // Кастомная форма отзывов
 remove_action('woocommerce_review_before_comment_form', 'woocommerce_review_form', 10);
 add_action('woocommerce_review_before_comment_form', function() { ?>
