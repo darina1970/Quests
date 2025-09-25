@@ -163,55 +163,54 @@ $main_image_url = $product->get_image_id() ? wp_get_attachment_url($product->get
                     </form>
                 </div>
                 <div class="reviews-list">
-                    <div class="reviews-list">
-                        <?php
-                        $comments = get_comments([
-                            'post_id' => get_the_ID(),
-                            'status' => 'approve',
-                            'type' => ['review', 'comment'],
-                            'number' => 0,
-                            'order' => 'DESC',
-                        ]);
+                    <?php
+                    $comments = get_comments([
+                        'post_id' => get_the_ID(),
+                        'status'  => 'approve',
+                        'type'    => 'review',
+                        'order'   => 'DESC',
+                    ]);
 
-                        if ($comments) {
-                            foreach ($comments as $comment) :
-                                $rating = get_comment_meta($comment->comment_ID, 'rating', true);
-                                $photos = get_comment_meta($comment->comment_ID, 'review_photos', true);
-                                ?>
-                                <div class="review">
-                                    <div class="review-header">
-                                        <div class="review-stars">
-                                            <?php for ($i = 1; $i <= 5; $i++) : ?>
-                                                <img src="<?php echo get_template_directory_uri(); ?>/assets/icons/star-full.svg"
-                                                    class="<?php echo ($i <= $rating) ? 'star-active' : 'star-inactive'; ?>"
-                                                    alt="star">
-                                            <?php endfor; ?>
-                                        </div>
-                                        <p class="review-date"><?php echo get_comment_date('d/m/y', $comment); ?></p>
+                    if ($comments) :
+                        foreach ($comments as $comment) :
+                            $rating = intval(get_comment_meta($comment->comment_ID, 'rating', true));
+                            $photos = get_comment_meta($comment->comment_ID, 'review_photos', true);
+                            if (!is_array($photos)) $photos = [];
+                            ?>
+                            <div class="review">
+                                <div class="review-header">
+                                    <div class="review-stars">
+                                        <?php for ($i = 1; $i <= 5; $i++) : ?>
+                                            <?php if ($i <= $rating) : ?>
+                                                <img src="<?php echo get_template_directory_uri(); ?>/assets/icons/star-full.svg" alt="star">
+                                            <?php else : ?>
+                                                <img src="<?php echo get_template_directory_uri(); ?>/assets/icons/star.svg" alt="star">
+                                            <?php endif; ?>
+                                        <?php endfor; ?>
                                     </div>
-
-                                    <div class="review__user-info">
-                                        <img src="<?php echo get_template_directory_uri(); ?>/assets/icons/review-icon.svg" alt="user icon">
-                                        <p><?php echo esc_html($comment->comment_author); ?></p>
-                                    </div>
-
-                                    <p><?php echo esc_html($comment->comment_content); ?></p>
-
-                                    <?php if ($photos && is_array($photos)) : ?>
-                                        <div class="review-photos">
-                                            <?php foreach ($photos as $photo) : ?>
-                                                <img src="<?php echo esc_url($photo); ?>" alt="review photo">
-                                            <?php endforeach; ?>
-                                        </div>
-                                    <?php endif; ?>
+                                    <p class="review-date"><?php echo get_comment_date('d/m/y', $comment); ?></p>
                                 </div>
-                            <?php
-                            endforeach;
-                        } else {
-                            echo '<p>No reviews yet.</p>';
-                        }
-                        ?>
-                    </div>
+
+                                <div class="review__user-info">
+                                    <img src="<?php echo get_template_directory_uri(); ?>/assets/icons/review-icon.svg" alt="user icon">
+                                    <p><?php echo esc_html($comment->comment_author); ?></p>
+                                </div>
+
+                                <p><?php echo esc_html($comment->comment_content); ?></p>
+
+                                <?php if ($photos) : ?>
+                                    <div class="review-photos">
+                                        <?php foreach ($photos as $photo) : ?>
+                                            <img src="<?php echo esc_url($photo); ?>" alt="review photo">
+                                        <?php endforeach; ?>
+                                    </div>
+                                <?php endif; ?>
+                            </div>
+                        <?php endforeach;
+                    else :
+                        echo '<p>No reviews yet.</p>';
+                    endif;
+                    ?>
                 </div>
                 
             </div>

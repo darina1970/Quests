@@ -139,34 +139,49 @@ function handle_custom_review() {
 function render_reviews_list() { ?>
     <div class="reviews-list">
         <?php
+        // Берём только отзывы WooCommerce
         $comments = get_comments([
-            'post_id'  => get_the_ID(),
-            'status'   => 'approve',
-            'type__in' => ['comment','review'],
-            'number'   => 0,
-            'order'    => 'DESC',
+            'post_id' => get_the_ID(),
+            'status' => 'approve',
+            'type' => 'review',
+            'order' => 'DESC',
         ]);
 
         if ($comments) {
-            foreach($comments as $comment):
+            foreach ($comments as $comment):
+
+                // Получаем рейтинг
                 $rating = get_comment_meta($comment->comment_ID, 'rating', true);
+                $rating = intval($rating);
+                if($rating < 0) $rating = 0;
+                if($rating > 5) $rating = 5;
+
+                // Получаем фото
                 $photos = get_comment_meta($comment->comment_ID, 'review_photos', true);
+                if (!is_array($photos)) $photos = [];
+
                 ?>
                 <div class="review">
                     <div class="review-header">
                         <div class="review-stars">
-                            <?php for($i=1;$i<=5;$i++): ?>
-                                <img src="<?php echo get_template_directory_uri(); ?>/assets/icons/star-full.svg" class="<?php echo ($i <= $rating) ? 'selected' : ''; ?>" alt="star">
-                            <?php endfor; ?>
+                            <?php 
+                            for($i = 1; $i <= 5; $i++):
+                                $star_class = ($i <= $rating) ? 'selected' : '';
+                                echo '<img src="' . get_template_directory_uri() . '/assets/icons/star-full.svg" class="'. $star_class .'" alt="star">';
+                            endfor; 
+                            ?>
                         </div>
                         <p class="review-date"><?php echo get_comment_date('d/m/y', $comment); ?></p>
                     </div>
+
                     <div class="review__user-info">
                         <img src="<?php echo get_template_directory_uri(); ?>/assets/icons/review-icon.svg" alt="user icon">
                         <p><?php echo esc_html($comment->comment_author); ?></p>
                     </div>
+
                     <p><?php echo esc_html($comment->comment_content); ?></p>
-                    <?php if ($photos && is_array($photos)): ?>
+
+                    <?php if($photos): ?>
                         <div class="review-photos">
                             <?php foreach($photos as $photo): ?>
                                 <img src="<?php echo esc_url($photo); ?>" alt="review photo">
@@ -180,3 +195,31 @@ function render_reviews_list() { ?>
         } ?>
     </div>
 <?php }
+
+// Добавляем метабокс для отзывов WooCommerce
+add_action('add_meta_boxes', function() {
+    add_meta_box(
+        'wc_review_photos',
+        'Review Photos',
+        'render_wc_review_photos_metabox',
+        'comment',
+        'normal',
+        'high'
+    );
+});
+
+// Callback метабокса
+function render_wc_review_photos_metabox($comment) {
+    if($comment->comment_type !== 'review') return;
+
+    $photos = get_comment_meta($comment->comment_ID,'review_photos',true);
+    echo '<div style="display:flex;gap:10px;flex-wrap:wrap;">';
+    if($photos && is_array($photos)) {
+        foreach($photos as $photo){
+            echo '<img src="'.esc_url($photo).'" style="width:80px;height:80px;object-fit:cover;border:1px solid #ccc;">';
+        }
+    } else {
+        echo '<p>No photos uploaded.</p>';
+    }
+    echo '</div>';
+}
