@@ -131,7 +131,7 @@ document.addEventListener("DOMContentLoaded", function () {
       reviewForm.reset();
       photoPreview.innerHTML = "";
       ratingInput.value = 0;
-      stars.forEach((s) => this.classList.remove("selected"));
+      stars.forEach((s) => s.classList.remove("selected"));
     }
   });
 
@@ -185,7 +185,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
         btn.addEventListener("click", () => {
           container.remove();
-          // чтобы реально убрать файл из input (иначе он всё равно отправится)
           const dt = new DataTransfer();
           Array.from(photoInput.files)
             .filter((f) => f.name !== file.name)
