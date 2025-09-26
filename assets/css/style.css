@@ -1146,20 +1146,6 @@ nav li:hover {
   font-family: var(--font-heading);
 }
 
-/* .form__text-extra {
-  position: relative;
-  display: flex;
-} */
-
-/* .form__text-extra img {
-  position: absolute;
-  left: 40vw;
-  top: -14vw;
-  width: 36%;
-  height: auto;
-  object-fit: contain;
-} */
-
 .form__content {
   display: flex;
   flex-direction: column;
@@ -1237,6 +1223,16 @@ nav li:hover {
   font-size: 0.875rem;
   font-weight: var(--font-weight-light);
   line-height: 1.4;
+}
+
+/* Текст всплывающего сообщения после отправки формы */
+.form-message {
+  text-align: center;
+  text-transform: uppercase;
+  font-size: clamp(24px, 2.083vw, 40px);
+  padding-bottom: clamp(50px, 5.2083vw, 100px);
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* Privacy */
@@ -1740,9 +1736,14 @@ nav li:hover {
   text-align: center;
 }
 
+.review-logo {
+  width: 40px;
+  height: auto;
+}
+
 .review-form {
   position: relative;
-  display: inline-block;
+  display: none;
   align-self: center;
 }
 

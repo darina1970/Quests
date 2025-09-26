@@ -261,6 +261,117 @@ function render_wc_review_photos_metabox($comment) {
     echo '</div>';
 }
 
+add_action('wp_ajax_filter_products', 'filter_products_callback');
+add_action('wp_ajax_nopriv_filter_products', 'filter_products_callback');
+
+function filter_products_callback() {
+    $args = [
+        'post_type'      => 'product',
+        'posts_per_page' => -1,
+        'post_status'    => 'publish',
+        'tax_query'      => ['relation' => 'AND'],
+    ];
+
+    // Фильтр по возрасту (атрибут pa_age)
+    if (!empty($_POST['age'])) {
+        $args['tax_query'][] = [
+            'taxonomy' => 'pa_age',
+            'field'    => 'name',
+            'terms'    => sanitize_text_field($_POST['age']),
+        ];
+    }
+
+    // Фильтр по теме (атрибут pa_theme)
+    if (!empty($_POST['theme'])) {
+        $args['tax_query'][] = [
+            'taxonomy' => 'pa_theme',
+            'field'    => 'slug',
+            'terms'    => sanitize_text_field($_POST['theme']),
+        ];
+    }
+
+    // Сортировка
+    if (!empty($_POST['sort'])) {
+        if ($_POST['sort'] === 'asc') {
+            $args['orderby']  = 'meta_value_num';
+            $args['order']    = 'ASC';
+            $args['meta_key'] = '_price';
+        } elseif ($_POST['sort'] === 'desc') {
+            $args['orderby']  = 'meta_value_num';
+            $args['order']    = 'DESC';
+            $args['meta_key'] = '_price';
+        }
+    }
+
+    $query = new WP_Query($args);
+
+    if ($query->have_posts()) {
+        while ($query->have_posts()) {
+            $query->the_post();
+            global $product;
+            ?>
+            
+            <article class="product-card">
+                <a class="product-card__image" href="<?php the_permalink(); ?>">
+                    <?php echo woocommerce_get_product_thumbnail('medium'); ?>
+                </a>
+                <div class="product-card__content">
+                    <a class="product-card__title-link" href="<?php the_permalink(); ?>">
+                        <h4 class="product-card__title"><?php the_title(); ?></h4>
+                    </a>
+                    <div class="product-card__middle">
+                        <div class="rating-info">
+                            <div class="rating-stars">
+                                <?php
+                                $rating = (float) $product->get_average_rating();
+                                $reviews_count = $product->get_review_count();
+
+                                for ($i = 1; $i <= 5; $i++) {
+                                    if ($i <= floor($rating)) {
+                                        echo '<img src="' . get_template_directory_uri() . '/assets/icons/star-full.svg" alt="star">';
+                                    } else {
+                                        echo '<img src="' . get_template_directory_uri() . '/assets/icons/star.svg" alt="star">';
+                                    }
+                                }
+                                ?>
+                            </div>
+                            <p>(<?php echo $reviews_count; ?> reviews)</p>
+                        </div>
+                        <div class="product-card__meta">
+                            <span>Age: </span>
+                            <span>
+                                <?php
+                                $age = $product->get_attribute('age');
+                                echo $age ? esc_html($age) : '—';
+                                ?>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="product-card__bottom">
+                        <?php if ($product->is_on_sale()) : ?>
+                            <span class="product-card__price">
+                                €<?php echo $product->get_sale_price(); ?>
+                                <span class="old-price">€<?php echo $product->get_regular_price(); ?></span>
+                            </span>
+                        <?php else : ?>
+                            <span class="product-card__price">
+                                €<?php echo $product->get_regular_price(); ?>
+                            </span>
+                        <?php endif; ?>
+
+                        <a href="<?php echo get_permalink($product->get_id()); ?>" class="btn btn-card">Learn more</a>
+                    </div>
+                </div>
+            </article>
+
+            <?php
+        }
+    } else {
+        echo '<p>No products found.</p>';
+    }
+
+    wp_die();
+}
 
 // Регистрация кастомного типа записи "Слайдер"
 add_action('after_setup_theme', function() {
@@ -281,3 +392,39 @@ add_action('init', function() {
         'show_in_rest'=> true,
     ));
 });
+
+
+//Шаблон формы
+add_action('wp_ajax_alena_subscribe_form', 'alena_handle_ajax_form');
+add_action('wp_ajax_nopriv_alena_subscribe_form', 'alena_handle_ajax_form');
+
+function alena_handle_ajax_form() {
+  $name = sanitize_text_field( $_POST['name'] ?? '' );
+  $email = sanitize_email( $_POST['email'] ?? '' );
+  $with_quest = isset($_POST['with_quest']) && $_POST['with_quest'] === '1' ? 'yes' : 'no';
+
+  $row = [
+    current_time('mysql'),
+    $email,
+    $name,
+    $with_quest
+  ];
+
+  $upload_dir = wp_upload_dir();
+  $csv_file = trailingslashit($upload_dir['basedir']) . 'subscriptions.csv';
+
+  $is_new = ! file_exists($csv_file);
+  $fp = fopen($csv_file, 'a');
+
+  if ($fp) {
+    if ($is_new) {
+      fputcsv($fp, ['datetime','email','name','with_quest']);
+    }
+    fputcsv($fp, $row);
+    fclose($fp);
+  }
+
+  wp_send_json_success([
+    'with_quest' => $with_quest
+  ]);
+}

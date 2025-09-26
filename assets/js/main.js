@@ -17,6 +17,33 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  const ageFilter = document.getElementById("filter-age");
+  const themeFilter = document.getElementById("filter-theme");
+  const sortFilter = document.getElementById("sort-price");
+  const productsWrapper = document.querySelector(".product-items__wrapper");
+
+  function fetchProducts() {
+    const data = new FormData();
+    data.append("action", "filter_products");
+    data.append("age", ageFilter.value);
+    data.append("theme", themeFilter.value);
+    data.append("sort", sortFilter.value);
+
+    fetch(woocommerce_params.ajax_url, {
+      method: "POST",
+      body: data,
+    })
+      .then((res) => res.text())
+      .then((html) => {
+        productsWrapper.innerHTML = html;
+      })
+      .catch((err) => console.error("AJAX error:", err));
+  }
+
+  ageFilter.addEventListener("change", fetchProducts);
+  themeFilter.addEventListener("change", fetchProducts);
+  sortFilter.addEventListener("change", fetchProducts);
+
   const faqItems = document.querySelectorAll(".faq-item");
 
   faqItems.forEach((item) => {
@@ -75,6 +102,103 @@ document.addEventListener("DOMContentLoaded", () => {
   track.addEventListener("mouseleave", () => {
     track.style.animationPlayState = "running";
   });
+
+
+  //Form
+  const form = document.querySelector('#subscribe-form');
+  const wrapper = document.querySelector('#form-wrapper');
+  const message = document.querySelector('#form-message');
+
+  if (!form || !wrapper || !message) return;
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(form);
+    formData.append('action', 'alena_subscribe_form');
+
+    try {
+      const response = await fetch('/wp-admin/admin-ajax.php', {
+        method: 'POST',
+        body: formData
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        const withQuest = result.data.with_quest === 'yes';
+
+        // Скрываем форму и текст
+        wrapper.querySelectorAll('form, .form__text, .form__image').forEach(el => {
+          if (el) el.style.display = 'none';
+        });
+
+        // Показываем сообщение
+        message.innerHTML = withQuest
+          ? 'Thanks for subscribing! 💌\n A free quest will be sent to your email.'
+          : 'Thanks for subscribing! 💌';
+
+        message.style.display = 'block';
+
+        // Через 5 секунд форма возвращается
+        setTimeout(() => {
+          wrapper.querySelectorAll('form, .form__text, .form__image').forEach(el => {
+            if (el) el.style.display = '';
+          });
+          message.style.display = 'none';
+          form.reset();
+        }, 5000);
+      } else {
+        message.innerHTML = 'An error has occurred. Try again.';
+        message.style.display = 'block';
+      }
+    } catch (err) {
+      console.error('Ошибка отправки:', err);
+      message.innerHTML = 'Network error. Please try again later.';
+      message.style.display = 'block';
+    }
+        
+});
 });
 
 
+/* МОЯ СТАРАЯ ФОРМА
+<section class="form section-common" id="form">
+        <div class="container">
+            <div class="form__wrapper">
+                <?php if ( get_field('show_form_image') ) : ?>
+                    <?php $image = get_field('form_image'); ?>
+                    <?php if( $image ) : ?>
+                        <img class="form__image" src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['alt']); ?>">
+                    <?php endif; ?>
+                <?php endif; ?>
+                <div class="form__text">
+                    <?php if ( get_field('form_title') ) : ?>
+                        <h2 class="text-align"><?php the_field('form_title'); ?></h2>
+                    <?php endif; ?>
+                    <?php if ( get_field('form_subtitle') ) : ?>
+                        <h3 class="text-align"><?php the_field('form_subtitle'); ?></h3>
+                    <?php endif; ?>
+                    <?php if ( get_field('show_form_paragraph') && get_field('form_paragraph') ) : ?>
+                        <p class="text-align"><?php the_field('form_paragraph'); ?></p>
+                    <?php endif; ?>
+                </div>
+                <form>
+                    <div class="form__content">
+                        <div class="form__input">
+                            <input class="name-input" type="text" placeholder="First Name" required>
+                            <input class="adress-input" type="text" placeholder="Email Address" required>
+                        </div>
+                        <div class="form__button_wrapper">
+                            <button class="btn-form btn" type="submit">Subscribe</button>
+                        </div>
+                        <div class="checkbox">
+                            <input type="checkbox" id="agree" required>
+                            <label for="agree">By subscribing, you agree to our <a href="<?php echo get_permalink( get_page_by_path('privacy-policy') ); ?>" target="_blank">Privacy Policy</a></label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+*/

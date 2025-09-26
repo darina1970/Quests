@@ -20,16 +20,33 @@ get_header();
                     <label for="filter-age">Age</label>
                     <select name="filter-age" id="filter-age">
                         <option value="">All</option>
-                        <option value="6+">6+</option>
-                        <option value="8+">8+</option>
-                        <option value="12+">12+</option>
+                        <?php
+                            $ages = get_terms([
+                                'taxonomy'   => 'pa_age',
+                                'hide_empty' => true,
+                            ]);
+                            if (!empty($ages) && !is_wp_error($ages)) {
+                                foreach ($ages as $age) {
+                                    echo '<option value="' . esc_attr($age->name) . '">' . esc_html($age->name) . '</option>';
+                                }
+                            }
+                        ?>
                     </select>
                     <div class="filter-theme__wrapper">
                         <label for="filter-theme">Theme</label>
                         <select name="filter-theme" id="filter-theme">
                             <option value="">All</option>
-                            <option value="halloween">Halloween</option>
-                            <option value="christmas">Christmas</option>
+                            <?php
+                                $themes = get_terms([
+                                    'taxonomy'   => 'pa_theme',
+                                    'hide_empty' => true,
+                                ]);
+                                if (!empty($themes) && !is_wp_error($themes)) {
+                                    foreach ($themes as $theme) {
+                                        echo '<option value="' . esc_attr($theme->slug) . '">' . esc_html($theme->name) . '</option>';
+                                    }
+                                }
+                                ?>
                         </select>
                     </div>
                 </div>
@@ -345,15 +362,25 @@ get_header();
             </div>
         </div>
     </section>
+
+    <!--Form-->
+    <?php
+    $has_image = get_field('show_form_image');
+    $has_paragraph = get_field('show_form_paragraph');
+    $with_quest = ($has_image || $has_paragraph) ? '1' : '0';
+    ?>
+
     <section class="form section-common" id="form">
         <div class="container">
-            <div class="form__wrapper">
+            <div class="form__wrapper" id="form-wrapper">
+
                 <?php if ( get_field('show_form_image') ) : ?>
-                    <?php $image = get_field('form_image'); ?>
-                    <?php if( $image ) : ?>
-                        <img class="form__image" src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['alt']); ?>">
-                    <?php endif; ?>
+                <?php $image = get_field('form_image'); ?>
+                <?php if( $image ) : ?>
+                    <img class="form__image" src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['alt']); ?>">
                 <?php endif; ?>
+                <?php endif; ?>
+
                 <div class="form__text">
                     <?php if ( get_field('form_title') ) : ?>
                         <h2 class="text-align"><?php the_field('form_title'); ?></h2>
@@ -365,24 +392,31 @@ get_header();
                         <p class="text-align"><?php the_field('form_paragraph'); ?></p>
                     <?php endif; ?>
                 </div>
-                <form>
+
+                <form method="post" action="" id="subscribe-form">
                     <div class="form__content">
                         <div class="form__input">
-                            <input class="name-input" type="text" placeholder="First Name" required>
-                            <input class="adress-input" type="text" placeholder="Email Address" required>
+                            <input class="name-input" name="name" type="text" placeholder="First Name" required>
+                            <input class="adress-input" name="email" type="email" placeholder="Email Address" required>
                         </div>
                         <div class="form__button_wrapper">
                             <button class="btn-form btn" type="submit">Subscribe</button>
                         </div>
                         <div class="checkbox">
                             <input type="checkbox" id="agree" required>
-                            <label for="agree">By subscribing, you agree to our <a href="<?php echo get_permalink( get_page_by_path('privacy-policy') ); ?>" target="_blank">Privacy Policy</a></label>
+                            <label for="agree">
+                                By subscribing, you agree to our
+                                <a href="<?php echo esc_url( get_permalink( get_page_by_path('privacy-policy') ) ); ?>" target="_blank">Privacy Policy</a>
+                            </label>
                         </div>
+                        <input type="hidden" name="with_quest" value="<?php echo esc_attr($with_quest); ?>">
                     </div>
                 </form>
+                <div class="form-message" id="form-message" style="display: none;"></div>
             </div>
         </div>
     </section>
+
 </main>
 
 <?php

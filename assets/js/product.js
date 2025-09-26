@@ -114,6 +114,15 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
+  const reviewLink = document.querySelector('a[href="#reviews"]');
+  if (reviewLink) {
+    reviewLink.addEventListener("click", (e) => {
+      e.preventDefault();
+      activateTab("reviews");
+      document.getElementById("reviews").scrollIntoView({ behavior: "smooth" });
+    });
+  }
+
   const writeReviewBtn = document.getElementById("writeReview");
   const reviewFormContainer = document.getElementById("reviewForm");
   const reviewMessage = document.getElementById("reviewMessage");
@@ -131,7 +140,7 @@ document.addEventListener("DOMContentLoaded", function () {
       reviewForm.reset();
       photoPreview.innerHTML = "";
       ratingInput.value = 0;
-      stars.forEach((s) => this.classList.remove("selected"));
+      stars.forEach((s) => s.classList.remove("selected"));
     }
   });
 
@@ -172,11 +181,29 @@ document.addEventListener("DOMContentLoaded", function () {
       if (!file.type.startsWith("image/")) return;
       const reader = new FileReader();
       reader.onload = function (e) {
+        const container = document.createElement("div");
+        container.classList.add("photo-item");
+        container.style.position = "relative";
+
         const img = document.createElement("img");
         img.src = e.target.result;
-        img.style.width = "80px";
-        img.style.marginRight = "5px";
-        photoPreview.appendChild(img);
+
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.textContent = "×";
+
+        btn.addEventListener("click", () => {
+          container.remove();
+          const dt = new DataTransfer();
+          Array.from(photoInput.files)
+            .filter((f) => f.name !== file.name)
+            .forEach((f) => dt.items.add(f));
+          photoInput.files = dt.files;
+        });
+
+        container.appendChild(img);
+        container.appendChild(btn);
+        photoPreview.appendChild(container);
       };
       reader.readAsDataURL(file);
     });
