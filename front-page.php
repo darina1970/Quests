@@ -239,7 +239,7 @@ get_header();
                 <?php
                 $gallery_query = new WP_Query(array(
                     'post_type'      => 'gallery_slider',
-                    'posts_per_page' => -1, // без ограничения
+                    'posts_per_page' => -1,
                     'orderby'        => 'date',
                     'order'          => 'ASC'
                 ));
