@@ -114,6 +114,15 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
+  const reviewLink = document.querySelector('a[href="#reviews"]');
+  if (reviewLink) {
+    reviewLink.addEventListener("click", (e) => {
+      e.preventDefault();
+      activateTab("reviews");
+      document.getElementById("reviews").scrollIntoView({ behavior: "smooth" });
+    });
+  }
+
   const writeReviewBtn = document.getElementById("writeReview");
   const reviewFormContainer = document.getElementById("reviewForm");
   const reviewMessage = document.getElementById("reviewMessage");
