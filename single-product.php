@@ -206,6 +206,25 @@ $main_image_url = $product->get_image_id() ? wp_get_attachment_url($product->get
                                         <?php endforeach; ?>
                                     </div>
                                 <?php endif; ?>
+                                <?php
+                                $replies = get_comments([
+                                    'parent' => $comment->comment_ID,
+                                    'status' => 'approve',
+                                    'order'  => 'ASC',
+                                ]);
+
+                                if ($replies) :
+                                    foreach ($replies as $reply) : ?>
+                                        <div class="review review-reply">
+                                            <div class="reply__author">
+                                                <strong>QuestTime</strong>
+                                            </div>
+                                            <p><?php echo esc_html($reply->comment_content); ?></p>
+                                            <p class="reply-date"><?php echo get_comment_date('d/m/y', $reply); ?></p>
+                                        </div>
+                                    <?php endforeach;
+                                endif;
+                                ?>
                             </div>
                         <?php endforeach;
                     else :
