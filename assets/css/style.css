@@ -1742,7 +1742,7 @@ nav li:hover {
 
 .review-form {
   position: relative;
-  display: inline-block;
+  display: none;
   align-self: center;
 }
 

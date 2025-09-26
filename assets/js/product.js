@@ -172,11 +172,30 @@ document.addEventListener("DOMContentLoaded", function () {
       if (!file.type.startsWith("image/")) return;
       const reader = new FileReader();
       reader.onload = function (e) {
+        const container = document.createElement("div");
+        container.classList.add("photo-item");
+        container.style.position = "relative";
+
         const img = document.createElement("img");
         img.src = e.target.result;
-        img.style.width = "80px";
-        img.style.marginRight = "5px";
-        photoPreview.appendChild(img);
+
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.textContent = "×";
+
+        btn.addEventListener("click", () => {
+          container.remove();
+          // чтобы реально убрать файл из input (иначе он всё равно отправится)
+          const dt = new DataTransfer();
+          Array.from(photoInput.files)
+            .filter((f) => f.name !== file.name)
+            .forEach((f) => dt.items.add(f));
+          photoInput.files = dt.files;
+        });
+
+        container.appendChild(img);
+        container.appendChild(btn);
+        photoPreview.appendChild(container);
       };
       reader.readAsDataURL(file);
     });
