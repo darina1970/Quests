@@ -1740,6 +1740,11 @@ nav li:hover {
   text-align: center;
 }
 
+.review-logo {
+  width: 40px;
+  height: auto;
+}
+
 .review-form {
   position: relative;
   display: none;

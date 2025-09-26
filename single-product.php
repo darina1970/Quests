@@ -216,11 +216,16 @@ $main_image_url = $product->get_image_id() ? wp_get_attachment_url($product->get
                                 if ($replies) :
                                     foreach ($replies as $reply) : ?>
                                         <div class="review review-reply">
-                                            <div class="reply__author">
-                                                <strong>QuestTime</strong>
+                                            <div class="review-header">
+                                                <div class="review__user-info" style="display:flex; justify-content:space-between; width:100%; align-items:center;">
+                                                    <div class="review-author-wrapper" style="display:flex; align-items:center; gap:5px;">
+                                                        <img src="<?php echo get_template_directory_uri(); ?>/assets/favicon/favicon.svg" alt="QuestTime logo" class="review-logo">
+                                                        <p class="review-author">QuestTime</p>
+                                                    </div>
+                                                    <p class="review-date"><?php echo get_comment_date('d/m/y', $reply); ?></p>
+                                                </div>
                                             </div>
                                             <p><?php echo esc_html($reply->comment_content); ?></p>
-                                            <p class="reply-date"><?php echo get_comment_date('d/m/y', $reply); ?></p>
                                         </div>
                                     <?php endforeach;
                                 endif;
