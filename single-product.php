@@ -253,42 +253,100 @@ $main_image_url = $product->get_image_id() ? wp_get_attachment_url($product->get
         <div class="products__wrapper container">
             <h3 class="recommend-title">You may also like</h3>
             <div class="product-items__wrapper">
-                <article class="product-card">
-                    <a class="product-card__image" href="product.html">
-                        <img src="./assets/images/card-1.webp" alt="Product card">
-                    </a>
-                    <div class="product-card__content">
-                        <a class="product-card__title-link" href="product.html">
-                            <h4 class="product-card__title">Frank and his Spooky Gang</h4>
-                        </a>
-                        <div class="product-card__meta">
-                            <img class="product-card__icon" src="./assets/icons/user.svg" alt="User Icon">
-                            <span class="product-card__age">6+</span>
-                        </div>
-                        <div class="product-card__bottom">
-                            <span class="product-card__price">€20</span>
-                            <a href="product.html" class="btn btn-card">Learn more</a>
-                        </div>
-                    </div>
-                </article>
-                <article class="product-card">
-                    <a class="product-card__image" href="product.html">
-                        <img src="./assets/images/card-2.webp" alt="Product card">
-                    </a>
-                    <div class="product-card__content">
-                        <a class="product-card__title-link" href="product.html">
-                            <h4 class="product-card__title">Frank and his Spooky Gang</h4>
-                        </a>
-                        <div class="product-card__meta">
-                            <img class="product-card__icon" src="./assets/icons/user.svg" alt="User Icon">
-                            <span class="product-card__age">6+</span>
-                        </div>
-                        <div class="product-card__bottom">
-                            <span class="product-card__price">€20</span>
-                            <a href="product.html" class="btn btn-card">Learn more</a>
-                        </div>
-                    </div>
-                </article>
+                <?php
+                global $product;
+
+                if ($product) {
+                    $theme = $product->get_attribute('theme');
+
+                    $args = [
+                        'post_type'      => 'product',
+                        'posts_per_page' => 2,
+                        'post__not_in'   => [$product->get_id()],
+                        'tax_query'      => ['relation' => 'OR'],
+                    ];
+
+                    if ($theme) {
+                        $args['tax_query'][] = [
+                            'taxonomy' => 'pa_theme',
+                            'field'    => 'slug',
+                            'terms'    => $theme,
+                        ];
+                    }
+
+                    $related = new WP_Query($args);
+
+                    if (!$related->have_posts()) {
+                        $related = new WP_Query([
+                            'post_type'      => 'product',
+                            'posts_per_page' => 2,
+                            'orderby'        => 'rand',
+                            'post__not_in'   => [$product->get_id()],
+                        ]);
+                    }
+
+                    if ($related->have_posts()) :
+                        while ($related->have_posts()) : $related->the_post();
+                            global $product;
+                            ?>
+                            <article class="product-card">
+                                <a class="product-card__image" href="<?php the_permalink(); ?>">
+                                    <?php echo woocommerce_get_product_thumbnail('medium'); ?>
+                                </a>
+                                <div class="product-card__content">
+                                    <a class="product-card__title-link" href="<?php the_permalink(); ?>">
+                                        <h4 class="product-card__title"><?php the_title(); ?></h4>
+                                    </a>
+                                    <div class="product-card__middle">
+                                        <div class="rating-info">
+                                            <div class="rating-stars">
+                                                <?php
+                                                $rating = (float) $product->get_average_rating();
+                                                $reviews_count = $product->get_review_count();
+
+                                                for ($i = 1; $i <= 5; $i++) {
+                                                    if ($i <= floor($rating)) {
+                                                        echo '<img src="' . get_template_directory_uri() . '/assets/icons/star-full.svg" alt="star">';
+                                                    } else {
+                                                        echo '<img src="' . get_template_directory_uri() . '/assets/icons/star.svg" alt="star">';
+                                                    }
+                                                }
+                                                ?>
+                                            </div>
+                                            <p>(<?php echo $reviews_count; ?> reviews)</p>
+                                        </div>
+                                        <div class="product-card__meta">
+                                            <span>Age: </span>
+                                            <span>
+                                                <?php
+                                                $age = $product->get_attribute('age');
+                                                echo $age ? esc_html($age) : '—';
+                                                ?>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="product-card__bottom">
+                                        <?php if ( $product->is_on_sale() ) : ?>
+                                            <span class="product-card__price">
+                                                €<?php echo $product->get_sale_price(); ?>
+                                                <span class="old-price">€<?php echo $product->get_regular_price(); ?></span>
+                                            </span>
+                                        <?php else : ?>
+                                            <span class="product-card__price">
+                                                €<?php echo $product->get_regular_price(); ?>
+                                            </span>
+                                        <?php endif; ?>
+
+                                        <a href="<?php echo get_permalink($product->get_id()); ?>" class="btn btn-card">Learn more</a>
+                                    </div>
+                                </div>
+                            </article>
+                            <?php
+                        endwhile;
+                        wp_reset_postdata();
+                    endif;
+                }
+                ?>
             </div>
         </div>
     </section>
