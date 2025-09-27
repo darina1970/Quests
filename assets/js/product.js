@@ -91,183 +91,166 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   updateMainImage();
-  // const tabs = document.querySelectorAll(".product-tab");
-  // const tabContents = document.querySelectorAll(".tab-content");
+  const tabs = document.querySelectorAll(".product-tab");
+  const tabContents = document.querySelectorAll(".tab-content");
 
-  // function activateTab(targetId) {
-  //   tabs.forEach((t) => t.classList.remove("active"));
-  //   tabContents.forEach((tc) => tc.classList.remove("active"));
+  function activateTab(targetId) {
+    tabs.forEach((t) => t.classList.remove("active"));
+    tabContents.forEach((tc) => tc.classList.remove("active"));
 
-  //   const targetTab = document.querySelector(`[data-tab="${targetId}"]`);
-  //   const targetContent = document.getElementById(targetId);
+    const targetTab = document.querySelector(`[data-tab="${targetId}"]`);
+    const targetContent = document.getElementById(targetId);
 
-  //   if (targetTab && targetContent) {
-  //     targetTab.classList.add("active");
-  //     targetContent.classList.add("active");
-  //   }
-  // }
+    if (targetTab && targetContent) {
+      targetTab.classList.add("active");
+      targetContent.classList.add("active");
+    }
+  }
 
-  // tabs.forEach((tab) => {
-  //   tab.addEventListener("click", () => {
-  //     const target = tab.dataset.tab;
-  //     activateTab(target);
+  tabs.forEach((tab) => {
+    tab.addEventListener("click", () => {
+      const target = tab.dataset.tab;
+      activateTab(target);
+    });
+  });
 
-  //     // tabs.forEach((t) => t.classList.remove("active"));
-  //     // tabContents.forEach((tc) => tc.classList.remove("active"));
+  const reviewLink = document.querySelector('a[href="#reviews"]');
+  if (reviewLink) {
+    reviewLink.addEventListener("click", (e) => {
+      e.preventDefault();
+      activateTab("reviews");
+      document.getElementById("reviews").scrollIntoView({ behavior: "smooth" });
+    });
+  }
 
-  //     // tab.classList.add("active");
-  //     // document.getElementById(target).classList.add("active");
-  //   });
-  // });
+  const writeReviewBtn = document.getElementById("writeReview");
+  const reviewFormContainer = document.getElementById("reviewForm");
+  const reviewMessage = document.getElementById("reviewMessage");
 
-  // const reviewLink = document.querySelector('a[href="#reviews"]');
-  // if (reviewLink) {
-  //   reviewLink.addEventListener("click", (e) => {
-  //     e.preventDefault();
-  //     activateTab("reviews");
-  //     document.getElementById("reviews").scrollIntoView({ behavior: "smooth" });
-  //   });
-  // }
+  writeReviewBtn.addEventListener("click", function () {
+    if (
+      reviewFormContainer.style.display === "none" ||
+      reviewFormContainer.style.display === ""
+    ) {
+      reviewFormContainer.style.display = "block";
+      writeReviewBtn.textContent = "Cancel";
+    } else {
+      reviewFormContainer.style.display = "none";
+      writeReviewBtn.textContent = "Write Your Review";
+      reviewForm.reset();
+      photoPreview.innerHTML = "";
+      ratingInput.value = 0;
+      stars.forEach((s) => s.classList.remove("selected"));
+    }
+  });
 
-  // const writeBtn = document.getElementById("writeReview");
-  // const reviewForm = document.getElementById("reviewForm");
-  // const submitBtn = document.getElementById("submit-review");
-  // const reviewList = document.querySelector(".reviews-list");
+  const stars = document.querySelectorAll(".stars-input span");
+  const ratingInput = document.getElementById("reviewRating");
 
-  // writeBtn.addEventListener("click", () => {
-  //   const isHidden = reviewForm.classList.contains("hidden");
+  stars.forEach((star) => {
+    star.addEventListener("click", function () {
+      const value = parseInt(this.dataset.value);
+      ratingInput.value = value;
 
-  //   if (isHidden) {
-  //     reviewForm.classList.remove("hidden");
-  //     writeBtn.textContent = "Cancel Your Review";
-  //   } else {
-  //     reviewForm.classList.add("hidden");
-  //     writeBtn.textContent = "Write Your Review";
-  //   }
-  // });
+      stars.forEach((s) => {
+        if (parseInt(s.dataset.value) <= value) {
+          s.classList.add("selected");
+        } else {
+          s.classList.remove("selected");
+        }
+      });
+    });
+  });
 
-  // const starsInput = document.querySelectorAll(".stars-input span");
-  // let selectedRating = 0;
+  const photoInput = document.getElementById("reviewPhotos");
+  const photoPreview = document.getElementById("photoPreview");
+  const photoError = document.getElementById("photoError");
 
-  // starsInput.forEach((star, index) => {
-  //   star.addEventListener("click", () => {
-  //     selectedRating = index + 1;
-  //     starsInput.forEach((s, i) => {
-  //       if (i < selectedRating) {
-  //         s.classList.add("selected");
-  //       } else {
-  //         s.classList.remove("selected");
-  //       }
-  //     });
-  //   });
-  // });
+  photoInput.addEventListener("change", function () {
+    photoPreview.innerHTML = "";
+    photoError.textContent = "";
+    const files = Array.from(this.files);
 
-  // Фото с превью, лимитом и удалением
-  // const photoInput = document.getElementById("reviewPhotos");
-  // const photoPreview = document.getElementById("photoPreview");
-  // const photoError = document.getElementById("photoError");
-  // const maxFiles = 3;
+    if (files.length > 3) {
+      photoError.textContent = "You can upload up to 3 photos only.";
+      this.value = "";
+      return;
+    }
 
-  // photoInput.addEventListener("change", () => {
-  //   photoError.textContent = "";
+    files.forEach((file) => {
+      if (!file.type.startsWith("image/")) return;
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        const container = document.createElement("div");
+        container.classList.add("photo-item");
+        container.style.position = "relative";
 
-  //   let existingPhotos = photoPreview.querySelectorAll(".photo-item").length;
-  //   let files = Array.from(photoInput.files);
+        const img = document.createElement("img");
+        img.src = e.target.result;
 
-  //   if (existingPhotos + files.length > maxFiles) {
-  //     photoError.textContent = `You can upload up to ${maxFiles} images.`;
-  //     files = files.slice(0, maxFiles - existingPhotos);
-  //   }
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.textContent = "×";
 
-  //   files.forEach((file) => {
-  //     const reader = new FileReader();
-  //     reader.onload = (e) => {
-  //       const container = document.createElement("div");
-  //       container.classList.add("photo-item");
-  //       container.style.position = "relative";
+        btn.addEventListener("click", () => {
+          container.remove();
+          const dt = new DataTransfer();
+          Array.from(photoInput.files)
+            .filter((f) => f.name !== file.name)
+            .forEach((f) => dt.items.add(f));
+          photoInput.files = dt.files;
+        });
 
-  //       const img = document.createElement("img");
-  //       img.src = e.target.result;
+        container.appendChild(img);
+        container.appendChild(btn);
+        photoPreview.appendChild(container);
+      };
+      reader.readAsDataURL(file);
+    });
+  });
 
-  //       const btn = document.createElement("button");
-  //       btn.type = "button";
-  //       btn.textContent = "×";
-  //       btn.addEventListener("click", () => container.remove());
+  const reviewForm = document.getElementById("customReviewForm");
 
-  //       container.appendChild(img);
-  //       container.appendChild(btn);
-  //       photoPreview.appendChild(container);
-  //     };
-  //     reader.readAsDataURL(file);
-  //   });
-  // });
+  reviewForm.addEventListener("submit", function (e) {
+    e.preventDefault();
 
-  // Отправка отзыва
-  // const submitBtn = document.getElementById("submit-review");
-  // const reviewList = document.querySelector(".reviews-list");
+    const formData = new FormData(reviewForm);
+    formData.append("action", "submit_custom_review");
+    formData.append("product_id", woocommerce_params.product_id);
 
-  // submitBtn.addEventListener("click", (e) => {
-  //   e.preventDefault();
+    fetch(woocommerce_params.ajax_url, {
+      method: "POST",
+      body: formData,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          showMessage(
+            "Review submitted! It will appear after moderation.",
+            true
+          );
+          reviewForm.reset();
+          document.getElementById("photoPreview").innerHTML = "";
+          document.getElementById("reviewRating").value = 0;
+          document
+            .querySelectorAll(".stars-input span")
+            .forEach((s) => s.classList.remove("selected"));
+          reviewFormContainer.style.display = "none";
+          writeReviewBtn.textContent = "Write your Review";
+        } else {
+          showMessage(data.data || "Error submitting review.", false);
+        }
+      })
+      .catch(() => showMessage("AJAX request failed.", false));
+  });
 
-  //   const name = document.getElementById("reviewName").value.trim();
-  //   const text = document.getElementById("reviewText").value.trim();
-  //   const files = Array.from(photoPreview.querySelectorAll("img"));
+  function showMessage(text, success = true) {
+    reviewMessage.style.display = "block";
+    reviewMessage.style.color = success ? "green" : "red";
+    reviewMessage.textContent = text;
 
-  //   if (!name || !text || selectedRating === 0) {
-  //     alert("Please fill in your name, review, and select a rating");
-  //     return;
-  //   }
-
-  //   const newReview = document.createElement("div");
-  //   newReview.classList.add("review");
-
-  //   const date = new Date();
-  //   const formattedDate = date.toLocaleDateString("en-GB");
-
-  //   let starsHTML = "";
-  //   for (let i = 0; i < 5; i++) {
-  //     starsHTML += `<img src="./assets/icons/${
-  //       i < selectedRating ? "star-full" : "star"
-  //     }.svg" alt="star">`;
-  //   }
-
-  //   newReview.innerHTML = `
-  //         <div class="review-header">
-  //             <div class="review-stars">${starsHTML}</div>
-  //             <p class="review-date">${formattedDate}</p>
-  //         </div>
-  //         <div class="review__user-info">
-  //             <img src="./assets/icons/review-icon.svg" alt="user icon">
-  //             <p>${name}</p>
-  //         </div>
-  //         <p>${text}</p>
-  //         <div class="review-photos"></div>
-  //     `;
-
-  //   const reviewPhotosContainer = newReview.querySelector(".review-photos");
-
-  //   files.forEach((img) => {
-  //     const reviewImg = document.createElement("img");
-  //     reviewImg.src = img.src;
-  //     reviewPhotosContainer.appendChild(reviewImg);
-  //   });
-
-  //   reviewList.prepend(newReview);
-
-  // Очистка формы
-  // reviewForm.classList.add("hidden");
-  // writeBtn.textContent = "Write Your Review";
-  // document.getElementById("reviewName").value = "";
-  // document.getElementById("reviewText").value = "";
-  // photoPreview.innerHTML = "";
-  // photoError.textContent = "";
-  // selectedRating = 0;
-  // starsInput.forEach((s) => s.classList.remove("selected"));
-
-  // const thanksMsg = document.createElement("p");
-  // thanksMsg.textContent = "Thank you for your feedback!";
-  // thanksMsg.style.color = "green";
-  // reviewForm.parentElement.insertBefore(thanksMsg, reviewForm);
-  // setTimeout(() => thanksMsg.remove(), 3000);
-  // });
+    setTimeout(() => {
+      reviewMessage.style.display = "none";
+    }, 4000);
+  }
 });

@@ -20,16 +20,33 @@ get_header();
                     <label for="filter-age">Age</label>
                     <select name="filter-age" id="filter-age">
                         <option value="">All</option>
-                        <option value="6+">6+</option>
-                        <option value="8+">8+</option>
-                        <option value="12+">12+</option>
+                        <?php
+                            $ages = get_terms([
+                                'taxonomy'   => 'pa_age',
+                                'hide_empty' => true,
+                            ]);
+                            if (!empty($ages) && !is_wp_error($ages)) {
+                                foreach ($ages as $age) {
+                                    echo '<option value="' . esc_attr($age->name) . '">' . esc_html($age->name) . '</option>';
+                                }
+                            }
+                        ?>
                     </select>
                     <div class="filter-theme__wrapper">
                         <label for="filter-theme">Theme</label>
                         <select name="filter-theme" id="filter-theme">
                             <option value="">All</option>
-                            <option value="halloween">Halloween</option>
-                            <option value="christmas">Christmas</option>
+                            <?php
+                                $themes = get_terms([
+                                    'taxonomy'   => 'pa_theme',
+                                    'hide_empty' => true,
+                                ]);
+                                if (!empty($themes) && !is_wp_error($themes)) {
+                                    foreach ($themes as $theme) {
+                                        echo '<option value="' . esc_attr($theme->slug) . '">' . esc_html($theme->name) . '</option>';
+                                    }
+                                }
+                                ?>
                         </select>
                     </div>
                 </div>

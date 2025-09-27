@@ -17,6 +17,33 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  const ageFilter = document.getElementById("filter-age");
+  const themeFilter = document.getElementById("filter-theme");
+  const sortFilter = document.getElementById("sort-price");
+  const productsWrapper = document.querySelector(".product-items__wrapper");
+
+  function fetchProducts() {
+    const data = new FormData();
+    data.append("action", "filter_products");
+    data.append("age", ageFilter.value);
+    data.append("theme", themeFilter.value);
+    data.append("sort", sortFilter.value);
+
+    fetch(woocommerce_params.ajax_url, {
+      method: "POST",
+      body: data,
+    })
+      .then((res) => res.text())
+      .then((html) => {
+        productsWrapper.innerHTML = html;
+      })
+      .catch((err) => console.error("AJAX error:", err));
+  }
+
+  ageFilter.addEventListener("change", fetchProducts);
+  themeFilter.addEventListener("change", fetchProducts);
+  sortFilter.addEventListener("change", fetchProducts);
+
   const faqItems = document.querySelectorAll(".faq-item");
 
   faqItems.forEach((item) => {
@@ -76,5 +103,3 @@ document.addEventListener("DOMContentLoaded", () => {
     track.style.animationPlayState = "running";
   });
 });
-
-
