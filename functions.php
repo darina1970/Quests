@@ -394,37 +394,106 @@ add_action('init', function() {
 });
 
 
-//Шаблон формы
-add_action('wp_ajax_alena_subscribe_form', 'alena_handle_ajax_form');
-add_action('wp_ajax_nopriv_alena_subscribe_form', 'alena_handle_ajax_form');
+// Форма подписки
+add_action('wp_ajax_form_subscribe_ajax', 'form_subscribe_handle');
+add_action('wp_ajax_nopriv_form_subscribe_ajax', 'form_subscribe_handle');
 
-function alena_handle_ajax_form() {
-  $name = sanitize_text_field( $_POST['name'] ?? '' );
-  $email = sanitize_email( $_POST['email'] ?? '' );
+function form_subscribe_handle() {
+  $name = sanitize_text_field($_POST['name'] ?? '');
+  $email = sanitize_email($_POST['email'] ?? '');
   $with_quest = isset($_POST['with_quest']) && $_POST['with_quest'] === '1' ? 'yes' : 'no';
 
-  $row = [
-    current_time('mysql'),
-    $email,
-    $name,
-    $with_quest
-  ];
-
+  // Сохраняем в CSV (это проверочный, потом удалится)
+  $row = [current_time('mysql'), $email, $name, $with_quest];
   $upload_dir = wp_upload_dir();
-  $csv_file = trailingslashit($upload_dir['basedir']) . 'subscriptions.csv';
+  $csv_file = trailingslashit($upload_dir['basedir']) . 'form_subscribers.csv';
 
-  $is_new = ! file_exists($csv_file);
-  $fp = fopen($csv_file, 'a');
-
-  if ($fp) {
-    if ($is_new) {
+  if ($fp = fopen($csv_file, 'a')) {
+    if (!file_exists($csv_file)) {
       fputcsv($fp, ['datetime','email','name','with_quest']);
     }
     fputcsv($fp, $row);
     fclose($fp);
   }
 
+  // Отправка в MailerLite
+  if (function_exists('send_subscriber_to_mailerlite')) {
+    send_subscriber_to_mailerlite(
+      $email,
+      $name,
+      $with_quest === 'yes'
+    );
+  }
+
+  // Отправка письма
+  $subject = get_field('mail_subject', 'option') ?: 'Thanks for subscribing!';
+  $message = ($with_quest === 'yes')
+    ? get_field('mail_body_with_quest', 'option')
+    : get_field('mail_body_simple', 'option');
+
+  $headers = ['Content-Type: text/html; charset=UTF-8'];
+  $attachments = [];
+
+  if ($with_quest === 'yes') {
+    $quest_file = get_field('quest_file', 'option');
+    if ($quest_file && isset($quest_file['ID'])) {
+      $file_path = get_attached_file($quest_file['ID']);
+      if (file_exists($file_path)) {
+        $attachments[] = $file_path;
+      }
+    }
+  }
+
+  //wp_mail($email, $subject, $message, $headers, $attachments);
+  $result = wp_mail($email, $subject, $message, $headers, $attachments);
+  error_log('Письмо отправлено? ' . ($result ? 'да' : 'нет'));
+
+  // Ответ в JS
   wp_send_json_success([
-    'with_quest' => $with_quest
+  'with_quest' => $with_quest
   ]);
+}
+
+
+function send_subscriber_to_mailerlite($email, $name = '', $with_quest = false) {
+    $api_key = defined('MAILERLITE_API_KEY') ? constant('MAILERLITE_API_KEY') : null;
+    $group_id_quest = defined('MAILERLITE_GROUP_ID_QUEST') ? constant('MAILERLITE_GROUP_ID_QUEST') : null;
+    $group_id_no_quest = defined('MAILERLITE_GROUP_ID_NO_QUEST') ? constant('MAILERLITE_GROUP_ID_NO_QUEST') : null;
+
+    if (!$api_key || !$group_id_quest || !$group_id_no_quest) {
+        error_log('MailerLite: отсутствует ключ или ID групп');
+        return false;
+    }
+
+    $group_id = $with_quest ? $group_id_quest : $group_id_no_quest;
+
+    $body = [
+        'email' => $email,
+        'name'  => $name,
+        'groups' => [$group_id],
+        'fields' => [
+            'with_quest' => $with_quest ? 'true' : 'false'
+        ]
+    ];
+
+    $response = wp_remote_post('https://connect.mailerlite.com/api/subscribers', [
+        'headers' => [
+            'Content-Type'  => 'application/json',
+            'Authorization' => 'Bearer ' . $api_key,
+        ],
+        'body' => json_encode($body),
+    ]);
+
+    if (is_wp_error($response)) {
+        error_log('MailerLite ошибка: ' . $response->get_error_message());
+        return false;
+    }
+
+    $code = wp_remote_retrieve_response_code($response);
+    if (!in_array($code, [200, 201])) {
+        error_log('MailerLite API код ответа: ' . $code);
+        return false;
+    }
+
+    return true;
 }

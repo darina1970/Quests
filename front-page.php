@@ -374,22 +374,23 @@ get_header();
         <div class="container">
             <div class="form__wrapper" id="form-wrapper">
 
-                <?php if ( get_field('show_form_image') ) : ?>
-                <?php $image = get_field('form_image'); ?>
-                <?php if( $image ) : ?>
+                <?php if ( get_field('show_form_image') ) :
+                $image = get_field('form_image');
+                if( $image ) : ?>
                     <img class="form__image" src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['alt']); ?>">
-                <?php endif; ?>
-                <?php endif; ?>
+                <?php endif; endif; ?>
 
                 <div class="form__text">
                     <?php if ( get_field('form_title') ) : ?>
-                        <h2 class="text-align"><?php the_field('form_title'); ?></h2>
+                    <h2 class="text-align"><?php the_field('form_title'); ?></h2>
                     <?php endif; ?>
+
                     <?php if ( get_field('form_subtitle') ) : ?>
-                        <h3 class="text-align"><?php the_field('form_subtitle'); ?></h3>
+                    <h3 class="text-align"><?php the_field('form_subtitle'); ?></h3>
                     <?php endif; ?>
+
                     <?php if ( get_field('show_form_paragraph') && get_field('form_paragraph') ) : ?>
-                        <p class="text-align"><?php the_field('form_paragraph'); ?></p>
+                    <p class="text-align"><?php the_field('form_paragraph'); ?></p>
                     <?php endif; ?>
                 </div>
 
@@ -405,8 +406,8 @@ get_header();
                         <div class="checkbox">
                             <input type="checkbox" id="agree" required>
                             <label for="agree">
-                                By subscribing, you agree to our
-                                <a href="<?php echo esc_url( get_permalink( get_page_by_path('privacy-policy') ) ); ?>" target="_blank">Privacy Policy</a>
+                            By subscribing, you agree to our
+                            <a href="<?php echo get_permalink( get_page_by_path('privacy-policy') ); ?>" target="_blank">Privacy Policy</a>
                             </label>
                         </div>
                         <input type="hidden" name="with_quest" value="<?php echo esc_attr($with_quest); ?>">

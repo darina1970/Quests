@@ -1227,6 +1227,7 @@ nav li:hover {
 
 /* Текст всплывающего сообщения после отправки формы */
 .form-message {
+  font-family: var(--font-heading);
   text-align: center;
   text-transform: uppercase;
   font-size: clamp(24px, 2.083vw, 40px);
