@@ -28,7 +28,8 @@ add_theme_support('post-thumbnails');
 add_theme_support('title-tag');
 
 // Поддержка WooCommerce
-function questtime_add_woocommerce_support() {
+function questtime_add_woocommerce_support()
+{
     add_theme_support('woocommerce');
 }
 add_action('after_setup_theme', 'questtime_add_woocommerce_support');
@@ -37,15 +38,15 @@ add_action('after_setup_theme', 'questtime_add_woocommerce_support');
 add_filter('woocommerce_enqueue_styles', '__return_empty_array');
 
 // AJAX обновление корзины
-add_filter('woocommerce_add_to_cart_fragments', function($fragments) {
+add_filter('woocommerce_add_to_cart_fragments', function ($fragments) {
     ob_start(); ?>
     <span class="cart-count"><?php echo WC()->cart->get_cart_contents_count(); ?></span>
-    <?php
+<?php
     $fragments['.cart-count'] = ob_get_clean();
     return $fragments;
 });
 
-add_filter('locale', function($locale) {
+add_filter('locale', function ($locale) {
     if (is_admin()) {
         return $locale;
     }
@@ -59,12 +60,12 @@ add_filter('locale', function($locale) {
 
 // Кастомная форма отзывов
 remove_action('woocommerce_review_before_comment_form', 'woocommerce_review_form', 10);
-add_action('woocommerce_review_before_comment_form', function() { ?>
+add_action('woocommerce_review_before_comment_form', function () { ?>
     <form id="customReviewForm" class="review-form__overlay" enctype="multipart/form-data">
         <div class="rating__wrapper">
             <p class="text-align">RATING *</p>
             <div class="stars-input">
-                <?php for($i=1;$i<=5;$i++): ?>
+                <?php for ($i = 1; $i <= 5; $i++): ?>
                     <span data-value="<?php echo $i; ?>">
                         <img src="<?php echo get_template_directory_uri(); ?>/assets/icons/star-full.svg" alt="star <?php echo $i; ?>">
                     </span>
@@ -107,7 +108,8 @@ add_action('woocommerce_review_before_comment_form', function() { ?>
 add_action('wp_ajax_submit_custom_review', 'handle_custom_review');
 add_action('wp_ajax_nopriv_submit_custom_review', 'handle_custom_review');
 
-function handle_custom_review() {
+function handle_custom_review()
+{
     // Проверка Product ID
     if (!isset($_POST['product_id'])) wp_send_json_error("Product ID missing.");
     $product_id = intval($_POST['product_id']);
@@ -173,7 +175,8 @@ function handle_custom_review() {
     wp_send_json_success("Review submitted.");
 }
 // Вывод всех отзывов с фото и рейтингом
-function render_reviews_list() { ?>
+function render_reviews_list()
+{ ?>
     <div class="reviews-list">
         <?php
         // Берём только отзывы WooCommerce
@@ -190,22 +193,22 @@ function render_reviews_list() { ?>
                 // Получаем рейтинг
                 $rating = get_comment_meta($comment->comment_ID, 'rating', true);
                 $rating = intval($rating);
-                if($rating < 0) $rating = 0;
-                if($rating > 5) $rating = 5;
+                if ($rating < 0) $rating = 0;
+                if ($rating > 5) $rating = 5;
 
                 // Получаем фото
                 $photos = get_comment_meta($comment->comment_ID, 'review_photos', true);
                 if (!is_array($photos)) $photos = [];
 
-                ?>
+        ?>
                 <div class="review">
                     <div class="review-header">
                         <div class="review-stars">
-                            <?php 
-                            for($i = 1; $i <= 5; $i++):
+                            <?php
+                            for ($i = 1; $i <= 5; $i++):
                                 $star_class = ($i <= $rating) ? 'selected' : '';
-                                echo '<img src="' . get_template_directory_uri() . '/assets/icons/star-full.svg" class="'. $star_class .'" alt="star">';
-                            endfor; 
+                                echo '<img src="' . get_template_directory_uri() . '/assets/icons/star-full.svg" class="' . $star_class . '" alt="star">';
+                            endfor;
                             ?>
                         </div>
                         <p class="review-date"><?php echo get_comment_date('d/m/y', $comment); ?></p>
@@ -218,23 +221,23 @@ function render_reviews_list() { ?>
 
                     <p><?php echo esc_html($comment->comment_content); ?></p>
 
-                    <?php if($photos): ?>
+                    <?php if ($photos): ?>
                         <div class="review-photos">
-                            <?php foreach($photos as $photo): ?>
+                            <?php foreach ($photos as $photo): ?>
                                 <img src="<?php echo esc_url($photo); ?>" alt="review photo">
                             <?php endforeach; ?>
                         </div>
                     <?php endif; ?>
                 </div>
-            <?php endforeach;
+        <?php endforeach;
         } else {
             echo '<p>No reviews yet.</p>';
         } ?>
     </div>
-<?php }
+    <?php }
 
 // Добавляем метабокс для отзывов WooCommerce
-add_action('add_meta_boxes', function() {
+add_action('add_meta_boxes', function () {
     add_meta_box(
         'wc_review_photos',
         'Review Photos',
@@ -246,14 +249,15 @@ add_action('add_meta_boxes', function() {
 });
 
 // Callback метабокса
-function render_wc_review_photos_metabox($comment) {
-    if($comment->comment_type !== 'review') return;
+function render_wc_review_photos_metabox($comment)
+{
+    if ($comment->comment_type !== 'review') return;
 
-    $photos = get_comment_meta($comment->comment_ID,'review_photos',true);
+    $photos = get_comment_meta($comment->comment_ID, 'review_photos', true);
     echo '<div style="display:flex;gap:10px;flex-wrap:wrap;">';
-    if($photos && is_array($photos)) {
-        foreach($photos as $photo){
-            echo '<img src="'.esc_url($photo).'" style="width:80px;height:80px;object-fit:cover;border:1px solid #ccc;">';
+    if ($photos && is_array($photos)) {
+        foreach ($photos as $photo) {
+            echo '<img src="' . esc_url($photo) . '" style="width:80px;height:80px;object-fit:cover;border:1px solid #ccc;">';
         }
     } else {
         echo '<p>No photos uploaded.</p>';
@@ -264,7 +268,8 @@ function render_wc_review_photos_metabox($comment) {
 add_action('wp_ajax_filter_products', 'filter_products_callback');
 add_action('wp_ajax_nopriv_filter_products', 'filter_products_callback');
 
-function filter_products_callback() {
+function filter_products_callback()
+{
     $args = [
         'post_type'      => 'product',
         'posts_per_page' => -1,
@@ -309,8 +314,8 @@ function filter_products_callback() {
         while ($query->have_posts()) {
             $query->the_post();
             global $product;
-            ?>
-            
+    ?>
+
             <article class="product-card">
                 <a class="product-card__image" href="<?php the_permalink(); ?>">
                     <?php echo woocommerce_get_product_thumbnail('medium'); ?>
@@ -364,7 +369,7 @@ function filter_products_callback() {
                 </div>
             </article>
 
-            <?php
+<?php
         }
     } else {
         echo '<p>No products found.</p>';
@@ -372,3 +377,30 @@ function filter_products_callback() {
 
     wp_die();
 }
+
+
+// Вывод вопросов и ответов блока FAQ
+function register_faq_post_type()
+{
+    register_post_type('faq', [
+        'labels' => [
+            'name' => 'FAQs',
+            'singular_name' => 'FAQ',
+            'add_new' => 'Add New',
+            'add_new_item' => 'Add New FAQ',
+            'edit_item' => 'Edit FAQ',
+            'new_item' => 'New FAQ',
+            'view_item' => 'View FAQ',
+            'search_items' => 'Search FAQs',
+            'not_found' => 'No FAQs found',
+            'menu_name' => 'FAQ',
+        ],
+        'public' => true,
+        'has_archive' => false,
+        'rewrite' => ['slug' => 'faq'],
+        'menu_position' => 5,
+        'menu_icon' => 'dashicons-editor-help',
+        'supports' => ['title'],
+    ]);
+}
+add_action('init', 'register_faq_post_type');
