@@ -21,15 +21,15 @@ get_header();
                     <select name="filter-age" id="filter-age">
                         <option value="">All</option>
                         <?php
-                            $ages = get_terms([
-                                'taxonomy'   => 'pa_age',
-                                'hide_empty' => true,
-                            ]);
-                            if (!empty($ages) && !is_wp_error($ages)) {
-                                foreach ($ages as $age) {
-                                    echo '<option value="' . esc_attr($age->name) . '">' . esc_html($age->name) . '</option>';
-                                }
+                        $ages = get_terms([
+                            'taxonomy'   => 'pa_age',
+                            'hide_empty' => true,
+                        ]);
+                        if (!empty($ages) && !is_wp_error($ages)) {
+                            foreach ($ages as $age) {
+                                echo '<option value="' . esc_attr($age->name) . '">' . esc_html($age->name) . '</option>';
                             }
+                        }
                         ?>
                     </select>
                     <div class="filter-theme__wrapper">
@@ -37,16 +37,16 @@ get_header();
                         <select name="filter-theme" id="filter-theme">
                             <option value="">All</option>
                             <?php
-                                $themes = get_terms([
-                                    'taxonomy'   => 'pa_theme',
-                                    'hide_empty' => true,
-                                ]);
-                                if (!empty($themes) && !is_wp_error($themes)) {
-                                    foreach ($themes as $theme) {
-                                        echo '<option value="' . esc_attr($theme->slug) . '">' . esc_html($theme->name) . '</option>';
-                                    }
+                            $themes = get_terms([
+                                'taxonomy'   => 'pa_theme',
+                                'hide_empty' => true,
+                            ]);
+                            if (!empty($themes) && !is_wp_error($themes)) {
+                                foreach ($themes as $theme) {
+                                    echo '<option value="' . esc_attr($theme->slug) . '">' . esc_html($theme->name) . '</option>';
                                 }
-                                ?>
+                            }
+                            ?>
                         </select>
                     </div>
                 </div>
@@ -61,7 +61,7 @@ get_header();
             </div>
             <div class="product-items__wrapper">
                 <?php
-                
+
                 $args = [
                     'post_type'      => 'product',
                     'posts_per_page' => -1,
@@ -72,9 +72,10 @@ get_header();
                 $loop = new WP_Query($args);
 
                 if ($loop->have_posts()) :
-                    while ($loop->have_posts()) : $loop->the_post();
-                        global $product;?>
-                        
+                    while ($loop->have_posts()) : $loop->the_post();                      
+
+                        global $product; ?>
+
                         <article class="product-card">
                             <a class="product-card__image" href="<?php the_permalink(); ?>">
                                 <?php if (has_post_thumbnail()) {
@@ -114,7 +115,7 @@ get_header();
                                     </div>
                                 </div>
                                 <div class="product-card__bottom">
-                                    <?php if ( $product->is_on_sale() ) : ?>
+                                    <?php if ($product->is_on_sale()) : ?>
                                         <span class="product-card__price">
                                             €<?php echo $product->get_sale_price(); ?>
                                             <span class="old-price">€<?php echo $product->get_regular_price(); ?></span>
@@ -129,14 +130,14 @@ get_header();
                                 </div>
                             </div>
                         </article>
-                        
-                    <?php endwhile;
+
+                <?php endwhile;
                 else :
                     echo '<p>No products found</p>';
                 endif;
 
-                wp_reset_postdata(); 
-                
+                wp_reset_postdata();
+
                 ?>
             </div>
         </div>
@@ -280,86 +281,48 @@ get_header();
     <section class="faq section-common" id="faq">
         <div class="faq__wrapper">
             <h2 class="text-align">Frequently Asked Questions</h2>
-            <div class="faq-item">
-                <div class="faq-question__wrapper">
-                    <div class="faq-question cursor-scale">
-                        <img class="faq-icon" src="<?php echo get_template_directory_uri(); ?>/assets/icons/question.svg" alt="question icon">
-                        <span class="faq-text">How will I receive the quest after purchase?</span>
+
+            <?php
+            $faqs = new WP_Query([
+                'post_type' => 'faq',
+                'posts_per_page' => -1,
+                'orderby' => 'menu_order',
+                'order' => 'ASC'
+            ]);
+
+            if ($faqs->have_posts()):
+                while ($faqs->have_posts()): $faqs->the_post();
+                    $question = get_the_title();
+                    $answer = get_field('answer');
+                    $video = get_field('video_url');
+            ?>
+                    <div class="faq-item">
+                        <div class="faq-question__wrapper">
+                            <div class="faq-question cursor-scale">
+                                <img class="faq-icon" src="<?php echo get_template_directory_uri(); ?>/assets/icons/question.svg" alt="question icon">
+                                <span class="faq-text"><?php echo esc_html($question); ?></span>
+                            </div>
+                            <img class="faq-arrow cursor-scale" src="<?php echo get_template_directory_uri(); ?>/assets/icons/arrow-down.svg" alt="arrow-down">
+                        </div>
+                        <div class="faq-answer">
+                            <p><?php echo esc_html($answer); ?></p>
+                            <?php if (!empty($video)): ?>
+                                <div class="faq-video">
+                                    <iframe width="100%" height="200"
+                                        src="<?php echo esc_url($video); ?>" title="FAQ Video"
+                                        frameborder="0"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                        allowfullscreen>
+                                    </iframe>
+                                </div>
+                            <?php endif; ?>
+                        </div>
                     </div>
-                    <img class="faq-arrow cursor-scale" src="<?php echo get_template_directory_uri(); ?>/assets/icons/arrow-down.svg" alt="arrow-down">
-                </div>
-                <div class="faq-answer">
-                    <p>After purchase, the quest will be sent to the email address you provided.</p>
-                    <div class="faq-video">
-                        <iframe width="100%" height="200"
-                            src="<?php echo get_template_directory_uri(); ?>/assets/6049036_Birthday_Birthday_Party_1280x720.mp4" title="FAQ Video"
-                            frameborder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen>
-                        </iframe>
-                    </div>
-                </div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question__wrapper">
-                    <div class="faq-question cursor-scale">
-                        <img class="faq-icon" src="<?php echo get_template_directory_uri(); ?>/assets/icons/question.svg" alt="question icon">
-                        <span class="faq-text">How will I receive the quest after purchase?</span>
-                    </div>
-                    <img class="faq-arrow cursor-scale" src="<?php echo get_template_directory_uri(); ?>/assets/icons/arrow-down.svg" alt="arrow-down">
-                </div>
-                <div class="faq-answer">
-                    <p>After purchase, the quest will be sent to the email address you provided.</p>
-                    <div class="faq-video">
-                        <iframe width="100%" height="200"
-                            src="<?php echo get_template_directory_uri(); ?>/assets/6049036_Birthday_Birthday_Party_1280x720.mp4" title="FAQ Video"
-                            frameborder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen>
-                        </iframe>
-                    </div>
-                </div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question__wrapper">
-                    <div class="faq-question cursor-scale">
-                        <img class="faq-icon" src="<?php echo get_template_directory_uri(); ?>/assets/icons/question.svg" alt="question icon">
-                        <span class="faq-text">How will I receive the quest after purchase?</span>
-                    </div>
-                    <img class="faq-arrow cursor-scale" src="<?php echo get_template_directory_uri(); ?>/assets/icons/arrow-down.svg" alt="arrow-down">
-                </div>
-                <div class="faq-answer">
-                    <p>After purchase, the quest will be sent to the email address you provided.</p>
-                    <div class="faq-video">
-                        <iframe width="100%" height="200"
-                            src="<?php echo get_template_directory_uri(); ?>/assets/6049036_Birthday_Birthday_Party_1280x720.mp4" title="FAQ Video"
-                            frameborder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen>
-                        </iframe>
-                    </div>
-                </div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question__wrapper">
-                    <div class="faq-question cursor-scale">
-                        <img class="faq-icon" src="<?php echo get_template_directory_uri(); ?>/assets/icons/question.svg" alt="question icon">
-                        <span class="faq-text">How will I receive the quest after purchase?</span>
-                    </div>
-                    <img class="faq-arrow cursor-scale" src="<?php echo get_template_directory_uri(); ?>/assets/icons/arrow-down.svg" alt="arrow-down">
-                </div>
-                <div class="faq-answer">
-                    <p>After purchase, the quest will be sent to the email address you provided.</p>
-                    <div class="faq-video">
-                        <iframe width="100%" height="200"
-                            src="<?php echo get_template_directory_uri(); ?>/assets/6049036_Birthday_Birthday_Party_1280x720.mp4" title="FAQ Video"
-                            frameborder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen>
-                        </iframe>
-                    </div>
-                </div>
-            </div>
+            <?php
+                endwhile;
+                wp_reset_postdata();
+            endif;
+            ?>
         </div>
     </section>
 
@@ -408,7 +371,7 @@ get_header();
                             <label for="agree">
                             By subscribing, you agree to our
                             <a href="<?php echo get_permalink( get_page_by_path('privacy-policy') ); ?>" target="_blank">Privacy Policy</a>
-                            </label>
+                            </label>                        
                         </div>
                         <input type="hidden" name="with_quest" value="<?php echo esc_attr($with_quest); ?>">
                     </div>
