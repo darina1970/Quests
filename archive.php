@@ -9,10 +9,10 @@ get_header();
                 <source src="./assets/video/kids_quests_banner.mp4" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
-    
+
             <!-- <img class="hero__bg-image" src="./assets/images/blog-page/blog-hero.webp" alt="blog-hero background"> -->
         </div>
-    
+
         <div class="hero__content">
             <h1 class="hero__title">Mystery Blog — Secrets Waiting at Home</h1>
             <p class="hero__subtitle">Discover tips, stories and magical ideas to turn your evenings into
@@ -20,98 +20,66 @@ get_header();
             <a href="#blogArticles" class="btn btn-hero">Read our news</a>
         </div>
     </section>
-    <section class="blog-article__main section-common" id="blogArticleMain">
-        <div class="blog-article__wrapper container">
-            <div class="blog-article__image">
-                <img src="./assets/icons/monogram.png" alt="monogram">
-            </div>
-            <h2 class="text-align">Our stories & Mysteries</h2>
-            <article class="blog__item blog-article__item">
-                <div class="blog__item-content">
-                    <a href="article.html" class="blog__item-image-main">
-                        <img src="./assets/images/card-8.webp" alt="article">
-                    </a>
-                    <div class="blog__item-descr">
-                        <a href="article.html">
-                            <h3 class="blog__item-title">Deciphering an Ancient Map</h3>
-                        </a>
-                        <p class="blog__item-date">August 28, 2025</p>
-                        <p class="blog__item-text">Faded ink, torn edges, and cryptic symbols… The map seems to
-                            whisper
-                            secrets of places long forgotten. Every mark invites you to look closer, to connect
-                            clues
-                            and uncover what lies beyond the obvious.</p>
-                    </div>
-                </div>
-            </article>
-            <div class="blog-article__image">
-                <img src="./assets/icons/monogram-down.png" alt="monogram">
-            </div>
-        </div>
-    </section>
-    <section class="blog-articles__sub section-common" id="blogArticles">
+    <section class="blog-article__main section-common" id="blogArticles">
         <div class="blog__wrapper container">
+            <h2 class="text-align">Our stories & Mysteries</h2>
             <div class="blog__items">
-                <article class="blog__item">
-                    <div class="blog__item-content">
-                        <a href="article.html" class="blog__item-image">
-                            <img src="./assets/images/card-8.webp" alt="article">
-                        </a>
-                        <a href="article.html">
-                            <h3 class="blog__item-title">How to host a home quest party</h3>
-                        </a>
-                        <p class="blog__item-date">August 28, 2025</p>
-                        <p class="blog__item-text">Bring the thrill of adventure right into your living room!
-                            Hosting a
-                            home quest party is a
-                            fun and creative way to gather friends and family, solve puzzles together, and turn an
-                            ordinary evening into an unforgettable mystery.</p>
-                    </div>
-                    <a href="article.html" class="blog__link">
-                        <span>READ MORE</span>
-                        <img src="./assets/icons/learn-more-arrow.svg" alt="arrow right">
-                    </a>
-                </article>
-                <article class="blog__item">
-                    <div class="blog__item-content">
-                        <a href="article.html" class="blog__item-image">
-                            <img src="./assets/images/card-8.webp" alt="article">
-                        </a>
-                        <a href="article.html">
-                            <h3 class="blog__item-title">How to host a home quest party</h3>
-                        </a>
-                        <p class="blog__item-date">August 28, 2025</p>
-                        <p class="blog__item-text">Bring the thrill of adventure right into your living room!
-                            Hosting a
-                            home quest party is a
-                            fun and creative way to gather friends and family, solve puzzles together, and turn an
-                            ordinary evening into an unforgettable mystery.</p>
-                    </div>
-                    <a href="article.html" class="blog__link">
-                        <span>READ MORE</span>
-                        <img src="./assets/icons/learn-more-arrow.svg" alt="arrow right">
-                    </a>
-                </article>
-                <article class="blog__item">
-                    <div class="blog__item-content">
-                        <a href="article.html" class="blog__item-image">
-                            <img src="./assets/images/card-8.webp" alt="article">
-                        </a>
-                        <a href="article.html">
-                            <h3 class="blog__item-title">How to host a home quest party</h3>
-                        </a>
-                        <p class="blog__item-date">August 28, 2025</p>
-                        <p class="blog__item-text">Bring the thrill of adventure right into your living room!
-                            Hosting a
-                            home quest party is a
-                            fun and creative way to gather friends and family, solve puzzles together, and turn an
-                            ordinary evening into an unforgettable mystery.</p>
-                    </div>
-                    <a href="article.html" class="blog__link">
-                        <span>READ MORE</span>
-                        <img src="./assets/icons/learn-more-arrow.svg" alt="arrow right">
-                    </a>
-                </article>
+                <?php
+                $args = array(
+                    'post_type' => 'post',
+                    'posts_per_page' => -1,
+                    'orderby' => 'date',
+                    'order' => 'DESC'
+                );
+
+                $query = new WP_Query($args);
+                if ($query->have_posts()) :
+                    $i = 0;
+                    while ($query->have_posts()) : $query->the_post();
+                        $i++;
+                        if ($i === 1) : ?>
+                            <article class="blog__item blog-article__item">
+                                <div class="blog__item-content">
+                                    <a href="<?php the_permalink(); ?>" class="blog__item-image-main">
+                                        <?php if (has_post_thumbnail()) {
+                                            the_post_thumbnail('blog-large');
+                                        } ?>
+                                    </a>
+                                    <div class="blog__item-descr">
+                                        <a href="<?php the_permalink(); ?>">
+                                            <h3 class="blog__item-title"><?php the_title(); ?></h3>
+                                        </a>
+                                        <p class="blog__item-date"><?php echo get_the_date('F j, Y'); ?></p>
+                                        <p class="blog__item-text"><?php echo wp_trim_words(get_the_excerpt(), 30); ?></p>
+                                    </div>
+                                </div>
+                            </article>
+                        <?php else : ?>
+                            <article class="blog__item">
+                                <div class="blog__item-content">
+                                    <a href="<?php the_permalink(); ?>" class="blog__item-image">
+                                        <?php if (has_post_thumbnail()) {
+                                            the_post_thumbnail('blog-thumb');
+                                        } ?>
+                                    </a>
+                                    <a href="<?php the_permalink(); ?>">
+                                        <h3 class="blog__item-title"><?php the_title(); ?></h3>
+                                    </a>
+                                    <p class="blog__item-date"><?php echo get_the_date('F j, Y'); ?></p>
+                                    <p class="blog__item-text"><?php echo wp_trim_words(get_the_excerpt(), 25); ?></p>
+                                </div>
+                                <a href="<?php the_permalink(); ?>" class="blog__link">
+                                    <span>READ MORE</span>
+                                    <img src="<?php echo get_template_directory_uri(); ?>/assets/icons/learn-more-arrow.svg" alt="arrow right">
+                                </a>
+                            </article>
+                <?php endif;
+                    endwhile;
+                    wp_reset_postdata();
+                else :
+                    echo '<p>No posts found</p>';
+                endif;
+                ?>
             </div>
         </div>
     </section>
