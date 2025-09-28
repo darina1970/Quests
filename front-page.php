@@ -72,7 +72,8 @@ get_header();
                 $loop = new WP_Query($args);
 
                 if ($loop->have_posts()) :
-                    while ($loop->have_posts()) : $loop->the_post();
+                    while ($loop->have_posts()) : $loop->the_post();                      
+
                         global $product; ?>
 
                         <article class="product-card">
@@ -253,12 +254,27 @@ get_header();
     <section class="gallery-slider" id="gallery-slider">
         <div class="gallery-slider__wrapper">
             <div class="slider-track" id="slider-track">
-                <div class="slide"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/product-page/quest1-1.webp" alt="Product image" /></div>
-                <div class="slide"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/product-page/quest1-2.webp" alt="Product image" /></div>
-                <div class="slide"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/product-page/quest1-3.webp" alt="Product image" /></div>
-                <div class="slide"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/product-page/quest1-4.webp" alt="Product image" /></div>
-                <div class="slide"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/product-page/quest1-5.webp" alt="Product image" /></div>
-                <div class="slide"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/product-page/quest1-6.webp" alt="Product image" /></div>
+                <?php
+                $gallery_query = new WP_Query(array(
+                    'post_type'      => 'gallery_slider',
+                    'posts_per_page' => -1,
+                    'orderby'        => 'date',
+                    'order'          => 'ASC'
+                ));
+                
+                if ($gallery_query->have_posts()) :
+                    while ($gallery_query->have_posts()) : $gallery_query->the_post();
+                    if (has_post_thumbnail()) :
+                    ?>
+                    <div class="slide">
+                        <?php the_post_thumbnail('large', array('alt' => get_the_title())); ?>
+                    </div>
+                    <?php
+                    endif;
+                    endwhile;
+                    wp_reset_postdata();
+                    endif;
+                ?>
             </div>
         </div>
     </section>
@@ -309,33 +325,62 @@ get_header();
             ?>
         </div>
     </section>
+
+    <!--Form-->
+    <?php
+    $has_image = get_field('show_form_image');
+    $has_paragraph = get_field('show_form_paragraph');
+    $with_quest = ($has_image || $has_paragraph) ? '1' : '0';
+    ?>
+
     <section class="form section-common" id="form">
         <div class="container">
-            <div class="form__wrapper">
-                <img class="form__image" src="<?php echo get_template_directory_uri(); ?>/assets/images/printing form.png" alt="Printing form">
+            <div class="form__wrapper" id="form-wrapper">
+
+                <?php if ( get_field('show_form_image') ) :
+                $image = get_field('form_image');
+                if( $image ) : ?>
+                    <img class="form__image" src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['alt']); ?>">
+                <?php endif; endif; ?>
+
                 <div class="form__text">
-                    <h2 class="text-align">Keep Up with QuestTime</h2>
-                    <h3 class="text-align">Subscribe to our Newsletter</h3>
-                    <p class="text-align">Get a free quest</p>
+                    <?php if ( get_field('form_title') ) : ?>
+                    <h2 class="text-align"><?php the_field('form_title'); ?></h2>
+                    <?php endif; ?>
+
+                    <?php if ( get_field('form_subtitle') ) : ?>
+                    <h3 class="text-align"><?php the_field('form_subtitle'); ?></h3>
+                    <?php endif; ?>
+
+                    <?php if ( get_field('show_form_paragraph') && get_field('form_paragraph') ) : ?>
+                    <p class="text-align"><?php the_field('form_paragraph'); ?></p>
+                    <?php endif; ?>
                 </div>
-                <form>
+
+                <form method="post" action="" id="subscribe-form">
                     <div class="form__content">
                         <div class="form__input">
-                            <input class="name-input" type="text" placeholder="First Name" required>
-                            <input class="adress-input" type="text" placeholder="Email Address" required>
+                            <input class="name-input" name="name" type="text" placeholder="First Name" required>
+                            <input class="adress-input" name="email" type="email" placeholder="Email Address" required>
                         </div>
                         <div class="form__button_wrapper">
                             <button class="btn-form btn" type="submit">Subscribe</button>
                         </div>
                         <div class="checkbox">
                             <input type="checkbox" id="agree" required>
-                            <label for="agree">By subscribing, you agree to our <a href="<?php echo get_permalink(get_page_by_path('privacy-policy')); ?>" target="_blank">Privacy Policy</a></label>
+                            <label for="agree">
+                            By subscribing, you agree to our
+                            <a href="<?php echo get_permalink( get_page_by_path('privacy-policy') ); ?>" target="_blank">Privacy Policy</a>
+                            </label>                        
                         </div>
+                        <input type="hidden" name="with_quest" value="<?php echo esc_attr($with_quest); ?>">
                     </div>
                 </form>
+                <div class="form-message" id="form-message" style="display: none;"></div>
             </div>
         </div>
     </section>
+
 </main>
 
 <?php
