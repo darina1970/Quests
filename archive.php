@@ -115,31 +115,57 @@ get_header();
             </div>
         </div>
     </section>
+    <!--Form-->
+    <?php
+    $has_image = get_field('show_form_image');
+    $has_paragraph = get_field('show_form_paragraph');
+    $with_quest = ($has_image || $has_paragraph) ? '1' : '0';
+    ?>
+
     <section class="form section-common" id="form">
         <div class="container">
-            <div class="form__wrapper">
-                <img class="form__image" src="./assets/images/printing form.png" alt="Printing form">
+            <div class="form__wrapper" id="form-wrapper">
+
+                <?php if ( get_field('show_form_image') ) :
+                $image = get_field('form_image');
+                if( $image ) : ?>
+                    <img class="form__image" src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['alt']); ?>">
+                <?php endif; endif; ?>
+
                 <div class="form__text">
-                    <h2 class="text-align">Keep Up with QuestTime</h2>
-                    <h3 class="text-align">Subscribe to our Newsletter</h3>
-                    <p class="text-align">Get a free quest</p>
+                    <?php if ( get_field('form_title') ) : ?>
+                    <h2 class="text-align"><?php the_field('form_title'); ?></h2>
+                    <?php endif; ?>
+
+                    <?php if ( get_field('form_subtitle') ) : ?>
+                    <h3 class="text-align"><?php the_field('form_subtitle'); ?></h3>
+                    <?php endif; ?>
+
+                    <?php if ( get_field('show_form_paragraph') && get_field('form_paragraph') ) : ?>
+                    <p class="text-align"><?php the_field('form_paragraph'); ?></p>
+                    <?php endif; ?>
                 </div>
-                <form>
+
+                <form method="post" action="" id="subscribe-form">
                     <div class="form__content">
                         <div class="form__input">
-                            <input class="name-input" type="text" placeholder="First Name" required>
-                            <input class="adress-input" type="text" placeholder="Email Address" required>
+                            <input class="name-input" name="name" type="text" placeholder="First Name" required>
+                            <input class="adress-input" name="email" type="email" placeholder="Email Address" required>
                         </div>
                         <div class="form__button_wrapper">
                             <button class="btn-form btn" type="submit">Subscribe</button>
                         </div>
                         <div class="checkbox">
                             <input type="checkbox" id="agree" required>
-                            <label for="agree">By subscribing, you agree to our <a href="/privacy-policy.html"
-                                    target="_blank">Privacy Policy</a></label>
+                            <label for="agree">
+                            By subscribing, you agree to our
+                            <a href="<?php echo get_permalink( get_page_by_path('privacy-policy') ); ?>" target="_blank">Privacy Policy</a>
+                            </label>                        
                         </div>
+                        <input type="hidden" name="with_quest" value="<?php echo esc_attr($with_quest); ?>">
                     </div>
                 </form>
+                <div class="form-message" id="form-message" style="display: none;"></div>
             </div>
         </div>
     </section>
