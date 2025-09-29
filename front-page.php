@@ -72,7 +72,7 @@ get_header();
                 $loop = new WP_Query($args);
 
                 if ($loop->have_posts()) :
-                    while ($loop->have_posts()) : $loop->the_post();                      
+                    while ($loop->have_posts()) : $loop->the_post();
 
                         global $product; ?>
 
@@ -205,47 +205,41 @@ get_header();
         <div class="blog__wrapper container">
             <h2 class="text-align">Blog Posts</h2>
             <div class="blog__items">
-                <article class="blog__item">
-                    <a href="article.html" class="blog__item-image">
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/card-8.webp" alt="article">
-                    </a>
-                    <a href="article.html">
-                        <h3 class="blog__item-title">How to host a home quest party</h3>
-                    </a>
-                    <p class="blog__item-date">August 28, 2025</p>
-                    <p class="blog__item-text">Bring the thrill of adventure right into your living room! Hosting a
-                        home quest party is a
-                        fun and creative way to gather friends and family, solve puzzles together, and turn an
-                        ordinary evening into an unforgettable mystery.</p>
-                </article>
-                <article class="blog__item">
-                    <a href="article.html" class="blog__item-image">
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/card-8.webp" alt="article">
-                    </a>
-                    <a href="article.html">
-                        <h3 class="blog__item-title">How to host a home quest party</h3>
-                    </a>
-                    <p class="blog__item-date">August 28, 2025</p>
-                    <p class="blog__item-text">Bring the thrill of adventure right into your living room! Hosting a
-                        home quest party is a
-                        fun and creative way to gather friends and family, solve puzzles together, and turn an
-                        ordinary evening into an unforgettable mystery.</p>
-                </article>
-                <article class="blog__item">
-                    <a href="article.html" class="blog__item-image">
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/card-8.webp" alt="article">
-                    </a>
-                    <a href="article.html">
-                        <h3 class="blog__item-title">How to host a home quest party</h3>
-                    </a>
-                    <p class="blog__item-date">August 28, 2025</p>
-                    <p class="blog__item-text">Bring the thrill of adventure right into your living room! Hosting a
-                        home quest party is a
-                        fun and creative way to gather friends and family, solve puzzles together, and turn an
-                        ordinary evening into an unforgettable mystery.</p>
-                </article>
+                <?php
+                $args = array(
+                    'posts_per_page' => 3,
+                    'meta_query' => array(
+                        array(
+                            'key'     => 'is_featured',
+                            'value'   => '"yes"',
+                            'compare' => 'LIKE'
+                        )
+                    )
+                );
+
+                $query = new WP_Query($args);
+
+                if ($query->have_posts()) :
+                    while ($query->have_posts()) : $query->the_post(); ?>
+                        <article class="blog__item">
+                            <a href="<?php the_permalink(); ?>" class="blog__item-image">
+                                <?php if (has_post_thumbnail()) {
+                                    the_post_thumbnail('blog-thumb');
+                                } ?>
+                            </a>
+                            <a href="<?php the_permalink(); ?>">
+                                <h3 class="blog__item-title"><?php the_title(); ?></h3>
+                            </a>
+                            <p class="blog__item-date"><?php echo get_the_date('F j, Y'); ?></p>
+                            <p class="blog__item-text"><?php echo wp_trim_words(get_the_excerpt(), 25); ?></p>
+                        </article>
+                <?php endwhile;
+                    wp_reset_postdata();
+                endif;
+                ?>
             </div>
-            <a href="blog.html" class="blog__link">
+
+            <a href=<?php echo site_url('/archive/'); ?> class="blog__link">
                 <span>Learn more in our Blog</span>
                 <img src="<?php echo get_template_directory_uri(); ?>/assets/icons/learn-more-arrow.svg" alt="arrow right">
             </a>
@@ -261,19 +255,19 @@ get_header();
                     'orderby'        => 'date',
                     'order'          => 'ASC'
                 ));
-                
+
                 if ($gallery_query->have_posts()) :
                     while ($gallery_query->have_posts()) : $gallery_query->the_post();
-                    if (has_post_thumbnail()) :
-                    ?>
-                    <div class="slide">
-                        <?php the_post_thumbnail('large', array('alt' => get_the_title())); ?>
-                    </div>
-                    <?php
-                    endif;
+                        if (has_post_thumbnail()) :
+                ?>
+                            <div class="slide">
+                                <?php the_post_thumbnail('large', array('alt' => get_the_title())); ?>
+                            </div>
+                <?php
+                        endif;
                     endwhile;
                     wp_reset_postdata();
-                    endif;
+                endif;
                 ?>
             </div>
         </div>
@@ -337,23 +331,24 @@ get_header();
         <div class="container">
             <div class="form__wrapper" id="form-wrapper">
 
-                <?php if ( get_field('show_form_image') ) :
-                $image = get_field('form_image');
-                if( $image ) : ?>
-                    <img class="form__image" src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['alt']); ?>">
-                <?php endif; endif; ?>
+                <?php if (get_field('show_form_image')) :
+                    $image = get_field('form_image');
+                    if ($image) : ?>
+                        <img class="form__image" src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['alt']); ?>">
+                <?php endif;
+                endif; ?>
 
                 <div class="form__text">
-                    <?php if ( get_field('form_title') ) : ?>
-                    <h2 class="text-align"><?php the_field('form_title'); ?></h2>
+                    <?php if (get_field('form_title')) : ?>
+                        <h2 class="text-align"><?php the_field('form_title'); ?></h2>
                     <?php endif; ?>
 
-                    <?php if ( get_field('form_subtitle') ) : ?>
-                    <h3 class="text-align"><?php the_field('form_subtitle'); ?></h3>
+                    <?php if (get_field('form_subtitle')) : ?>
+                        <h3 class="text-align"><?php the_field('form_subtitle'); ?></h3>
                     <?php endif; ?>
 
-                    <?php if ( get_field('show_form_paragraph') && get_field('form_paragraph') ) : ?>
-                    <p class="text-align"><?php the_field('form_paragraph'); ?></p>
+                    <?php if (get_field('show_form_paragraph') && get_field('form_paragraph')) : ?>
+                        <p class="text-align"><?php the_field('form_paragraph'); ?></p>
                     <?php endif; ?>
                 </div>
 
@@ -369,9 +364,9 @@ get_header();
                         <div class="checkbox">
                             <input type="checkbox" id="agree" required>
                             <label for="agree">
-                            By subscribing, you agree to our
-                            <a href="<?php echo get_permalink( get_page_by_path('privacy-policy') ); ?>" target="_blank">Privacy Policy</a>
-                            </label>                        
+                                By subscribing, you agree to our
+                                <a href="<?php echo get_permalink(get_page_by_path('privacy-policy')); ?>" target="_blank">Privacy Policy</a>
+                            </label>
                         </div>
                         <input type="hidden" name="with_quest" value="<?php echo esc_attr($with_quest); ?>">
                     </div>

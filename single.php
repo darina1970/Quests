@@ -6,105 +6,38 @@ get_header();
     <section class="article section-common" id="article">
         <div class="article__wrapper container">
             <div class="blog-article__image">
-                <img src="./assets/icons/monogram.png" alt="monogram">
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/icons/monogram.png" alt="monogram">
             </div>
-            <div class="article__slider">
-                <div class="article__main-image">
-                    <img id="current" src="./assets/images/product-page/quest1-1.webp" alt="Main image">
-                </div>
-                <div class="images-slider">
-                    <img src="./assets/images/product-page/quest1-1.webp" class="img active" alt="img">
-                    <img src="./assets/images/product-page/quest1-2.webp" class="img" alt="img">
-                    <img src="./assets/images/product-page/quest1-3.webp" class="img" alt="img">
-                    <img src="./assets/images/product-page/quest1-4.webp" class="img" alt="img">
-                </div>
-                <div class="slider-arrows">
-                    <button class="left-arrow"><img src="./assets/icons/left-arrow.png" alt="left-arrow"></button>
-                    <button class="right-arrow"><img src="./assets/icons/right-arrow.png"
-                            alt="right-arrow"></button>
-                </div>
-            </div>
-            <div id="lightbox" class="lightbox">
-                <span class="btn-close">&times;</span>
-                <span class="btn-prev">&#10094;</span>
-                <img class="lightbox-content" id="lightbox-img" alt="lightbox">
-                <span class="btn-next">&#10095;</span>
-            </div>
-            <div class="blog__item-descr">
-                <a href="article.html">
-                    <h3 class="blog__item-title">Deciphering an Ancient Map</h3>
-                </a>
-                <p class="blog__item-date">August 28, 2025</p>
-                <div class="blog__item-text">
-                    <p>Faded ink, torn edges, and cryptic symbols… The map seems to whisper
-                        secrets of places long forgotten. Every mark invites you to look closer, to connect clues
-                        and
-                        uncover what lies beyond the obvious. Faded ink, torn edges, and cryptic symbols… The map
-                        seems
-                        to whisper secrets of places long forgotten. Every mark invites you to look closer, to
-                        connect
-                        clues and uncover what lies beyond the obvious.Faded ink, torn edges, and cryptic symbols…
-                        The
-                        map seems to whisper secrets of places long forgotten. Every mark invites you to look
-                        closer, to
-                        connect clues and uncover what lies beyond the obvious.Faded ink, torn edges, and cryptic
-                        symbols… The map seems to whisper secrets of places long forgotten. Every mark invites you
-                        to
-                        look closer, to connect clues and uncover what lies beyond the obvious.Faded ink, torn
-                        edges,
-                        and cryptic symbols… The map seems to whisper secrets of places long forgotten. Every mark
-                        invites you to look closer, to connect clues and uncover what lies beyond the obvious.Faded
-                        ink,
-                        torn edges, and cryptic symbols… The map seems to whisper secrets of places long forgotten.
-                        Every mark invites you to look closer, to connect clues and uncover what lies beyond the
-                        obvious.Faded ink, torn edges, and cryptic symbols…
-                        The map seems to whisper secrets of places long forgotten. Every mark invites you to look
-                        closer, to connect clues and uncover what lies beyond the obvious.Faded ink, torn edges, and
-                        cryptic symbols…</p>
-                    <p>The map seems to whisper secrets of places long forgotten. Every mark invites you to look
-                        closer, to connect clues and uncover what lies beyond the obvious.Faded ink, torn edges, and
-                        cryptic symbols… The map seems to whisper secrets of places long forgotten. Every mark
-                        invites
-                        you to look closer, to connect clues and uncover what lies beyond the obvious.Faded ink,
-                        torn
-                        edges, and cryptic symbols… The map seems to whisper secrets of places long forgotten. Every
-                        mark invites you to look closer, to connect clues and uncover what lies beyond the
-                        obvious.Faded
-                        ink, torn edges, and cryptic symbols… The map seems to whisper secrets of places long
-                        forgotten.
-                        Every mark invites you to look closer, to connect clues and uncover what lies beyond the
-                        obvious.Faded ink, torn edges, and cryptic symbols… The map seems to whisper secrets of
-                        places
-                        long forgotten. Every mark invites you to look closer, to connect clues and uncover what
-                        lies
-                        beyond the obvious.</p>
-                    <p>Faded ink, torn edges, and cryptic symbols… The map seems to whisper secrets of places long
-                        forgotten. Every mark invites you to look closer, to connect clues and uncover what lies
-                        beyond
-                        the obvious. Faded ink, torn edges, and cryptic symbols… The map seems to whisper secrets of
-                        places long forgotten. Every mark invites you to look closer, to connect clues and uncover
-                        what
-                        lies beyond the obvious. Faded ink, torn edges, and cryptic symbols… The map seems to
-                        whisper
-                        secrets of places long forgotten. Every mark invites you to look closer, to connect clues
-                        and
-                        uncover what lies beyond the obvious. Faded ink, torn edges, and cryptic symbols… The map
-                        seems
-                        to whisper secrets of places long forgotten. Every mark invites you to look closer, to
-                        connect
-                        clues and uncover what lies beyond the obvious. Faded ink, torn edges, and cryptic symbols…
-                        The
-                        map seems to whisper secrets of places long forgotten. Every mark invites you to look
-                        closer, to
-                        connect clues and uncover what lies beyond the obvious.</p>
-                </div>
-            </div>
-            <a href="blog.html" class="blog__link">
-                <span>BACK TO BLOG</span>
-                <img src="./assets/icons/learn-more-arrow.svg" alt="arrow right">
-            </a>
+
+            <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
+                    <div class="article__main">
+                        <?php if (has_post_thumbnail()) : ?>
+                            <div class="article__main-image">
+                                <?php the_post_thumbnail('blog-large'); ?>
+                            </div>
+                        <?php endif; ?>
+
+                        <div class="blog__item-descr">
+                            <h3 class="blog__item-title"><?php the_title(); ?></h3>
+                            <p class="blog__item-date"><?php echo get_the_date('F j, Y'); ?></p>
+                            <div class="blog__item-text">
+                                <?php the_content(); ?>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href=<?php echo site_url('/archive/'); ?> class="blog__link">
+                        <span>BACK TO BLOG</span>
+                        <img src="<?php echo get_template_directory_uri(); ?>/assets/icons/learn-more-arrow.svg" alt="arrow right">
+                    </a>
+            <?php endwhile;
+            endif; ?>
         </div>
     </section>
+
+    <?php get_footer(); ?>
+
+
 </main>
 
 <?php
