@@ -142,65 +142,31 @@ get_header();
             </div>
         </div>
     </section>
+    <?php
+    $reviews = new WP_Query(array(
+        'post_type' => 'review',
+        'posts_per_page' => -1
+    ));
+
+    if ($reviews->have_posts()) :
+    ?>
     <section class="reviews section-decorated-dark section-common" id="reviews">
         <div class="container">
             <h2 class="text-align">REVIEWS</h2>
             <div class="reviews__slider-wrapper">
                 <div class="reviews__slider">
-                    <div class="review-card">
-                        <div class="review-card__stars">★★★★★</div>
-                        <div class="review-card__author">Julia</div>
-                        <p class="review-card__text">We hosted the quest on Saturday and it was an absolute hit!
-                            Everyone loved it — adults and kids alike. The puzzles were
-                            fun and varied, and the witty texts made us laugh throughout. Thank you for such a
-                            fantastic celebration!</p>
-                    </div>
-                    <div class="review-card">
-                        <div class="review-card__stars">★★★★★</div>
-                        <div class="review-card__author">Leo</div>
-                        <p class="review-card__text">We hosted the quest on Saturday and it was an absolute hit!
-                            Everyone loved it — adults and kids alike. The puzzles were
-                            fun and varied, and the witty texts made us laugh throughout. Thank you for such a
-                            fantastic celebration!
-                        </p>
-                    </div>
-                    <div class="review-card">
-                        <div class="review-card__stars">★★★★★</div>
-                        <div class="review-card__author">Maya</div>
-                        <p class="review-card__text">We hosted the quest on Saturday and it was an absolute hit!
-                            Everyone loved it — adults and kids alike. The puzzles were
-                            fun and varied, and the witty texts made us laugh throughout. Thank you for such a
-                            fantastic celebration!</p>
-                    </div>
-                    <div class="review-card">
-                        <div class="review-card__stars">★★★★★</div>
-                        <div class="review-card__author">Tom</div>
-                        <p class="review-card__text">We hosted the quest on Saturday and it was an absolute hit!
-                            Everyone loved it — adults and kids alike. The puzzles were
-                            fun and varied, and the witty texts made us laugh throughout. Thank you for such a
-                            fantastic celebration!
-                        </p>
-                    </div>
-                    <div class="review-card">
-                        <div class="review-card__stars">★★★★★</div>
-                        <div class="review-card__author">Anna</div>
-                        <p class="review-card__text">We hosted the quest on Saturday and it was an absolute hit!
-                            Everyone loved it — adults and kids alike. The puzzles were
-                            fun and varied, and the witty texts made us laugh throughout. Thank you for such a
-                            fantastic celebration!</p>
-                    </div>
-                    <div class="review-card">
-                        <div class="review-card__stars">★★★★★</div>
-                        <div class="review-card__author">Chris</div>
-                        <p class="review-card__text">We hosted the quest on Saturday and it was an absolute hit!
-                            Everyone loved it — adults and kids alike. The puzzles were
-                            fun and varied, and the witty texts made us laugh throughout. Thank you for such a
-                            fantastic celebration!</p>
-                    </div>
+                    <?php while ($reviews->have_posts()) : $reviews->the_post(); ?>
+                        <div class="review-card">
+                            <div class="review-card__stars">★★★★★</div>
+                            <div class="review-card__author"><?php the_title(); ?></div>
+                            <p class="review-card__text"><?php the_content(); ?></p>
+                        </div>
+                    <?php endwhile; ?>
                 </div>
             </div>
         </div>
     </section>
+    <?php endif; wp_reset_postdata(); ?>
     <section class="blog section-special" id="blog">
         <div class="blog__wrapper container">
             <h2 class="text-align">Blog Posts</h2>
