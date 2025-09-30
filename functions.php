@@ -7,6 +7,9 @@ add_action('wp_enqueue_scripts', function () {
 
     if (is_front_page()) {
         wp_enqueue_script('questtime-home', get_template_directory_uri() . '/assets/js/main.js', [], null, true);
+        wp_localize_script('questtime-home', 'woocommerce_params', [
+            'ajax_url'   => admin_url('admin-ajax.php'),
+        ]);
     }
 
     if (is_singular('product')) {
