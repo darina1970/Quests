@@ -961,6 +961,18 @@ nav li:hover {
   gap: 70px;
 }
 
+.blog-article__item .blog__item-image-main,
+.article__main-image,
+.blog__item-text .wp-block-video {
+  width: 60%;
+  margin: auto;
+}
+
+.blog-article__item .blog__item-image-main,
+.article__main-image {
+  aspect-ratio: 5/3;
+}
+
 .blog__item-descr {
   display: flex;
   flex-direction: column;
@@ -2284,6 +2296,12 @@ body.page-404 .spark {
 
   .blog-articles__sub .blog__item-content {
     gap: 20px;
+  }
+
+  .blog-article__item .blog__item-image-main,
+  .article__main-image,
+  .blog__item-text .wp-block-video {
+    width: 100%;
   }
 
   .form-bg {
