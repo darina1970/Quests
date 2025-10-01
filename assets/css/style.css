@@ -968,6 +968,11 @@ nav li:hover {
   margin: auto;
 }
 
+.blog-article__item .blog__item-image-main,
+.article__main-image {
+  aspect-ratio: 5/3;
+}
+
 .blog__item-descr {
   display: flex;
   flex-direction: column;
