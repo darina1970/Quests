@@ -852,7 +852,8 @@ nav li:hover {
   gap: 26px;
 }
 
-.blog__item-image {
+.blog__item-image,
+.blog__item-image-main {
   width: 100%;
   aspect-ratio: 5/3;
   overflow: hidden;
