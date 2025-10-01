@@ -3,14 +3,7 @@ get_header();
 ?>
 
 <main>
-    <section class="hero section-decorated-light" id="hero">
-        <img class="hero__bg" src="<?php echo get_template_directory_uri(); ?>/assets/images/hero.webp">
-        <div class="hero__content">
-            <h1 class="hero__title">Unlock the Secrets Hidden at Home</h1>
-            <p class="hero__subtitle">The mystery begins right at your doorstep</p>
-            <a href="#products" class="btn btn-hero">See Our Products</a>
-        </div>
-    </section>
+    <?php get_template_part('hero'); ?>
     <section class="products section-common" id="products">
         <div class="products__wrapper container">
             <h2 class="text-align">Our Home mysteries</h2>
