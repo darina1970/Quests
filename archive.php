@@ -1,25 +1,12 @@
 <?php
+/*
+Template Name: Blog
+*/
 get_header();
 ?>
 
 <main>
-    <section class="hero section-decorated-light" id="hero">
-        <div class="hero__bg-wrapper">
-            <video class="hero__bg-video" autoplay muted loop playsinline>
-                <source src="./assets/video/kids_quests_banner.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-
-            <!-- <img class="hero__bg-image" src="./assets/images/blog-page/blog-hero.webp" alt="blog-hero background"> -->
-        </div>
-
-        <div class="hero__content">
-            <h1 class="hero__title">Mystery Blog — Secrets Waiting at Home</h1>
-            <p class="hero__subtitle">Discover tips, stories and magical ideas to turn your evenings into
-                adventures.</p>
-            <a href="#blogArticles" class="btn btn-hero">Read our news</a>
-        </div>
-    </section>
+    <?php get_template_part('hero'); ?>
     <section class="blog-article__main section-common" id="blogArticles">
         <div class="blog__wrapper container">
             <h2 class="text-align">Our stories & Mysteries</h2>
