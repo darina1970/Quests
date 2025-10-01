@@ -961,7 +961,8 @@ nav li:hover {
 }
 
 .blog-article__item .blog__item-image-main,
-.article__main-image {
+.article__main-image,
+.blog__item-text .wp-block-video {
   width: 60%;
   margin: auto;
 }
