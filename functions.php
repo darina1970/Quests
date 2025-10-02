@@ -520,3 +520,26 @@ function register_faq_post_type()
 }
 add_action('init', 'register_faq_post_type');
 
+function register_social_links_cpt() {
+    $labels = [
+        'name'          => 'Social Links',
+        'singular_name' => 'Social Link',
+        'add_new_item'  => 'Add New Social Link',
+        'edit_item'     => 'Edit Social Link',
+        'all_items'     => 'All Social Links',
+    ];
+
+    $args = [
+        'labels'             => $labels,
+        'public'             => false,
+        'show_ui'            => true,
+        'show_in_menu'       => true,
+        'supports'           => ['title', 'thumbnail'],
+        'menu_position'      => 20,
+        'menu_icon'          => 'dashicons-share',
+    ];
+
+    register_post_type('social_link', $args);
+}
+add_action('init', 'register_social_links_cpt');
+

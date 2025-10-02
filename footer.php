@@ -31,15 +31,27 @@
             <div class="footer__socials">
                 <p class="footer__socials-text">PURCHASE ASSISTANCE</p>
                 <div class="footer__socials-wrapper">
-                    <a href="#" class="footer__socials-icon">
-                        <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/icons/linkedin.svg' ); ?>" alt="linkedin">
-                    </a>
-                    <a href="#" class="footer__socials-icon">
-                        <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/icons/instagram.svg' ); ?>" alt="instagram">
-                    </a>
-                    <a href="#" class="footer__socials-icon">
-                        <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/icons/whatsapp.svg' ); ?>" alt="whatsapp">
-                    </a>
+                    <?php
+                    $socials = new WP_Query([
+                        'post_type' => 'social_link',
+                        'posts_per_page' => -1,
+                        'orderby' => 'menu_order',
+                        'order' => 'ASC'
+                    ]);
+
+                    if ($socials->have_posts()) :
+                        while ($socials->have_posts()) : $socials->the_post();
+                            $url  = get_field('social_url');
+                            $icon = get_the_post_thumbnail_url(get_the_ID(), 'full');
+                            if ($url && $icon) : ?>
+                                <a href="<?php echo esc_url($url); ?>" class="footer__socials-icon" target="_blank" rel="noopener">
+                                    <img src="<?php echo esc_url($icon); ?>" alt="<?php the_title(); ?>">
+                                </a>
+                            <?php endif;
+                        endwhile;
+                        wp_reset_postdata();
+                    endif;
+                    ?>
                 </div>
             </div>
         </div>
