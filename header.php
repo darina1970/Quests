@@ -24,7 +24,7 @@
                     <ul class="header__nav-list text-black text-uppercase list-unstyled">
                     <li class="nav-list__item"><a href="#products">Our Products</a></li>
                     <li class="nav-list__item"><a href="#reviews">Reviews</a></li>
-                    <li class="nav-list__item"><a href="#blog">Blog</a></li>
+                    <li class="nav-list__item"><a href="<?php echo site_url('/archive/'); ?>">Blog</a></li>
                     <li class="nav-list__item"><a href="#faq">FAQ</a></li>
                     </ul>
                 <?php elseif ( is_archive() ) : ?>
@@ -34,7 +34,7 @@
                 <?php elseif ( is_singular('product') || is_singular('post') ) : ?>
                     <ul class="header__nav-list text-black text-uppercase list-unstyled">
                     <li class="nav-list__item"><a href="<?php echo esc_url( home_url('/') ); ?>">Home</a></li>
-                    <li class="nav-list__item"><a href="<?php echo esc_url( get_permalink(get_option('page_for_posts')) ); ?>">Blog</a></li>
+                    <li class="nav-list__item"><a href="<?php echo site_url('/archive/'); ?>">Blog</a></li>
                     </ul>
                 <?php else : ?>
                     <ul class="header__nav-list text-black text-uppercase list-unstyled">
