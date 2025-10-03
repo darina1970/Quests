@@ -79,6 +79,11 @@ $main_image_url = $product->get_image_id() ? wp_get_attachment_url($product->get
                             €<?php echo $product->get_regular_price(); ?>
                         <?php endif; ?>
                     </p>
+                    <?php if ($product->get_short_description()): ?>
+                    <div class="product-hero__short-description">
+                        <?php echo wpautop( wp_kses_post( $product->get_short_description() ) ); ?>
+                    </div>
+                    <?php endif; ?>
                     <p><strong>Get a ready-made <?php echo esc_html($product->get_attribute('theme')); ?> quest for your child!</strong></p>
 
                     <?php
@@ -98,7 +103,8 @@ $main_image_url = $product->get_image_id() ? wp_get_attachment_url($product->get
 
                     <p><strong>Recommended age:</strong> <?php echo esc_html($product->get_attribute('age')); ?> years</p>
                     <p><strong>Number of players:</strong> <?php echo esc_html($product->get_attribute('players')); ?></p>
-                    <p><strong>Duration:</strong> ~<?php echo esc_html($product->get_attribute('duration')); ?> minutes</p>
+                    <p><strong>Play time:</strong> ~<?php echo esc_html($product->get_attribute('duration')); ?> minutes</p>
+                    <p><strong>Prep time:</strong> ~<?php echo esc_html($product->get_attribute('preptime')); ?> minutes</p>
 
                     <div class="product-hero__add-to-cart">
                         <?php woocommerce_template_single_add_to_cart(); ?>
