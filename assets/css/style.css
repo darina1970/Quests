@@ -213,6 +213,33 @@ h4,
   font-size: clamp(18px, 1.042vw, 20px);
 }
 
+.wp-block-heading {
+  text-align: center;
+  width: 100%;
+}
+
+.wc-block-cart__empty-cart__title {
+  color: transparent;
+}
+
+.wc-block-cart__empty-cart__title.with-empty-cart-icon::before {
+    content: none !important;
+    display: none !important;
+    mask-image: none !important;
+}
+
+.wc-block-cart__empty-cart__title.with-empty-cart-icon::after {
+    content: "";
+    display: block;
+    width: 250px;
+    height: 250px;
+    margin: 0 auto 2em;
+    background-image: url('/wp-content/themes/Quests/assets/images/empty-cart.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+
 /* Можно добавить заголовку, чтобы центрировать */
 .text-align {
   width: 100%;
@@ -268,10 +295,10 @@ button {
   text-transform: uppercase;
 }
 
-.btn-hero:hover {
+/* .btn-hero:hover {
   background-color: #e6e6d8;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
+} */
 
 /* Кнопка для секции Products */
 .btn-card {
@@ -279,10 +306,10 @@ button {
   padding: 1px 13px;
 }
 
-.btn-card:hover {
+/* .btn-card:hover {
   background-color: var(--color-orange);
   color: var(--color-white);
-}
+} */
 
 /* Кнопка для секции Form */
 .btn-form {
@@ -291,10 +318,10 @@ button {
   padding: 11px 42px;
 }
 
-.btn-form:hover {
+/* .btn-form:hover {
   background-color: var(--color-orange);
   transform: scale(1.05);
-}
+} */
 
 /* Обычная секция */
 .section-common {
@@ -379,9 +406,9 @@ button {
   aspect-ratio: 191/60;
 }
 
-.logo img:hover {
+/* .logo img:hover {
   transform: scale(1.1);
-}
+} */
 
 nav ul {
   letter-spacing: -0.56px;
@@ -392,9 +419,9 @@ nav li {
   transition: all 0.3s ease;
 }
 
-nav li:hover {
+/* nav li:hover {
   transform: scale(1.1);
-}
+} */
 
 .header__nav-list {
   display: flex;
@@ -421,7 +448,7 @@ nav li:hover {
 .header__cart .cart-count {
   position: absolute;
   top: -12px;
-  right: -12px;
+  right: -9px;
   background: var(--color-orange);
   color: var(--color-white);
   font-size: 12px;
@@ -433,9 +460,9 @@ nav li:hover {
   align-items: center;
 }
 
-.header__cart img:hover {
+/* .header__cart img:hover {
   transform: scale(1.1);
-}
+} */
 
 .header__burger {
   display: none;
@@ -652,10 +679,10 @@ nav li:hover {
   flex-grow: 1;
 }
 
-.product-card:hover {
+/* .product-card:hover {
   transform: scale(1.03);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-}
+} */
 
 /* Изображение карточки с затемнением */
 .product-card__image {
@@ -686,9 +713,9 @@ nav li:hover {
   transition: background 0.3 ease;
 }
 
-.product-card:hover .product-card__image::after {
+/* .product-card:hover .product-card__image::after {
   background: rgba(106, 57, 14, 0);
-}
+} */
 
 .product-card__title-link {
   margin-bottom: 10px;
@@ -868,9 +895,9 @@ nav li:hover {
   transition: transform 0.3s ease;
 }
 
-.blog__item-image:hover img {
+/* .blog__item-image:hover img {
   transform: scale(1.2);
-}
+} */
 
 .blog__item h3 {
   letter-spacing: 1.6px;
@@ -906,9 +933,9 @@ nav li:hover {
   transition: transform 0.3s ease;
 }
 
-.blog__link:hover span {
+/* .blog__link:hover span {
   transform: scale(1.1);
-}
+} */
 
 .blog__link img {
   width: 30px;
@@ -1014,9 +1041,9 @@ nav li:hover {
   animation-play-state: running;
 }
 
-.gallery-slider__wrapper:hover .slider-track {
+/* .gallery-slider__wrapper:hover .slider-track {
   animation-play-state: paused;
-}
+} */
 
 .slide {
   flex: 0 0 auto;
@@ -1339,9 +1366,9 @@ nav li:hover {
   cursor: pointer;
 }
 
-.footer__arrow:hover {
+/* .footer__arrow:hover {
   transform: scale(1.1);
-}
+} */
 
 .footer__arrow img {
   width: clamp(60px, 9vw, 100px);
@@ -1396,10 +1423,10 @@ nav li:hover {
   transition: 0.3s;
 }
 
-.images-slider img.active,
+/* .images-slider img.active,
 .images-slider img:hover {
   opacity: 1;
-}
+} */
 
 /* Arrows slider */
 .slider-arrows {
@@ -1553,11 +1580,11 @@ nav li:hover {
     box-shadow 0.3s ease;
 }
 
-.product-hero__add-to-cart .single_add_to_cart_button:hover,
+/* .product-hero__add-to-cart .single_add_to_cart_button:hover,
 .btn-go-cart:hover {
   background-color: var(--color-orange);
   transform: scale(1.05);
-}
+} */
 
 /* Product-tabs */
 .product-tabs {
@@ -1825,9 +1852,9 @@ nav li:hover {
   border-radius: 10px;
 }
 
-.review-form__overlay textarea::-webkit-scrollbar-thumb:hover {
+/* .review-form__overlay textarea::-webkit-scrollbar-thumb:hover {
   background-color: #e48a2e;
-}
+} */
 
 .review-text {
   width: 100%;
@@ -1840,9 +1867,9 @@ nav li:hover {
   display: none;
 }
 
-.file-label:hover {
+/* .file-label:hover {
   background: #ff9900;
-}
+} */
 
 .notion {
   font-size: 16px;
@@ -2280,6 +2307,10 @@ body.page-404 .spark {
     align-items: flex-start;
   }
 
+  .product-card__image::after {
+    background: rgba(106, 57, 14, 0);
+  }
+
   /* Blog */
   .blog__items {
     gap: 20px;
@@ -2548,6 +2579,63 @@ body.page-404 .spark {
   }
 }
 
-/* @media (max-width: 420px) {
-    
-}   */
+@media (hover: hover) and (pointer: fine) {
+  .btn-hero:hover {
+    background-color: #e6e6d8;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  .btn-card:hover {
+    background-color: var(--color-orange);
+    color: var(--color-white);
+  }
+  .btn-form:hover {
+    background-color: var(--color-orange);
+    transform: scale(1.05);
+  }
+  .logo img:hover {
+    transform: scale(1.1);
+  }
+  nav li:hover {
+    transform: scale(1.1);
+  }
+  .header__cart img:hover {
+    transform: scale(1.1);
+  }
+  .product-card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+  .product-card:hover .product-card__image::after {
+    background: rgba(106, 57, 14, 0);
+  }
+  .review-form__overlay textarea::-webkit-scrollbar-thumb:hover {
+    background-color: #e48a2e;
+  }
+  .file-label:hover {
+    background: #ff9900;
+  }
+  .blog__item-image:hover img {
+    transform: scale(1.2);
+  }
+  .blog__link:hover span {
+    transform: scale(1.1);
+  }
+  .gallery-slider__wrapper:hover .slider-track {
+    animation-play-state: paused;
+  }
+  .footer__arrow:hover {
+    transform: scale(1.1);
+  }
+  .images-slider img.active,
+  .images-slider img:hover {
+    opacity: 1;
+  }
+  .product-hero__add-to-cart .single_add_to_cart_button:hover,
+  .btn-go-cart:hover {
+    background-color: var(--color-orange);
+    transform: scale(1.05);
+  }
+  .review-form__overlay textarea::-webkit-scrollbar-thumb:hover {
+    background-color: #e48a2e;
+  }
+}

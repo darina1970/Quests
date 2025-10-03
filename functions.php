@@ -542,4 +542,3 @@ function register_social_links_cpt() {
     register_post_type('social_link', $args);
 }
 add_action('init', 'register_social_links_cpt');
-
