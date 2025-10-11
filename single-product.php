@@ -49,8 +49,7 @@ $main_image_url = $product->get_image_id() ? wp_get_attachment_url($product->get
             <div class="product-hero__description">
                 <div class="product-hero__text">
                     <h3 class="product-hero__title">
-                        <span><?php echo esc_html($product->get_attribute('theme')); ?> Home Quests: </span>
-                        <span><?php echo $product->get_name(); ?> (Ages <?php echo $product->get_attribute('age'); ?>)</span>
+                        <?php echo esc_html ($product->get_name()); ?>
                     </h3>
 
                     <div class="rating-info">
@@ -249,7 +248,7 @@ $main_image_url = $product->get_image_id() ? wp_get_attachment_url($product->get
                 <div class="description__wrapper">
                     <?php 
                     global $product; 
-                    echo wp_kses_post( $product->get_description() ); 
+                    echo apply_filters( 'the_content', $product->get_description() ); 
                     ?>
                 </div>
             </div>

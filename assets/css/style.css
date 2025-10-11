@@ -214,6 +214,7 @@ h4,
 }
 
 .wp-block-heading {
+  color: transparent;
   text-align: center;
   width: 100%;
 }
@@ -1186,6 +1187,11 @@ nav li {
   color: #e59660;
   font-weight: var(--font-weight-regular);
   font-family: var(--font-heading);
+}
+
+.form-free-image {
+  max-width: 500px;
+  align-self: center;
 }
 
 .form__content {
@@ -2520,6 +2526,11 @@ body.page-404 .spark {
 
   .footer__socials-text {
     display: none;
+  }
+
+  .form-free-image {
+    width: 100%;
+    max-width: unset;
   }
 
 }

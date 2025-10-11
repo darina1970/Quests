@@ -309,6 +309,16 @@ get_header();
                     <?php if (get_field('show_form_paragraph') && get_field('form_paragraph')) : ?>
                         <p class="text-align"><?php the_field('form_paragraph'); ?></p>
                     <?php endif; ?>
+
+                    <?php 
+                        $form_image = get_field('form_free_image');
+                        if ($form_image): ?>
+                        <img 
+                            src="<?php echo esc_url($form_image['url']); ?>" 
+                            alt="<?php echo esc_attr($form_image['alt']); ?>" 
+                            class="form-free-image"
+                        >
+                    <?php endif; ?>
                 </div>
 
                 <form method="post" action="" id="subscribe-form">
