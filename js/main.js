@@ -38,9 +38,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const slider = document.querySelector(".reviews__slider");
   const cards = document.querySelectorAll(".review-card");
   let currentIndex = 0;
+  let sliderInterval;
 
   function scrollSlider() {
-    const cardWidth = cards[0].offsetWidth + 30; // ширина + gap
+    const cardWidth = cards[0].offsetWidth + 30;
     const visibleCards =
       window.innerWidth >= 1024 ? 3 : window.innerWidth >= 768 ? 2 : 1;
     const maxIndex = cards.length - visibleCards;
@@ -49,7 +50,23 @@ document.addEventListener("DOMContentLoaded", () => {
     slider.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
   }
 
-  setInterval(scrollSlider, 4000); // каждые 4 секунды
+  function startSlider() {
+    if (!sliderInterval) {
+      sliderInterval = setInterval(scrollSlider, 8000);
+    }
+  }
+
+  function stopSlider() {
+    clearInterval(sliderInterval);
+    sliderInterval = null;
+  }
+
+  slider.addEventListener("mouseenter", stopSlider);
+  slider.addEventListener("mouseleave", startSlider);
+  slider.addEventListener("touchstart", stopSlider);
+  slider.addEventListener("touchend", startSlider);
+
+  startSlider();
 
   // Gallery-slider
   const track = document.getElementById("slider-track");
@@ -76,5 +93,3 @@ document.addEventListener("DOMContentLoaded", () => {
     track.style.animationPlayState = "running";
   });
 });
-
-
