@@ -2003,6 +2003,74 @@ body.page-404 .spark {
   margin-bottom: 0;
 }
 
+/*cryptex-page*/
+.header_cryptex,
+.footer_cryptex {
+  justify-content: center;
+}
+/* Секция криптекса */
+.chars {
+  width: 350px;
+}
+
+.cryptex_wrap {
+  overflow: auto;
+  margin-bottom: 30px;
+}
+
+.cryptex {
+  width: 600px;
+  height: 217px;
+  overflow: hidden;
+  background: url(assets/images/cryptex-line.webp) repeat-x center;
+}
+
+.cryptex .chars {
+  margin:30px auto 0px;
+}
+
+.cryptex #lft {
+  width: 125px;
+  height: 217px;
+  float: left;
+  background: url(assets/images/cryptex-photo.webp) no-repeat left;
+}
+
+.cryptex #rgt {
+  width: 125px;
+  height: 217px;
+  float: right;
+  background: url(assets/images/cryptex-photo.webp) no-repeat right;
+}
+
+.cryptex .c {
+  background: #fff;
+  overflow-y: scroll;
+  height: 200px;
+}
+
+.cryptex .c, .chars .c {
+  width: 40px;
+  float: left;
+  margin: 7px 5px;
+}
+/* Сообщения */
+.cryptex-error-message,
+.cryptex-success-message {
+  margin-top: clamp(20px, 2vw, 40px);
+  font-family: var(--font-base);
+  font-size: clamp(16px, 1.042vw, 20px);
+  color: var(--color-gray);
+}
+
+.cryptex-success-message {
+  color: var(--color-text);
+}
+
+.hidden {
+  display: none;
+}
+
 @media (max-width: 1440px) {
   .product-items__wrapper {
     grid-template-columns: repeat(4, 1fr);
