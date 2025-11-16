@@ -2006,7 +2006,31 @@ body.page-404 .spark {
 /*cryptex-page*/
 .header_cryptex,
 .footer_cryptex {
+  display: flex;
   justify-content: center;
+  align-items: center;
+}
+
+.container-cryptex {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px 30px;
+  text-align: center;
+}
+
+
+/* Текстовая рамка */
+.cryptex-box {
+  max-width: 700px;
+  margin: 10px auto;
+  padding: clamp(30px, 4vw, 50px);
+  border: 1px solid var(--color-orange-light);
+  background-color: var(--color-card);
+  font-family: var(--font-base);
+  font-size: clamp(18px, 1.25vw, 22px);
+  color: var(--color-text);
+  text-align: center;
+  line-height: 1.6;
 }
 /* Секция криптекса */
 .chars {
@@ -2054,21 +2078,14 @@ body.page-404 .spark {
   float: left;
   margin: 7px 5px;
 }
-/* Сообщения */
-.cryptex-error-message,
-.cryptex-success-message {
-  margin-top: clamp(20px, 2vw, 40px);
-  font-family: var(--font-base);
-  font-size: clamp(16px, 1.042vw, 20px);
-  color: var(--color-gray);
+
+.cryptex-check-button {
+  text-align: center;
+  margin: clamp(30px, 4vw, 60px) auto;
 }
 
-.cryptex-success-message {
-  color: var(--color-text);
-}
-
-.hidden {
-  display: none;
+.btn-form {
+  text-transform: uppercase;
 }
 
 @media (max-width: 1440px) {
