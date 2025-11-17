@@ -13,7 +13,30 @@ add_action('wp_enqueue_scripts', function () {
     }
 
     if (is_singular('product')) {
-        wp_enqueue_script('questtime-product', get_template_directory_uri() . '/assets/js/product.js', ['jquery'], null, true);
+         // ✅ Подключаем Fancybox (новый рабочий CDN)
+        wp_enqueue_style(
+            'fancybox-css',
+            'https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css',
+            [],
+            null
+        );
+
+        wp_enqueue_script(
+            'fancybox-js',
+            'https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js',
+            [],
+            null,
+            true
+        );
+
+        // ✅ Подключаем твой скрипт с зависимостью
+        wp_enqueue_script(
+            'questtime-product',
+            get_template_directory_uri() . '/assets/js/product.js',
+            ['jquery', 'fancybox-js'],
+            null,
+            true
+        );
 
         // Передаём AJAX и ID товара в JS
         wp_localize_script('questtime-product', 'woocommerce_params', [

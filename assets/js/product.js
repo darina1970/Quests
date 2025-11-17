@@ -253,4 +253,37 @@ document.addEventListener("DOMContentLoaded", function () {
       reviewMessage.style.display = "none";
     }, 4000);
   }
+
+  document.querySelectorAll('.review-photos').forEach((block, index) => {
+    block.querySelectorAll('img').forEach(img => {
+      const src = img.getAttribute('src');
+      img.outerHTML = `<a data-fancybox="review-gallery-${index}" href="${src}">${img.outerHTML}</a>`;
+    });
+  });
+
+  // Проверяем, доступен ли Fancybox
+  if (typeof Fancybox !== 'undefined') {
+    Fancybox.bind('[data-fancybox^="review-gallery"]', {
+      Toolbar: {
+        display: [
+          { id: "counter", position: "center" },
+          "zoom",
+          "fullscreen",
+          "close",
+        ],
+      },
+      dragToClose: true,
+      closeButton: "outside",
+      animated: true,
+      showClass: "fancybox-fadeIn",
+      hideClass: "fancybox-fadeOut",
+      keyboard: {
+        Escape: "close",
+        ArrowLeft: "prev",
+        ArrowRight: "next",
+      },
+    });
+  } else {
+    console.warn('⚠️ Fancybox не найден');
+  }
 });
