@@ -2055,26 +2055,27 @@ body.page-404 .spark {
 .cryptex_wrap {
   display: flex;
   justify-content: center;
-  margin-bottom: 30px;
-  margin-top: 20px;
+  margin: 20px auto 30px;
+    overflow-x: auto;
+    max-width: 100%;
 }
 
 .cryptex {
   position: relative;
-  width: fit-content;
+  min-width: fit-content;
   height: 217px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: url(assets/images/cryptex-line.webp) repeat-x center;
+  background: url(../assets/images/cryptex-line.webp) repeat-x center;
   background-size: auto 100%;
-  padding: 0 125px;
-  gap: 10px;
+  padding: 0 clamp(60px, 10vw, 125px);
+  gap: clamp(6px, 1vw, 10px);
 }
 
 .cryptex .c {
-  width: 40px;
-  height: 200px;
+  width: clamp(20px, 2vw, 22px);
+  height: clamp(180px, 25vh, 200px);
   background: #fff;
   overflow-y: scroll;
   scrollbar-width: none;
@@ -2088,7 +2089,7 @@ body.page-404 .spark {
 .cryptex .c a {
   display: block;
   text-align: center;
-  font-size: 18px;
+  font-size: clamp(14px, 1.5vw, 18px);
   font-family: var(--font-base);
   color: var(--color-text);
   text-decoration: none;
@@ -2099,22 +2100,23 @@ body.page-404 .spark {
 #rgt {
   position: absolute;
   top: 0;
-  width: 125px;
+  width: clamp(60px, 10vw, 125px);
   height: 217px;
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: cover;
   pointer-events: none;
   z-index: 2;
 }
 
 #lft {
   left: 0;
-  background-image: url(assets/images/cryptex-photo.webp);
+  background-image: url(../assets/images/cryptex-photo.webp);
 }
 
 #rgt {
   right: 0;
-  background-image: url(assets/images/cryptex-photo.webp);
+  background-image: url(../assets/images/cryptex-photo.webp);
+  transform: scaleX(-1);
 }
 
 .cryptex-check-button {
