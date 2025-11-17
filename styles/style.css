@@ -2050,6 +2050,49 @@ body.page-404 .spark {
   font-size: 20px;
 }
 
+.game-select {
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin: 20px auto;
+  text-align: center;
+  font-family: var(--font-base);
+  font-size: 18px;
+  color: var(--color-text);
+}
+
+.game-select label {
+  display: block;
+  margin: 10px;
+  font-weight: var(--font-weight-bold);
+}
+
+.game-select select {
+  padding: 10px 40px;
+  border: 1px solid var(--color-orange);
+  border-radius: 6px;
+  font-size: 16px;
+  text-align: center;
+  font-family: var(--font-base);
+  background-color: var(--color-card);
+  color: var(--color-text);
+  cursor: pointer;
+}
+
+.game-select select:focus {
+  outline: none;
+  border-color: var(--color-orange);
+  box-shadow: 0 0 4px rgba(215, 83, 0, 0.6);
+}
+
+.game-select select option {
+  font-family: var(--font-base);
+  font-size: 16px;
+  color: var(--color-text);
+  background-color: var(--color-card);
+  padding: 8px;
+}
+
 .cryptex_wrap {
   display: flex;
   justify-content: center;
