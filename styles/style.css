@@ -2032,51 +2032,89 @@ body.page-404 .spark {
   text-align: center;
   line-height: 1.6;
 }
-/* Секция криптекса */
+
 .chars {
   width: 350px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.char-slot {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--color-orange);
+  border-radius: 6px;
+  font-size: 20px;
 }
 
 .cryptex_wrap {
-  overflow: auto;
+  display: flex;
+  justify-content: center;
   margin-bottom: 30px;
+  margin-top: 20px;
 }
 
 .cryptex {
-  width: 600px;
+  position: relative;
+  width: fit-content;
   height: 217px;
-  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background: url(assets/images/cryptex-line.webp) repeat-x center;
-}
-
-.cryptex .chars {
-  margin:30px auto 0px;
-}
-
-.cryptex #lft {
-  width: 125px;
-  height: 217px;
-  float: left;
-  background: url(assets/images/cryptex-photo.webp) no-repeat left;
-}
-
-.cryptex #rgt {
-  width: 125px;
-  height: 217px;
-  float: right;
-  background: url(assets/images/cryptex-photo.webp) no-repeat right;
+  background-size: auto 100%;
+  padding: 0 125px;
+  gap: 10px;
 }
 
 .cryptex .c {
+  width: 40px;
+  height: 200px;
   background: #fff;
   overflow-y: scroll;
-  height: 200px;
+  scrollbar-width: none;
+  flex-shrink: 0;
 }
 
-.cryptex .c, .chars .c {
-  width: 40px;
-  float: left;
-  margin: 7px 5px;
+.cryptex .c::-webkit-scrollbar {
+  display: none;
+}
+
+.cryptex .c a {
+  display: block;
+  text-align: center;
+  font-size: 18px;
+  font-family: var(--font-base);
+  color: var(--color-text);
+  text-decoration: none;
+  padding: 2px 0;
+}
+
+#lft,
+#rgt {
+  position: absolute;
+  top: 0;
+  width: 125px;
+  height: 217px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  pointer-events: none;
+  z-index: 2;
+}
+
+#lft {
+  left: 0;
+  background-image: url(assets/images/cryptex-photo.webp);
+}
+
+#rgt {
+  right: 0;
+  background-image: url(assets/images/cryptex-photo.webp);
 }
 
 .cryptex-check-button {
