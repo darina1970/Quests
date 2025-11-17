@@ -2032,7 +2032,8 @@ body.page-404 .spark {
 }
 
 .chars {
-  width: 350px;
+  width: 100%;
+  max-width: 350px;
   margin: 0 auto;
   display: flex;
   justify-content: center;
@@ -2100,6 +2101,7 @@ body.page-404 .spark {
   overflow-x: auto;
   max-width: 100%;
   padding-bottom: 10px;
+  scroll-behavior: smooth;
 }
 
 .cryptex {
@@ -2568,6 +2570,10 @@ body.page-404 .spark {
         display: none;
     }
 
+    /*cryptex*/
+    .cryptex_wrap {
+      justify-content: flex-start;
+    }
 }
 
 @media (max-width: 480px) {
