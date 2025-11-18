@@ -566,3 +566,70 @@ function register_social_links_cpt() {
 }
 add_action('init', 'register_social_links_cpt');
 
+// --- CPT: Cryptex Games ---
+add_action('init', function() {
+
+    register_post_type('cryptex_game', [
+        'labels' => [
+            'name' => 'Cryptex Игры',
+            'singular_name' => 'Cryptex Игра',
+            'add_new' => 'Добавить игру',
+        ],
+        'public' => true,
+        'menu_icon' => 'dashicons-shield-alt',
+        'supports' => ['title', 'editor'], // ВАЖНО — editor = редактируемый контент
+    ]);
+});
+
+// --- Metaboxes ---
+add_action('add_meta_boxes', function() {
+    add_meta_box('cryptex_fields', 'Параметры игры', 'cryptex_fields_cb', 'cryptex_game');
+});
+
+function cryptex_fields_cb($post) {
+    $length = get_post_meta($post->ID, 'code_length', true);
+    $code = get_post_meta($post->ID, 'secret_code', true);
+    ?>
+
+    <p>
+        <label>Количество букв:</label><br>
+        <input type="number" name="code_length" value="<?php echo esc_attr($length); ?>" min="1" max="20" />
+    </p>
+
+    <p>
+        <label>Кодовое слово:</label><br>
+        <input type="text" name="secret_code" value="<?php echo esc_attr($code); ?>" />
+    </p>
+
+    <?php
+}
+
+add_action('save_post', function($post_id) {
+    if (isset($_POST['code_length'])) {
+        update_post_meta($post_id, 'code_length', intval($_POST['code_length']));
+    }
+    if (isset($_POST['secret_code'])) {
+        update_post_meta($post_id, 'secret_code', sanitize_text_field($_POST['secret_code']));
+    }
+});
+
+add_action('wp_ajax_load_game', 'load_game');
+add_action('wp_ajax_nopriv_load_game', 'load_game');
+
+function load_game() {
+    $id = intval($_POST['game_id']);
+
+    $length = get_post_meta($id, 'code_length', true);
+    $code = get_post_meta($id, 'secret_code', true);
+
+    // Полноценный редактор WordPress
+    $post = get_post($id);
+    $content = apply_filters('the_content', $post->post_content);
+
+    wp_send_json_success([
+        'length' => intval($length),
+        'code' => strtoupper($code),
+        'content' => $content
+    ]);
+}
+
