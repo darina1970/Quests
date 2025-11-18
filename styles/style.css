@@ -2032,26 +2032,29 @@ body.page-404 .spark {
 }
 
 .chars {
-  width: 100%;
-  max-width: 350px;
-  margin: 0 auto;
+  max-width: 100%;
+  margin: 20 auto;
+  overflow-x: auto;
   display: flex;
   justify-content: center;
-  gap: 10px;
+  gap: 8px;
+  padding-bottom: 10px;
 }
 
 .char-slot {
+  flex-shrink: 0;
   width: 40px;
   height: 40px;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   border: 1px solid var(--color-orange);
   border-radius: 6px;
   font-size: 20px;
 }
 
 .game-select {
+  display: flex;
   flex-direction: column;
   align-items: center;
   gap: 8px;
@@ -2063,35 +2066,48 @@ body.page-404 .spark {
 }
 
 .game-select label {
-  display: block;
-  margin: 10px;
+  margin: 0;
   font-weight: var(--font-weight-bold);
 }
 
-.game-select select {
-  padding: 10px 40px;
+.select-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.select-wrapper select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 100%;
+  padding: 10px 40px 10px 12px;
   border: 1px solid var(--color-orange);
   border-radius: 6px;
   font-size: 16px;
-  text-align: center;
   font-family: var(--font-base);
   background-color: var(--color-card);
   color: var(--color-text);
   cursor: pointer;
+  text-align: center; 
+  text-align-last: center;  
+  -moz-text-align-last: center; 
 }
 
-.game-select select:focus {
+.select-wrapper::after {
+  content: "▼";
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  font-size: 12px;
+  color: var(--color-text);
+}
+
+.select-wrapper select:focus {
   outline: none;
   border-color: var(--color-orange);
   box-shadow: 0 0 4px rgba(215, 83, 0, 0.6);
-}
-
-.game-select select option {
-  font-family: var(--font-base);
-  font-size: 16px;
-  color: var(--color-text);
-  background-color: var(--color-card);
-  padding: 8px;
 }
 
 .cryptex_wrap {
@@ -2312,6 +2328,10 @@ body.page-404 .spark {
   .slider-arrows {
     margin-top: 12px;
     justify-content: center;
+  }
+
+  .cryptex_wrap {
+    margin: 10px auto 20px;
   }
 }
 
@@ -2572,6 +2592,11 @@ body.page-404 .spark {
 
     /*cryptex*/
     .cryptex_wrap {
+      justify-content: flex-start;
+      margin: 10px auto;
+    }
+
+    .chars {
       justify-content: flex-start;
     }
 }
