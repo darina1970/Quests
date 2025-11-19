@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cryptex</title>
+    <link rel="stylesheet" href="styles/style.css" />
+</head>
+
+<body>
+    <header class="header header_cryptex">
+        <div class="logo-center">
+                <img src="assets/logo.svg" alt="Logo" />
+        </div>
+    </header>
+
+    <main class="cryptex-page">
+        <section class="cryptex-section">
+            <div class="container-cryptex">
+
+                <div class="blog-article__image">
+                    <img src="./assets/icons/monogram.png" alt="monogram" />
+                </div>
+                <div class="cryptex-box">
+                    <p>
+                        Здесь будут записываться правила пользования криптексом, приветственное слово автора.
+                    </p>
+                </div>
+                <div class="blog-article__image">
+                    <img src="./assets/icons/monogram-down.png" alt="monogram" />
+                </div>
+
+                <div class="game-select">
+                    <label for="game">Choose a game</label>
+                    <div class="select-wrapper">
+                    <select id="game" name="game">
+                        <option value="game1">Game 1</option>
+                        <option value="game2">Game 2</option>
+                        <option value="game3">Game 3</option>
+                    </select>
+                    </div>
+                </div>
+                <!-- Поля для ввода букв -->
+                    <div class="chars">
+                        <div class="char-slot"><b id="c0">−</b></div>
+                        <div class="char-slot"><b id="c1">−</b></div>
+                        <div class="char-slot"><b id="c2">−</b></div>
+                        <div class="char-slot"><b id="c3">−</b></div>
+                        <div class="char-slot"><b id="c4">−</b></div>
+                        <div class="char-slot"><b id="c0">−</b></div>
+                        <div class="char-slot"><b id="c1">−</b></div>
+                        <div class="char-slot"><b id="c2">−</b></div>
+                        <div class="char-slot"><b id="c3">−</b></div>
+                        <div class="char-slot"><b id="c4">−</b></div>
+                        <br clear="left">
+                    </div>
+
+                <!-- Криптекс с фоном -->
+                <div class="cryptex_wrap">
+                    <div class="cryptex">
+                        <div id="lft">&nbsp;</div>
+                        <div id="rgt">&nbsp;</div>
+                        <div class="c" id="0">
+                            <a href="#!">A</a>
+                            <a href="#!">B</a>
+                            <a href="#!">C</a>
+                            <a href="#!">D</a>
+                            <a href="#!">E</a>
+                            <a href="#!">F</a>
+                            <a href="#!">G</a>
+                            <a href="#!">H</a>
+                            <a href="#!">I</a>
+                            <a href="#!">J</a>
+                            <a href="#!">K</a>
+                            <a href="#!">L</a>
+                            <a href="#!">M</a>
+                            <a href="#!">N</a>
+                            <a href="#!">O</a>
+                            <a href="#!">P</a>
+                            <a href="#!">Q</a>
+                            <a href="#!">R</a>
+                            <a href="#!">S</a>
+                            <a href="#!">T</a>
+                            <a href="#!">U</a>
+                            <a href="#!">V</a>
+                            <a href="#!">W</a>
+                            <a href="#!">X</a>
+                            <a href="#!">Y</a>
+                            <a href="#!">Z</a>
+                        </div>
+                        <div class="c" id="1">
+                            <a href="#!">A</a>
+                            <a href="#!">B</a>
+                            <a href="#!">C</a>
+                            <a href="#!">D</a>
+                            <a href="#!">E</a>
+                            <a href="#!">F</a>
+                            <a href="#!">G</a>
+                            <a href="#!">H</a>
+                            <a href="#!">I</a>
+                            <a href="#!">J</a>
+                            <a href="#!">K</a>
+                            <a href="#!">L</a>
+                            <a href="#!">M</a>
+                            <a href="#!">N</a>
+                            <a href="#!">O</a>
+                            <a href="#!">P</a>
+                            <a href="#!">Q</a>
+                            <a href="#!">R</a>
+                            <a href="#!">S</a>
+                            <a href="#!">T</a>
+                            <a href="#!">U</a>
+                            <a href="#!">V</a>
+                            <a href="#!">W</a>
+                            <a href="#!">X</a>
+                            <a href="#!">Y</a>
+                            <a href="#!">Z</a>
+                        </div>
+                        <div class="c" id="2">
+                            <a href="#!">A</a>
+                            <a href="#!">B</a>
+                            <a href="#!">C</a>
+                            <a href="#!">D</a>
+                            <a href="#!">E</a>
+                            <a href="#!">F</a>
+                            <a href="#!">G</a>
+                            <a href="#!">H</a>
+                            <a href="#!">I</a>
+                            <a href="#!">J</a>
+                            <a href="#!">K</a>
+                            <a href="#!">L</a>
+                            <a href="#!">M</a>
+                            <a href="#!">N</a>
+                            <a href="#!">O</a>
+                            <a href="#!">P</a>
+                            <a href="#!">Q</a>
+                            <a href="#!">R</a>
+                            <a href="#!">S</a>
+                            <a href="#!">T</a>
+                            <a href="#!">U</a>
+                            <a href="#!">V</a>
+                            <a href="#!">W</a>
+                            <a href="#!">X</a>
+                            <a href="#!">Y</a>
+                            <a href="#!">Z</a>
+                        </div>
+                        <div class="c" id="3">
+                            <a href="#!">A</a>
+                            <a href="#!">B</a>
+                            <a href="#!">C</a>
+                            <a href="#!">D</a>
+                            <a href="#!">E</a>
+                            <a href="#!">F</a>
+                            <a href="#!">G</a>
+                            <a href="#!">H</a>
+                            <a href="#!">I</a>
+                            <a href="#!">J</a>
+                            <a href="#!">K</a>
+                            <a href="#!">L</a>
+                            <a href="#!">M</a>
+                            <a href="#!">N</a>
+                            <a href="#!">O</a>
+                            <a href="#!">P</a>
+                            <a href="#!">Q</a>
+                            <a href="#!">R</a>
+                            <a href="#!">S</a>
+                            <a href="#!">T</a>
+                            <a href="#!">U</a>
+                            <a href="#!">V</a>
+                            <a href="#!">W</a>
+                            <a href="#!">X</a>
+                            <a href="#!">Y</a>
+                            <a href="#!">Z</a>
+                        </div>
+                        <div class="c" id="4">
+                            <a href="#!">A</a>
+                            <a href="#!">B</a>
+                            <a href="#!">C</a>
+                            <a href="#!">D</a>
+                            <a href="#!">E</a>
+                            <a href="#!">F</a>
+                            <a href="#!">G</a>
+                            <a href="#!">H</a>
+                            <a href="#!">I</a>
+                            <a href="#!">J</a>
+                            <a href="#!">K</a>
+                            <a href="#!">L</a>
+                            <a href="#!">M</a>
+                            <a href="#!">N</a>
+                            <a href="#!">O</a>
+                            <a href="#!">P</a>
+                            <a href="#!">Q</a>
+                            <a href="#!">R</a>
+                            <a href="#!">S</a>
+                            <a href="#!">T</a>
+                            <a href="#!">U</a>
+                            <a href="#!">V</a>
+                            <a href="#!">W</a>
+                            <a href="#!">X</a>
+                            <a href="#!">Y</a>
+                            <a href="#!">Z</a>
+                        </div>
+                        <div class="c" id="5">
+                            <a href="#!">A</a>
+                            <a href="#!">B</a>
+                            <a href="#!">C</a>
+                            <a href="#!">D</a>
+                            <a href="#!">E</a>
+                            <a href="#!">F</a>
+                            <a href="#!">G</a>
+                            <a href="#!">H</a>
+                            <a href="#!">I</a>
+                            <a href="#!">J</a>
+                            <a href="#!">K</a>
+                            <a href="#!">L</a>
+                            <a href="#!">M</a>
+                            <a href="#!">N</a>
+                            <a href="#!">O</a>
+                            <a href="#!">P</a>
+                            <a href="#!">Q</a>
+                            <a href="#!">R</a>
+                            <a href="#!">S</a>
+                            <a href="#!">T</a>
+                            <a href="#!">U</a>
+                            <a href="#!">V</a>
+                            <a href="#!">W</a>
+                            <a href="#!">X</a>
+                            <a href="#!">Y</a>
+                            <a href="#!">Z</a>
+                        </div>
+                        <div class="c" id="6">
+                            <a href="#!">A</a>
+                            <a href="#!">B</a>
+                            <a href="#!">C</a>
+                            <a href="#!">D</a>
+                            <a href="#!">E</a>
+                            <a href="#!">F</a>
+                            <a href="#!">G</a>
+                            <a href="#!">H</a>
+                            <a href="#!">I</a>
+                            <a href="#!">J</a>
+                            <a href="#!">K</a>
+                            <a href="#!">L</a>
+                            <a href="#!">M</a>
+                            <a href="#!">N</a>
+                            <a href="#!">O</a>
+                            <a href="#!">P</a>
+                            <a href="#!">Q</a>
+                            <a href="#!">R</a>
+                            <a href="#!">S</a>
+                            <a href="#!">T</a>
+                            <a href="#!">U</a>
+                            <a href="#!">V</a>
+                            <a href="#!">W</a>
+                            <a href="#!">X</a>
+                            <a href="#!">Y</a>
+                            <a href="#!">Z</a>
+                        </div>
+                        <div class="c" id="7">
+                            <a href="#!">A</a>
+                            <a href="#!">B</a>
+                            <a href="#!">C</a>
+                            <a href="#!">D</a>
+                            <a href="#!">E</a>
+                            <a href="#!">F</a>
+                            <a href="#!">G</a>
+                            <a href="#!">H</a>
+                            <a href="#!">I</a>
+                            <a href="#!">J</a>
+                            <a href="#!">K</a>
+                            <a href="#!">L</a>
+                            <a href="#!">M</a>
+                            <a href="#!">N</a>
+                            <a href="#!">O</a>
+                            <a href="#!">P</a>
+                            <a href="#!">Q</a>
+                            <a href="#!">R</a>
+                            <a href="#!">S</a>
+                            <a href="#!">T</a>
+                            <a href="#!">U</a>
+                            <a href="#!">V</a>
+                            <a href="#!">W</a>
+                            <a href="#!">X</a>
+                            <a href="#!">Y</a>
+                            <a href="#!">Z</a>
+                        </div>
+                        <div class="c" id="8">
+                            <a href="#!">A</a>
+                            <a href="#!">B</a>
+                            <a href="#!">C</a>
+                            <a href="#!">D</a>
+                            <a href="#!">E</a>
+                            <a href="#!">F</a>
+                            <a href="#!">G</a>
+                            <a href="#!">H</a>
+                            <a href="#!">I</a>
+                            <a href="#!">J</a>
+                            <a href="#!">K</a>
+                            <a href="#!">L</a>
+                            <a href="#!">M</a>
+                            <a href="#!">N</a>
+                            <a href="#!">O</a>
+                            <a href="#!">P</a>
+                            <a href="#!">Q</a>
+                            <a href="#!">R</a>
+                            <a href="#!">S</a>
+                            <a href="#!">T</a>
+                            <a href="#!">U</a>
+                            <a href="#!">V</a>
+                            <a href="#!">W</a>
+                            <a href="#!">X</a>
+                            <a href="#!">Y</a>
+                            <a href="#!">Z</a>
+                        </div>
+                        <div class="c" id="9">
+                            <a href="#!">A</a>
+                            <a href="#!">B</a>
+                            <a href="#!">C</a>
+                            <a href="#!">D</a>
+                            <a href="#!">E</a>
+                            <a href="#!">F</a>
+                            <a href="#!">G</a>
+                            <a href="#!">H</a>
+                            <a href="#!">I</a>
+                            <a href="#!">J</a>
+                            <a href="#!">K</a>
+                            <a href="#!">L</a>
+                            <a href="#!">M</a>
+                            <a href="#!">N</a>
+                            <a href="#!">O</a>
+                            <a href="#!">P</a>
+                            <a href="#!">Q</a>
+                            <a href="#!">R</a>
+                            <a href="#!">S</a>
+                            <a href="#!">T</a>
+                            <a href="#!">U</a>
+                            <a href="#!">V</a>
+                            <a href="#!">W</a>
+                            <a href="#!">X</a>
+                            <a href="#!">Y</a>
+                            <a href="#!">Z</a>
+                        </div>
+                        <div class="c" id="10">
+                            <a href="#!">A</a>
+                            <a href="#!">B</a>
+                            <a href="#!">C</a>
+                            <a href="#!">D</a>
+                            <a href="#!">E</a>
+                            <a href="#!">F</a>
+                            <a href="#!">G</a>
+                            <a href="#!">H</a>
+                            <a href="#!">I</a>
+                            <a href="#!">J</a>
+                            <a href="#!">K</a>
+                            <a href="#!">L</a>
+                            <a href="#!">M</a>
+                            <a href="#!">N</a>
+                            <a href="#!">O</a>
+                            <a href="#!">P</a>
+                            <a href="#!">Q</a>
+                            <a href="#!">R</a>
+                            <a href="#!">S</a>
+                            <a href="#!">T</a>
+                            <a href="#!">U</a>
+                            <a href="#!">V</a>
+                            <a href="#!">W</a>
+                            <a href="#!">X</a>
+                            <a href="#!">Y</a>
+                            <a href="#!">Z</a>
+                        </div>
+                        <div class="c" id="11">
+                            <a href="#!">A</a>
+                            <a href="#!">B</a>
+                            <a href="#!">C</a>
+                            <a href="#!">D</a>
+                            <a href="#!">E</a>
+                            <a href="#!">F</a>
+                            <a href="#!">G</a>
+                            <a href="#!">H</a>
+                            <a href="#!">I</a>
+                            <a href="#!">J</a>
+                            <a href="#!">K</a>
+                            <a href="#!">L</a>
+                            <a href="#!">M</a>
+                            <a href="#!">N</a>
+                            <a href="#!">O</a>
+                            <a href="#!">P</a>
+                            <a href="#!">Q</a>
+                            <a href="#!">R</a>
+                            <a href="#!">S</a>
+                            <a href="#!">T</a>
+                            <a href="#!">U</a>
+                            <a href="#!">V</a>
+                            <a href="#!">W</a>
+                            <a href="#!">X</a>
+                            <a href="#!">Y</a>
+                            <a href="#!">Z</a>
+                        </div>
+                        <div class="c" id="12">
+                            <a href="#!">A</a>
+                            <a href="#!">B</a>
+                            <a href="#!">C</a>
+                            <a href="#!">D</a>
+                            <a href="#!">E</a>
+                            <a href="#!">F</a>
+                            <a href="#!">G</a>
+                            <a href="#!">H</a>
+                            <a href="#!">I</a>
+                            <a href="#!">J</a>
+                            <a href="#!">K</a>
+                            <a href="#!">L</a>
+                            <a href="#!">M</a>
+                            <a href="#!">N</a>
+                            <a href="#!">O</a>
+                            <a href="#!">P</a>
+                            <a href="#!">Q</a>
+                            <a href="#!">R</a>
+                            <a href="#!">S</a>
+                            <a href="#!">T</a>
+                            <a href="#!">U</a>
+                            <a href="#!">V</a>
+                            <a href="#!">W</a>
+                            <a href="#!">X</a>
+                            <a href="#!">Y</a>
+                            <a href="#!">Z</a>
+                        </div>
+                        <div class="c" id="13">
+                            <a href="#!">A</a>
+                            <a href="#!">B</a>
+                            <a href="#!">C</a>
+                            <a href="#!">D</a>
+                            <a href="#!">E</a>
+                            <a href="#!">F</a>
+                            <a href="#!">G</a>
+                            <a href="#!">H</a>
+                            <a href="#!">I</a>
+                            <a href="#!">J</a>
+                            <a href="#!">K</a>
+                            <a href="#!">L</a>
+                            <a href="#!">M</a>
+                            <a href="#!">N</a>
+                            <a href="#!">O</a>
+                            <a href="#!">P</a>
+                            <a href="#!">Q</a>
+                            <a href="#!">R</a>
+                            <a href="#!">S</a>
+                            <a href="#!">T</a>
+                            <a href="#!">U</a>
+                            <a href="#!">V</a>
+                            <a href="#!">W</a>
+                            <a href="#!">X</a>
+                            <a href="#!">Y</a>
+                            <a href="#!">Z</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cryptex-check-button">
+                    <button class="btn btn-form">ПРОВЕРИТЬ КОД</button>
+                </div>
+
+                <div class="cryptex-box cryptex-box--error">
+                    <p>Сообщение при неверном вводе</p>
+                </div>
+                <div class="cryptex-box cryptex-box--success">
+                    <p>Сообщение при верном вводе: Здесь будут выводиться ваши записи: текст, фото, видео</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer footer_cryptex">
+        <div class="logo-center">
+                <img src="assets/logo.svg" alt="Logo" />
+        </div>
+    </footer>
+
+</body>
+
+</html>
