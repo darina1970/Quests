@@ -13,7 +13,6 @@ add_action('wp_enqueue_scripts', function () {
     }
 
     if (is_singular('product')) {
-         // ✅ Подключаем Fancybox (новый рабочий CDN)
         wp_enqueue_style(
             'fancybox-css',
             'https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css',
@@ -29,7 +28,6 @@ add_action('wp_enqueue_scripts', function () {
             true
         );
 
-        // ✅ Подключаем твой скрипт с зависимостью
         wp_enqueue_script(
             'questtime-product',
             get_template_directory_uri() . '/assets/js/product.js',
@@ -38,7 +36,6 @@ add_action('wp_enqueue_scripts', function () {
             true
         );
 
-        // Передаём AJAX и ID товара в JS
         wp_localize_script('questtime-product', 'woocommerce_params', [
             'ajax_url'   => admin_url('admin-ajax.php'),
             'product_id' => get_the_ID(),
@@ -566,7 +563,7 @@ function register_social_links_cpt() {
 }
 add_action('init', 'register_social_links_cpt');
 
-// --- CPT: Cryptex Games ---
+//Cryptex
 add_action('init', function() {
 
     register_post_type('cryptex_game', [
@@ -577,11 +574,10 @@ add_action('init', function() {
         ],
         'public' => true,
         'menu_icon' => 'dashicons-shield-alt',
-        'supports' => ['title', 'editor'], // ВАЖНО — editor = редактируемый контент
+        'supports' => ['title', 'editor'],
     ]);
 });
 
-// --- Metaboxes ---
 add_action('add_meta_boxes', function() {
     add_meta_box('cryptex_fields', 'Параметры игры', 'cryptex_fields_cb', 'cryptex_game');
 });
@@ -622,7 +618,6 @@ function load_game() {
     $length = get_post_meta($id, 'code_length', true);
     $code = get_post_meta($id, 'secret_code', true);
 
-    // Полноценный редактор WordPress
     $post = get_post($id);
     $content = apply_filters('the_content', $post->post_content);
 

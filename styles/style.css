@@ -2122,7 +2122,7 @@ body.page-404 .spark {
 
 .cryptex {
   position: relative;
-  width: 700px;
+  /* width: 700px; */
   height: 217px;
   display: flex;
   align-items: center;

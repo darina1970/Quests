@@ -3,36 +3,53 @@
 get_header();
 ?>
 
-<h2>Выберите игру</h2>
+<main class="cryptex-page">
+    <section class="cryptex-section">
+        <div class="container-cryptex">
+            <div class="game-select">
+                <label for="game">Choose your quest</label>
+                <div class="select-wrapper">
+                    <select id="gameSelect">
+                        <option value="">-- Quest Name --</option>
+                        <?php
+                        $games = get_posts([
+                            'post_type' => 'cryptex_game',
+                            'posts_per_page' => -1
+                        ]);
 
-<select id="gameSelect">
-    <option value="">-- Выберите --</option>
-    <?php
-    $games = get_posts([
-        'post_type' => 'cryptex_game',
-        'posts_per_page' => -1
-    ]);
+                        foreach ($games as $g) {
+                            echo '<option value="'.$g->ID.'">'.$g->post_title.'</option>';
+                        }
+                        ?>
+                    </select>
+                </div>
+                <button class="btn btn-form" id="showCryptex">Показать криптекс</button>
+            </div>
 
-    foreach ($games as $g) {
-        echo '<option value="'.$g->ID.'">'.$g->post_title.'</option>';
-    }
-    ?>
-</select>
+            <div id="cryptexArea" style="margin-top:30px; display:none;">
 
-<br><br>
-<button class="btn btn-form" id="showCryptex">Показать криптекс</button>
+                <div class="chars" id="slots"></div>
 
-<div id="cryptexArea" style="margin-top:30px; display:none;">
+                <div class="cryptex_wrap">
+                    <div class="cryptex" id="cryptexWheels">
+                        <div id="lft">&nbsp;</div>
+                        <div id="rgt">&nbsp;</div>
+                    </div>
+                </div>
 
-    <h3>Введите код:</h3>
 
-    <div id="slots" style="display:flex; gap:10px; margin-bottom:20px;"></div>
+                <button id="checkCode" class="btn btn-form">Check your code</button>
 
-    <button id="checkCode">Проверить код</button>
 
-    <div id="output" style="margin-top:20px;"></div>
+                <div id="output" style="margin-top:20px;"></div>
 
-</div>
+            </div>
+        </div>
+    </section>
+
+
+    
+</main>
 
 <script>
 let correctCode = "";
@@ -60,11 +77,37 @@ document.getElementById('showCryptex').addEventListener('click', function() {
         const slots = document.getElementById('slots');
         slots.innerHTML = "";
         for (let i = 0; i < codeLength; i++) {
-            const input = document.createElement('input');
-            input.maxLength = 1;
-            input.style.width = "40px";
-            input.style.textAlign = "center";
-            slots.appendChild(input);
+            const slot = document.createElement('div');
+            slot.classList.add('char-slot');
+            slot.innerHTML = `<b id="slot${i}">−</b>`
+            slots.appendChild(slot);
+        }
+
+        // Генерация криптекса
+        const wheels = document.getElementById('cryptexWheels');
+        wheels.innerHTML = "";
+
+        const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+        for (let i = 0; i < codeLength; i++) {
+
+            const wheel = document.createElement('div');
+            wheel.classList.add('c');
+            wheel.id = i;
+
+            alphabet.split('').forEach(letter => {
+                const a = document.createElement('a');
+                a.href = "#!";
+                a.textContent = letter;
+
+                a.addEventListener('click', () => {
+                    document.getElementById("slot" + i).textContent = letter;
+                });
+
+                wheel.appendChild(a);
+            });
+
+            wheels.appendChild(wheel);
         }
 
         document.getElementById('cryptexArea').style.display = "block";
@@ -74,16 +117,20 @@ document.getElementById('showCryptex').addEventListener('click', function() {
 });
 
 document.getElementById('checkCode').addEventListener('click', function() {
-    const inputs = document.querySelectorAll('#slots input');
     let user = "";
-    inputs.forEach(input => user += input.value.toUpperCase());
+    for (let i = 0; i < codeLength; i++) {
+        const slot = document.getElementById('slot' + i);
+        user += slot.textContent.toUpperCase();
+    }
 
-    if (user === correctCode) {
+    if (user === correctCode.toUpperCase()) {
         document.getElementById('output').innerHTML =
-            "<h3>Код верный!</h3>" + window.successContent;
+            '<div class="cryptex-box cryptex-box--success"><p>Код верный!</p>' +
+            window.successContent +
+            '</div>';
     } else {
         document.getElementById('output').innerHTML =
-            "<p style='color:red;'>Неверный код</p>";
+            '<div class="cryptex-box cryptex-box--error"><p>Неверный код</p></div>';
     }
 });
 </script>
