@@ -2187,7 +2187,7 @@ body.page-404 .spark {
   margin: clamp(30px, 4vw, 60px) auto;
 }
 
-.btn-form {
+.cryptex-check-button .btn-form {
   text-transform: uppercase;
 }
 
