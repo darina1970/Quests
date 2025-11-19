@@ -20,7 +20,7 @@ get_header();
 </select>
 
 <br><br>
-<button id="showCryptex">Показать криптекс</button>
+<button class="btn btn-form" id="showCryptex">Показать криптекс</button>
 
 <div id="cryptexArea" style="margin-top:30px; display:none;">
 
