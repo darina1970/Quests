@@ -224,21 +224,21 @@ h4,
 }
 
 .wc-block-cart__empty-cart__title.with-empty-cart-icon::before {
-    content: none !important;
-    display: none !important;
-    mask-image: none !important;
+  content: none !important;
+  display: none !important;
+  mask-image: none !important;
 }
 
 .wc-block-cart__empty-cart__title.with-empty-cart-icon::after {
-    content: "";
-    display: block;
-    width: 250px;
-    height: 250px;
-    margin: 0 auto 2em;
-    background-image: url('/wp-content/themes/Quests/assets/images/empty-cart.png');
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: contain;
+  content: "";
+  display: block;
+  width: 250px;
+  height: 250px;
+  margin: 0 auto 2em;
+  background-image: url('/wp-content/themes/Quests/assets/images/empty-cart.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
 }
 
 /* Можно добавить заголовку, чтобы центрировать */
@@ -840,6 +840,7 @@ nav li {
     flex: 0 0 calc((100% - 30px) / 2);
     max-width: calc((100% - 30px) / 2);
   }
+
   .cryptex_wrap {
     margin: 10px auto 20px;
   }
@@ -2130,6 +2131,14 @@ body.page-404 .spark {
   align-items: center;
 }
 
+.cryptex__logo {
+  margin: auto;
+}
+
+.logo.cryptex__logo img:hover {
+  transform: none;
+}
+
 .container-cryptex {
   max-width: 1000px;
   margin: 0 auto;
@@ -2207,9 +2216,9 @@ body.page-404 .spark {
   background-color: var(--color-card);
   color: var(--color-text);
   cursor: pointer;
-  text-align: center; 
-  text-align-last: center;  
-  -moz-text-align-last: center; 
+  text-align: center;
+  text-align-last: center;
+  -moz-text-align-last: center;
 }
 
 .select-wrapper::after {
@@ -2796,57 +2805,73 @@ body.page-404 .spark {
     background-color: #e6e6d8;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
+
   .btn-card:hover {
     background-color: var(--color-orange);
     color: var(--color-white);
   }
+
   .btn-form:hover {
     background-color: var(--color-orange);
     transform: scale(1.05);
   }
+
   .logo img:hover {
     transform: scale(1.1);
   }
+
   nav li:hover {
     transform: scale(1.1);
   }
+
   .header__cart img:hover {
     transform: scale(1.1);
   }
+
   .product-card:hover {
     transform: scale(1.03);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   }
+
   .product-card:hover .product-card__image::after {
     background: rgba(106, 57, 14, 0);
   }
+
   .review-form__overlay textarea::-webkit-scrollbar-thumb:hover {
     background-color: #e48a2e;
   }
+
   .file-label:hover {
     background: #ff9900;
   }
+
   .blog__item-image:hover img {
     transform: scale(1.2);
   }
+
   .blog__link:hover span {
     transform: scale(1.1);
   }
+
   .gallery-slider__wrapper:hover .slider-track {
     animation-play-state: paused;
   }
+
   .footer__arrow:hover {
     transform: scale(1.1);
   }
+
   .images-slider img.active,
   .images-slider img:hover {
     opacity: 1;
   }
+
   .product-hero__add-to-cart .single_add_to_cart_button:hover,
   .btn-go-cart:hover {
     background-color: var(--color-orange);
     transform: scale(1.05);
   }
+
   .review-form__overlay textarea::-webkit-scrollbar-thumb:hover {
     background-color: #e48a2e;
   }
