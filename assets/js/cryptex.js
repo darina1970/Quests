@@ -72,12 +72,12 @@ document.getElementById('checkCode').addEventListener('click', function() {
 
     if (user === correctCode.toUpperCase()) {
         document.getElementById('output').innerHTML =
-            '<div class="cryptex-box cryptex-box--success"><p>The code is correct!</p>' +
+            '<div class="cryptex-box cryptex-box--success">' +
             window.successContent +
             '</div>';
     } else {
         document.getElementById('output').innerHTML =
-            '<div class="cryptex-box cryptex-box--error"><p>Invalid code</p>' +
+            '<div class="cryptex-box cryptex-box--error">' +
             window.errorContent + 
             '</div>';
     }
