@@ -2246,14 +2246,18 @@ body.page-404 .spark {
   display: flex;
   align-items: center;
   justify-content: center;
-  /*background: url(../assets/images/cryptex-line.webp) repeat-x center;*/
-  background-image: url('<?php echo esc_url( $cryptex_line ); ?>') repeat-x center;
+  /*background: url(../images/cryptex-line.png) repeat-x center;*/
   background-size: 10px 100%;
   background-origin: content-box;
   background-clip: content-box;
   padding: 0 125px;
   gap: 10px;
   flex-shrink: 0;
+}
+
+#cryptexWheels {
+  display: flex;
+  gap: 10px;
 }
 
 .cryptex .c {
@@ -2293,14 +2297,12 @@ body.page-404 .spark {
 
 #lft {
   left: 0;
-  /*background-image: url(../assets/images/cryptex-photo-removebg-preview.png);*/
-  background-image: url('<?php echo esc_url( $cryptex_photo ); ?>');
+  /*background-image: url(../images/cryptex-photo-removebg-preview.png);*/
 }
 
 #rgt {
   right: 0;
-  /*background-image: url(../assets/images/cryptex-photo-removebg-preview.png);*/
-  background-image: url('<?php echo esc_url( $cryptex_photo ); ?>');
+  /*background-image: url(../images/cryptex-photo-removebg-preview.png);*/
   transform: scaleX(-1);
 }
 

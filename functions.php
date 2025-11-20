@@ -45,6 +45,20 @@ add_action('wp_enqueue_scripts', function () {
     if (is_404()) {
         wp_enqueue_script('questtime-404', get_template_directory_uri() . '/assets/js/404.js', [], null, true);
     }
+
+    if (is_page_template('page-cryptex.php')) {
+        wp_enqueue_script(
+            'questtime-cryptex',
+            get_template_directory_uri() . '/assets/js/cryptex.js',
+            [],              
+            null,
+            true          
+        );
+
+        wp_localize_script('questtime-cryptex', 'cryptexParams', [
+            'ajax_url' => admin_url('admin-ajax.php'),
+        ]);
+    }
 });
 
 add_theme_support('custom-logo');
@@ -635,7 +649,7 @@ function load_game() {
         'length' => intval($length),
         'code' => strtoupper($code),
         'content' => $content,
-        'error_text'   => $error //Добавила чтение в массив
+        'error_text' => $error //Добавила чтение в массив
     ]);
 }
 
