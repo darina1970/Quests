@@ -1,6 +1,10 @@
 <?php
 /* Template Name: Cryptex */
 get_header();
+
+$theme_uri = get_stylesheet_directory_uri();
+$cryptex_line = $theme_uri . './assets/images/cryptex-line.webp';
+$cryptex_photo = $theme_uri . './assets/images/cryptex-photo-removebg-preview.png';
 ?>
 
 <main class="cryptex-page">
@@ -72,6 +76,7 @@ document.getElementById('showCryptex').addEventListener('click', function() {
         correctCode = data.data.code;
         codeLength = data.data.length;
         window.successContent = data.data.content;
+        window.errorContent   = data.data.error_text;//Сохраняем текст ошибки
 
         // Слот под каждую букву
         const slots = document.getElementById('slots');
@@ -125,12 +130,14 @@ document.getElementById('checkCode').addEventListener('click', function() {
 
     if (user === correctCode.toUpperCase()) {
         document.getElementById('output').innerHTML =
-            '<div class="cryptex-box cryptex-box--success"><p>Код верный!</p>' +
+            '<div class="cryptex-box cryptex-box--success"><p>The code is correct!</p>' +
             window.successContent +
             '</div>';
     } else {
         document.getElementById('output').innerHTML =
-            '<div class="cryptex-box cryptex-box--error"><p>Неверный код</p></div>';
+            '<div class="cryptex-box cryptex-box--error"><p>Invalid code</p>' +
+            window.errorContent + 
+        '</div>';
     }
 });
 </script>
