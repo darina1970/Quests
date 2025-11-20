@@ -43,7 +43,6 @@ $cryptex_photo = $theme_uri . '/assets/images/cryptex-photo-removebg-preview.png
                         style="background-image: url('<?php echo esc_url( $cryptex_photo ); ?>'); transform: scaleX(-1);">
                         </div>
 
-                        <!-- Вынесла колесико -->
                         <div id="cryptexWheels"></div>
                     </div>
                 </div>

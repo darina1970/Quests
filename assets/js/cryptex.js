@@ -18,7 +18,7 @@ document.getElementById('showCryptex').addEventListener('click', function() {
         correctCode = data.data.code;
         codeLength = data.data.length;
         window.successContent = data.data.content;
-        window.errorContent = data.data.error_text;//Сохраняем текст ошибки
+        window.errorContent = data.data.error_text;
 
         // Слот под каждую букву
         const slots = document.getElementById('slots');

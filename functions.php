@@ -599,7 +599,7 @@ add_action('add_meta_boxes', function() {
 function cryptex_fields_cb($post) {
     $length = get_post_meta($post->ID, 'code_length', true);
     $code = get_post_meta($post->ID, 'secret_code', true);
-    $error = get_post_meta($post->ID, 'error_text', true); //Для текста с ошибкой
+    $error = get_post_meta($post->ID, 'error_text', true); 
     ?>
 
     <p>
@@ -629,7 +629,7 @@ add_action('save_post', function($post_id) {
     }
     if (isset($_POST['error_text'])) {
         update_post_meta($post_id, 'error_text', sanitize_textarea_field($_POST['error_text']));
-    } //Сохранение текста ошибки
+    }
 });
 
 add_action('wp_ajax_load_game', 'load_game');
@@ -649,7 +649,7 @@ function load_game() {
         'length' => intval($length),
         'code' => strtoupper($code),
         'content' => $content,
-        'error_text' => $error //Добавила чтение в массив
+        'error_text' => $error
     ]);
 }
 
