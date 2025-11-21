@@ -45,6 +45,20 @@ add_action('wp_enqueue_scripts', function () {
     if (is_404()) {
         wp_enqueue_script('questtime-404', get_template_directory_uri() . '/assets/js/404.js', [], null, true);
     }
+
+    if (is_page_template('page-cryptex.php')) {
+        wp_enqueue_script(
+            'questtime-cryptex',
+            get_template_directory_uri() . '/assets/js/cryptex.js',
+            [],              
+            null,
+            true          
+        );
+
+        wp_localize_script('questtime-cryptex', 'cryptexParams', [
+            'ajax_url' => admin_url('admin-ajax.php'),
+        ]);
+    }
 });
 
 add_theme_support('custom-logo');
@@ -585,6 +599,7 @@ add_action('add_meta_boxes', function() {
 function cryptex_fields_cb($post) {
     $length = get_post_meta($post->ID, 'code_length', true);
     $code = get_post_meta($post->ID, 'secret_code', true);
+    $error = get_post_meta($post->ID, 'error_text', true);
     ?>
 
     <p>
@@ -597,6 +612,11 @@ function cryptex_fields_cb($post) {
         <input type="text" name="secret_code" value="<?php echo esc_attr($code); ?>" />
     </p>
 
+    <p>
+        <label>Текст при неверном коде:</label><br>
+        <textarea name="error_text" rows="4" style="width:100%;"><?php echo esc_textarea($error); ?></textarea>
+    </p>
+
     <?php
 }
 
@@ -607,6 +627,9 @@ add_action('save_post', function($post_id) {
     if (isset($_POST['secret_code'])) {
         update_post_meta($post_id, 'secret_code', sanitize_text_field($_POST['secret_code']));
     }
+    if (isset($_POST['error_text'])) {
+        update_post_meta($post_id, 'error_text', sanitize_textarea_field($_POST['error_text']));
+    } 
 });
 
 add_action('wp_ajax_load_game', 'load_game');
@@ -617,6 +640,7 @@ function load_game() {
 
     $length = get_post_meta($id, 'code_length', true);
     $code = get_post_meta($id, 'secret_code', true);
+    $error = get_post_meta($id, 'error_text', true);
 
     $post = get_post($id);
     $content = apply_filters('the_content', $post->post_content);
@@ -624,7 +648,8 @@ function load_game() {
     wp_send_json_success([
         'length' => intval($length),
         'code' => strtoupper($code),
-        'content' => $content
+        'content' => $content,
+        'error_text' => $error
     ]);
 }
 
