@@ -10,6 +10,23 @@ $cryptex_photo = $theme_uri . '/assets/images/cryptex-photo-removebg-preview.png
 <main class="cryptex-page">
     <section class="cryptex-section">
         <div class="container-cryptex">
+            <div class="blog-article__image">
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/icons/monogram.png" alt="monogram" />
+            </div>
+            <div class="cryptex-box">
+                <?php
+                    $instructions = get_field('cryptex_instructions');
+
+                    if ($instructions) {
+                        echo wp_kses_post($instructions);
+                    } else {
+                        echo '<p>Добавьте инструкцию в админке → ACF поля.</p>';
+                    }
+                ?>
+            </div>
+            <div class="blog-article__image">
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/icons/monogram-down.png" alt="monogram" />
+            </div>
             <div class="game-select">
                 <label for="game">Choose your quest</label>
                 <div class="select-wrapper">
