@@ -5,6 +5,18 @@ add_action('wp_enqueue_scripts', function () {
     wp_enqueue_style('questtime-style', get_stylesheet_uri());
     wp_enqueue_style('questtime-main', get_template_directory_uri() . '/assets/css/style.css', [], null);
 
+    wp_enqueue_script(
+        'questtime-form-subscribe',
+        get_template_directory_uri() . '/assets/js/form-subscribe.js',
+        [],
+        null,
+        true
+    );
+
+    wp_localize_script('questtime-form-subscribe', 'wp_ajax_params', [
+        'ajax_url' => admin_url('admin-ajax.php'),
+    ]);
+
     if (is_front_page()) {
         wp_enqueue_script('questtime-home', get_template_directory_uri() . '/assets/js/main.js', [], null, true);
         wp_localize_script('questtime-home', 'woocommerce_params', [
