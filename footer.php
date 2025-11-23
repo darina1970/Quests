@@ -1,12 +1,13 @@
 <footer class="footer">
-    <div class="footer__wrapper container">
-        <?php if (is_page('cryptex')) : ?>
+    <?php if (is_page('cryptex')) : ?>
+        <div class="footer_cryptex">
             <div class="logo cryptex__logo">
                 <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/logo.svg'); ?>" alt="logo" />
             </div>
+        </div>  
 
-        <?php else : ?>
-
+    <?php else : ?>
+        <div class="footer__wrapper container">
             <div class="logo">
                 <a href="<?php echo esc_url(home_url('/')); ?>">
                     <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/logo.svg'); ?>" alt="logo" />
@@ -67,8 +68,8 @@
                     <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/icons/scroll-up.svg'); ?>" alt="scroll up" />
                 </a>
             </div>
-        <?php endif; ?>
-    </div>
+        </div>
+    <?php endif; ?>
 </footer>
 
 <?php
