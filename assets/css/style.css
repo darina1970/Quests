@@ -1,9 +1,9 @@
 @font-face {
   font-family: "Dihjauti";
-  src: url("../assets/fonts/Dihjauti/Dihjauti-Regular.woff2") format("woff2"),
-    url("../assets/fonts/Dihjauti/Dihjauti-Regular.woff") format("woff"),
-    url("../assets/fonts/Dihjauti/Dihjauti-Regular.ttf") format("truetype"),
-    url("../assets/fonts/Dihjauti/Dihjauti-Regular.eot") format("embedded-opentype");
+  src: url("../fonts/Dihjauti/Dihjauti-Regular.woff2") format("woff2"),
+    url("../fonts/Dihjauti/Dihjauti-Regular.woff") format("woff"),
+    url("../fonts/Dihjauti/Dihjauti-Regular.ttf") format("truetype"),
+    url("../fonts/Dihjauti/Dihjauti-Regular.eot") format("embedded-opentype");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -11,10 +11,10 @@
 
 @font-face {
   font-family: "Dihjauti";
-  src: url("../assets/fonts/Dihjauti/Dihjauti-Bold.woff2") format("woff2"),
-    url("../assets/fonts/Dihjauti/Dihjauti-Bold.woff") format("woff"),
-    url("../assets/fonts/Dihjauti/Dihjauti-Bold.ttf") format("truetype"),
-    url("../assets/fonts/Dihjauti/Dihjauti-Bold.eot") format("embedded-opentype");
+  src: url("../fonts/Dihjauti/Dihjauti-Bold.woff2") format("woff2"),
+    url("../fonts/Dihjauti/Dihjauti-Bold.woff") format("woff"),
+    url("../fonts/Dihjauti/Dihjauti-Bold.ttf") format("truetype"),
+    url("../fonts/Dihjauti/Dihjauti-Bold.eot") format("embedded-opentype");
   font-weight: 700;
   font-style: normal;
   font-display: swap;
@@ -22,10 +22,10 @@
 
 @font-face {
   font-family: "Inter";
-  src: url("../assets/fonts/Inter/Inter28pt-Regular.woff2") format("woff2"),
-    url("../assets/fonts/Inter/Inter28pt-Regular.woff") format("woff"),
-    url("../assets/fonts/Inter/Inter28pt-Regular.ttf") format("truetype"),
-    url("../assets/fonts/Inter/Inter28pt-Regular.eot") format("embedded-opentype");
+  src: url("../fonts/Inter/Inter28pt-Regular.woff2") format("woff2"),
+    url("../fonts/Inter/Inter28pt-Regular.woff") format("woff"),
+    url("../fonts/Inter/Inter28pt-Regular.ttf") format("truetype"),
+    url("../fonts/Inter/Inter28pt-Regular.eot") format("embedded-opentype");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -33,10 +33,10 @@
 
 @font-face {
   font-family: "Overpass";
-  src: url("../assets/fonts/Overpass/Overpass-Regular.woff2") format("woff2"),
-    url("../assets/fonts/Overpass/Overpass-Regular.woff") format("woff"),
-    url("../assets/fonts/Overpass/Overpass-Regular.ttf") format("truetype"),
-    url("../assets/fonts/Overpass/Overpass-Regular.eot") format("embedded-opentype");
+  src: url("../fonts/Overpass/Overpass-Regular.woff2") format("woff2"),
+    url("../fonts/Overpass/Overpass-Regular.woff") format("woff"),
+    url("../fonts/Overpass/Overpass-Regular.ttf") format("truetype"),
+    url("../fonts/Overpass/Overpass-Regular.eot") format("embedded-opentype");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -44,10 +44,10 @@
 
 @font-face {
   font-family: "Overpass";
-  src: url("../assets/fonts/Overpass/Overpass-Light.woff2") format("woff2"),
-    url("../assets/fonts/Overpass/Overpass-Light.woff") format("woff"),
-    url("../assets/fonts/Overpass/Overpass-Light.ttf") format("truetype"),
-    url("../assets/fonts/Overpass/Overpass-Light.eot") format("embedded-opentype");
+  src: url("../fonts/Overpass/Overpass-Light.woff2") format("woff2"),
+    url("../fonts/Overpass/Overpass-Light.woff") format("woff"),
+    url("../fonts/Overpass/Overpass-Light.ttf") format("truetype"),
+    url("../fonts/Overpass/Overpass-Light.eot") format("embedded-opentype");
   font-weight: 300;
   font-style: normal;
   font-display: swap;
@@ -55,10 +55,10 @@
 
 @font-face {
   font-family: "Overpass Mono";
-  src: url("../assets/fonts/OverpassMono/OverpassMono-Regular.woff2") format("woff2"),
-    url("../assets/fonts/OverpassMono/OverpassMono-Regular.woff") format("woff"),
-    url("../assets/fonts/OverpassMono/OverpassMono-Regular.ttf") format("truetype"),
-    url("../assets/fonts/OverpassMono/OverpassMono-Regular.eot") format("embedded-opentype");
+  src: url("../fonts/OverpassMono/OverpassMono-Regular.woff2") format("woff2"),
+    url("../fonts/OverpassMono/OverpassMono-Regular.woff") format("woff"),
+    url("../fonts/OverpassMono/OverpassMono-Regular.ttf") format("truetype"),
+    url("../fonts/OverpassMono/OverpassMono-Regular.eot") format("embedded-opentype");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -103,7 +103,7 @@ input,
 select,
 textarea,
 .cursor-scale {
-  cursor: url("../assets/icons/magnifying-glass.svg") 16 16, auto !important;
+  cursor: url("../icons/magnifying-glass.svg") 16 16, auto !important;
 }
 
 input,
@@ -213,6 +213,34 @@ h4,
   font-size: clamp(18px, 1.042vw, 20px);
 }
 
+.wp-block-heading {
+  color: transparent;
+  text-align: center;
+  width: 100%;
+}
+
+.wc-block-cart__empty-cart__title {
+  color: transparent;
+}
+
+.wc-block-cart__empty-cart__title.with-empty-cart-icon::before {
+  content: none !important;
+  display: none !important;
+  mask-image: none !important;
+}
+
+.wc-block-cart__empty-cart__title.with-empty-cart-icon::after {
+  content: "";
+  display: block;
+  width: 250px;
+  height: 250px;
+  margin: 0 auto 2em;
+  background-image: url('/wp-content/themes/Quests/assets/images/empty-cart.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
 /* Можно добавить заголовку, чтобы центрировать */
 .text-align {
   width: 100%;
@@ -268,10 +296,10 @@ button {
   text-transform: uppercase;
 }
 
-.btn-hero:hover {
+/* .btn-hero:hover {
   background-color: #e6e6d8;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
+} */
 
 /* Кнопка для секции Products */
 .btn-card {
@@ -279,10 +307,10 @@ button {
   padding: 1px 13px;
 }
 
-.btn-card:hover {
+/* .btn-card:hover {
   background-color: var(--color-orange);
   color: var(--color-white);
-}
+} */
 
 /* Кнопка для секции Form */
 .btn-form {
@@ -291,10 +319,10 @@ button {
   padding: 11px 42px;
 }
 
-.btn-form:hover {
+/* .btn-form:hover {
   background-color: var(--color-orange);
   transform: scale(1.05);
-}
+} */
 
 /* Обычная секция */
 .section-common {
@@ -339,7 +367,7 @@ button {
   left: 0;
   width: 100%;
   height: clamp(90px, 6.25vw, 120px);
-  background: url("../assets/images/torn-border-light.png") center bottom / cover no-repeat;
+  background: url("../images/torn-border-light.png") center bottom / cover no-repeat;
   pointer-events: none;
 }
 
@@ -356,7 +384,7 @@ button {
   left: 0;
   width: 100%;
   height: var(--tear-height);
-  background: url("../assets/images/torn-border-dark.png") center bottom / cover no-repeat;
+  background: url("../images/torn-border-dark.png") center bottom / cover no-repeat;
   pointer-events: none;
 }
 
@@ -379,9 +407,9 @@ button {
   aspect-ratio: 191/60;
 }
 
-.logo img:hover {
+/* .logo img:hover {
   transform: scale(1.1);
-}
+} */
 
 nav ul {
   letter-spacing: -0.56px;
@@ -392,9 +420,9 @@ nav li {
   transition: all 0.3s ease;
 }
 
-nav li:hover {
+/* nav li:hover {
   transform: scale(1.1);
-}
+} */
 
 .header__nav-list {
   display: flex;
@@ -413,9 +441,29 @@ nav li:hover {
   height: clamp(30px, 1.771vw, 34px);
 }
 
-.header__cart img:hover {
-  transform: scale(1.1);
+.header__cart {
+  position: relative;
+  display: inline-block;
 }
+
+.header__cart .cart-count {
+  position: absolute;
+  top: -12px;
+  right: -9px;
+  background: var(--color-orange);
+  color: var(--color-white);
+  font-size: 12px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* .header__cart img:hover {
+  transform: scale(1.1);
+} */
 
 .header__burger {
   display: none;
@@ -524,7 +572,7 @@ nav li:hover {
   width: 100%;
   height: 100%;
   overflow: hidden;
-  z-index: 0;
+  z-index: -1;
 }
 
 .hero__bg-video,
@@ -563,7 +611,6 @@ nav li:hover {
 }
 
 /* Products */
-
 .products__controls {
   display: flex;
   justify-content: space-between;
@@ -599,7 +646,7 @@ nav li:hover {
   border-radius: 4px;
   border: 1px solid #ccc;
   background-color: var(--color-bg);
-  background-image: url("../assets/icons/arrow-down.svg");
+  background-image: url("../icons/arrow-down.svg");
   background-repeat: no-repeat;
   background-position: right 10px center;
   background-size: 10px 6px;
@@ -630,13 +677,13 @@ nav li:hover {
 .product-card__content {
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  flex-grow: 1;
 }
 
-.product-card:hover {
+/* .product-card:hover {
   transform: scale(1.03);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-}
+} */
 
 /* Изображение карточки с затемнением */
 .product-card__image {
@@ -667,13 +714,28 @@ nav li:hover {
   transition: background 0.3 ease;
 }
 
-.product-card:hover .product-card__image::after {
+/* .product-card:hover .product-card__image::after {
   background: rgba(106, 57, 14, 0);
+} */
+
+.product-card__title-link {
+  margin-bottom: 10px;
 }
 
 /* Название продукта */
 .product-card__title {
-  flex-grow: 1;
+  min-height: 2.8em;
+  line-height: 1.4em;
+}
+
+.product-card__middle {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: start;
+  margin-bottom: 15px;
+  margin-top: auto;
+  gap: 10px;
 }
 
 /* Мета (иконка + возраст) */
@@ -682,6 +744,7 @@ nav li:hover {
   align-items: center;
   gap: 6px;
   font-size: 18px;
+  margin-top: 25px;
 }
 
 .product-card__icon {
@@ -697,6 +760,7 @@ nav li:hover {
 }
 
 .product-card__bottom {
+  margin-top: auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -704,6 +768,11 @@ nav li:hover {
 
 .product-card__price {
   font-size: 18px;
+}
+
+.rating-stars {
+  display: flex;
+  gap: 1px;
 }
 
 /* Reviews */
@@ -718,7 +787,7 @@ nav li:hover {
   display: flex;
   will-change: transform;
   gap: 30px;
-  transition: transform 1.2s ease-in-out;
+  transition: transform 0.6s ease-in-out;
 }
 
 .review-card {
@@ -771,6 +840,10 @@ nav li:hover {
     flex: 0 0 calc((100% - 30px) / 2);
     max-width: calc((100% - 30px) / 2);
   }
+
+  .cryptex_wrap {
+    margin: 10px auto 20px;
+  }
 }
 
 @media (max-width: 768px) {
@@ -800,11 +873,23 @@ nav li:hover {
   gap: 26px;
 }
 
+.blog-article__main .blog__item {
+  justify-content: space-between;
+}
+
+.blog__item-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 26px;
+}
+
 .blog__item-image,
 .blog__item-image-main {
   width: 100%;
   aspect-ratio: 5/3;
   overflow: hidden;
+  display: block;
 }
 
 .blog__item-image img,
@@ -815,9 +900,9 @@ nav li:hover {
   transition: transform 0.3s ease;
 }
 
-.blog__item-image:hover img {
+/* .blog__item-image:hover img {
   transform: scale(1.2);
-}
+} */
 
 .blog__item h3 {
   letter-spacing: 1.6px;
@@ -853,9 +938,9 @@ nav li:hover {
   transition: transform 0.3s ease;
 }
 
-.blog__link:hover span {
+/* .blog__link:hover span {
   transform: scale(1.1);
-}
+} */
 
 .blog__link img {
   width: 30px;
@@ -908,6 +993,18 @@ nav li:hover {
   gap: 70px;
 }
 
+.blog-article__item .blog__item-image-main,
+.article__main-image,
+.blog__item-text .wp-block-video {
+  width: 60%;
+  margin: auto;
+}
+
+.blog-article__item .blog__item-image-main,
+.article__main-image {
+  aspect-ratio: 5/3;
+}
+
 .blog__item-descr {
   display: flex;
   flex-direction: column;
@@ -949,9 +1046,9 @@ nav li:hover {
   animation-play-state: running;
 }
 
-.gallery-slider__wrapper:hover .slider-track {
+/* .gallery-slider__wrapper:hover .slider-track {
   animation-play-state: paused;
-}
+} */
 
 .slide {
   flex: 0 0 auto;
@@ -1001,7 +1098,7 @@ nav li:hover {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  cursor: url("../assets/icons/magnifying-glass.svg");
+  cursor: url("../icons/magnifying-glass.svg");
 }
 
 .faq-question {
@@ -1096,19 +1193,10 @@ nav li:hover {
   font-family: var(--font-heading);
 }
 
-/* .form__text-extra {
-  position: relative;
-  display: flex;
-} */
-
-/* .form__text-extra img {
-  position: absolute;
-  left: 40vw;
-  top: -14vw;
-  width: 36%;
-  height: auto;
-  object-fit: contain;
-} */
+.form-free-image {
+  max-width: 500px;
+  align-self: center;
+}
 
 .form__content {
   display: flex;
@@ -1187,6 +1275,17 @@ nav li:hover {
   font-size: 0.875rem;
   font-weight: var(--font-weight-light);
   line-height: 1.4;
+}
+
+/* Текст всплывающего сообщения после отправки формы */
+.form-message {
+  font-family: var(--font-heading);
+  text-align: center;
+  text-transform: uppercase;
+  font-size: clamp(24px, 2.083vw, 40px);
+  padding-bottom: clamp(50px, 5.2083vw, 100px);
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* Privacy */
@@ -1277,9 +1376,9 @@ nav li:hover {
   cursor: pointer;
 }
 
-.footer__arrow:hover {
+/* .footer__arrow:hover {
   transform: scale(1.1);
-}
+} */
 
 .footer__arrow img {
   width: clamp(60px, 9vw, 100px);
@@ -1334,10 +1433,10 @@ nav li:hover {
   transition: 0.3s;
 }
 
-.images-slider img.active,
+/* .images-slider img.active,
 .images-slider img:hover {
   opacity: 1;
-}
+} */
 
 /* Arrows slider */
 .slider-arrows {
@@ -1463,6 +1562,40 @@ nav li:hover {
   gap: 10px;
 }
 
+.product-hero__add-to-cart .cart {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.product-hero__add-to-cart .quantity input.qty {
+  width: 60px;
+  height: 100%;
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid var(--color-orange);
+  text-align: center;
+}
+
+
+.product-hero__add-to-cart .single_add_to_cart_button,
+.btn-go-cart {
+  background-color: rgba(215, 83, 0, 0.6);
+  color: var(--color-white);
+  border: none;
+  padding: 11px 42px;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+/* .product-hero__add-to-cart .single_add_to_cart_button:hover,
+.btn-go-cart:hover {
+  background-color: var(--color-orange);
+  transform: scale(1.05);
+} */
+
 /* Product-tabs */
 .product-tabs {
   display: flex;
@@ -1477,7 +1610,7 @@ nav li:hover {
   position: relative;
   top: 0;
   padding: 18px 100px;
-  cursor: url("../assets/icons/magnifying-glass.svg") 16 16, auto;
+  cursor: url("../icons/magnifying-glass.svg") 16 16, auto;
   border: none;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
@@ -1649,9 +1782,21 @@ nav li:hover {
   gap: 15px;
 }
 
+.review-message {
+  display: none;
+  margin-top: 10px;
+  color: green;
+  text-align: center;
+}
+
+.review-logo {
+  width: 40px;
+  height: auto;
+}
+
 .review-form {
   position: relative;
-  display: inline-block;
+  display: none;
   align-self: center;
 }
 
@@ -1717,9 +1862,9 @@ nav li:hover {
   border-radius: 10px;
 }
 
-.review-form__overlay textarea::-webkit-scrollbar-thumb:hover {
+/* .review-form__overlay textarea::-webkit-scrollbar-thumb:hover {
   background-color: #e48a2e;
-}
+} */
 
 .review-text {
   width: 100%;
@@ -1732,9 +1877,9 @@ nav li:hover {
   display: none;
 }
 
-.file-label:hover {
+/* .file-label:hover {
   background: #ff9900;
-}
+} */
 
 .notion {
   font-size: 16px;
@@ -1779,7 +1924,7 @@ nav li:hover {
   width: 20px;
   height: 20px;
   transform: translateY(-50%);
-  background-image: url("../assets/icons/tick.svg");
+  background-image: url("../icons/tick.svg");
   background-size: contain;
   background-repeat: no-repeat;
 }
@@ -1994,7 +2139,6 @@ body.page-404 .spark {
   transform: none;
 }
 
-
 .container-cryptex {
   max-width: 1000px;
   margin: 0 auto;
@@ -2122,9 +2266,8 @@ body.page-404 .spark {
 
 #cryptexWheels {
   display: flex;
-  gap: 10px;     
+  gap: 10px;
 }
-
 
 .cryptex .c {
   width: 22px;
@@ -2320,10 +2463,6 @@ body.page-404 .spark {
     margin-top: 12px;
     justify-content: center;
   }
-
-  .cryptex_wrap {
-    margin: 10px auto 20px;
-  }
 }
 
 @media (max-width: 768px) {
@@ -2379,6 +2518,10 @@ body.page-404 .spark {
     align-items: flex-start;
   }
 
+  .product-card__image::after {
+    background: rgba(106, 57, 14, 0);
+  }
+
   /* Blog */
   .blog__items {
     gap: 20px;
@@ -2395,6 +2538,12 @@ body.page-404 .spark {
 
   .blog-articles__sub .blog__item-content {
     gap: 20px;
+  }
+
+  .blog-article__item .blog__item-image-main,
+  .article__main-image,
+  .blog__item-text .wp-block-video {
+    width: 100%;
   }
 
   .form-bg {
@@ -2584,15 +2733,21 @@ body.page-404 .spark {
     display: none;
   }
 
-    /*cryptex*/
-    .cryptex_wrap {
-      justify-content: flex-start;
-      margin: 10px auto;
-    }
+  .form-free-image {
+    width: 100%;
+    max-width: unset;
+  }
 
-    .chars {
-      justify-content: flex-start;
-    }
+  /*cryptex*/
+  .cryptex_wrap {
+    justify-content: flex-start;
+    margin: 10px auto;
+  }
+
+  .chars {
+    justify-content: flex-start;
+  }
+
 }
 
 @media (max-width: 480px) {
@@ -2650,6 +2805,79 @@ body.page-404 .spark {
   }
 }
 
-/* @media (max-width: 420px) {
-    
-}   */
+@media (hover: hover) and (pointer: fine) {
+  .btn-hero:hover {
+    background-color: #e6e6d8;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .btn-card:hover {
+    background-color: var(--color-orange);
+    color: var(--color-white);
+  }
+
+  .btn-form:hover {
+    background-color: var(--color-orange);
+    transform: scale(1.05);
+  }
+
+  .logo img:hover {
+    transform: scale(1.1);
+  }
+
+  nav li:hover {
+    transform: scale(1.1);
+  }
+
+  .header__cart img:hover {
+    transform: scale(1.1);
+  }
+
+  .product-card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+
+  .product-card:hover .product-card__image::after {
+    background: rgba(106, 57, 14, 0);
+  }
+
+  .review-form__overlay textarea::-webkit-scrollbar-thumb:hover {
+    background-color: #e48a2e;
+  }
+
+  .file-label:hover {
+    background: #ff9900;
+  }
+
+  .blog__item-image:hover img {
+    transform: scale(1.2);
+  }
+
+  .blog__link:hover span {
+    transform: scale(1.1);
+  }
+
+  .gallery-slider__wrapper:hover .slider-track {
+    animation-play-state: paused;
+  }
+
+  .footer__arrow:hover {
+    transform: scale(1.1);
+  }
+
+  .images-slider img.active,
+  .images-slider img:hover {
+    opacity: 1;
+  }
+
+  .product-hero__add-to-cart .single_add_to_cart_button:hover,
+  .btn-go-cart:hover {
+    background-color: var(--color-orange);
+    transform: scale(1.05);
+  }
+
+  .review-form__overlay textarea::-webkit-scrollbar-thumb:hover {
+    background-color: #e48a2e;
+  }
+}
