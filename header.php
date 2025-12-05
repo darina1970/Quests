@@ -45,6 +45,7 @@
                             <li class="nav-list__item"><a href="#reviews">Reviews</a></li>
                             <li class="nav-list__item"><a href="<?php echo site_url('/archive/'); ?>">Blog</a></li>
                             <li class="nav-list__item"><a href="#faq">FAQ</a></li>
+                            <li class="nav-list__item"><a href="#form">Present</a></li>
                         </ul>
                     <?php elseif (is_archive()) : ?>
                         <ul class="header__nav-list text-black text-uppercase list-unstyled">
