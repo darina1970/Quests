@@ -72,33 +72,48 @@ get_header();
     </section>
     <!--Form-->
     <?php
-    $has_image = get_field('show_form_image');
-    $has_paragraph = get_field('show_form_paragraph');
+    $home_id = get_option('page_on_front');
+    $blog_id = get_queried_object_id();
+    
+    if ( ! function_exists('get_form_field_fallback') ) {
+        function get_form_field_fallback( $field, $blog_id, $home_id ) {
+            $value = get_field( $field, $blog_id );
+            if ( empty($value) ) {
+                $value = get_field( $field, $home_id );
+            }
+            return $value;
+        }
+    }
+    
+    $has_image = get_form_field_fallback('show_form_image', $blog_id, $home_id);
+    $has_paragraph = get_form_field_fallback('show_form_paragraph', $blog_id, $home_id);
+    $image = get_form_field_fallback('form_image', $blog_id, $home_id);
+    $form_title = get_form_field_fallback('form_title', $blog_id, $home_id);
+    $form_subtitle = get_form_field_fallback('form_subtitle', $blog_id, $home_id);
+    $form_paragraph = get_form_field_fallback('form_paragraph', $blog_id, $home_id);
+    
     $with_quest = ($has_image || $has_paragraph) ? '1' : '0';
     ?>
-
     <section class="form section-common" id="form">
         <div class="container">
             <div class="form__wrapper" id="form-wrapper">
-
-                <?php if (get_field('show_form_image')) :
-                    $image = get_field('form_image');
-                    if ($image) : ?>
-                        <img class="form__image" src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['alt']); ?>">
-                <?php endif;
-                endif; ?>
-
+                <?php if ( $has_image && !empty($image) ): ?>
+                    <img class="form__image"
+                    src="<?php echo esc_url( $image['url'] ); ?>"
+                    alt="<?php echo esc_attr( $image['alt'] ); ?>">
+                <?php endif; ?>
+                
                 <div class="form__text">
-                    <?php if (get_field('form_title')) : ?>
-                        <h2 class="text-align"><?php the_field('form_title'); ?></h2>
+                    <?php if ( !empty($form_title) ): ?>
+                        <h2 class="text-align"><?php echo esc_html( $form_title ); ?></h2>
                     <?php endif; ?>
 
-                    <?php if (get_field('form_subtitle')) : ?>
-                        <h3 class="text-align"><?php the_field('form_subtitle'); ?></h3>
+                    <?php if ( !empty($form_subtitle) ): ?>
+                        <h3 class="text-align"><?php echo esc_html( $form_subtitle ); ?></h3>
                     <?php endif; ?>
 
-                    <?php if (get_field('show_form_paragraph') && get_field('form_paragraph')) : ?>
-                        <p class="text-align"><?php the_field('form_paragraph'); ?></p>
+                    <?php if ( $has_paragraph && !empty($form_paragraph) ): ?>
+                        <p class="text-align"><?php echo esc_html( $form_paragraph ); ?></p>
                     <?php endif; ?>
                 </div>
 
@@ -115,7 +130,7 @@ get_header();
                             <input type="checkbox" id="agree" required>
                             <label for="agree">
                                 By subscribing, you agree to our
-                                <a href="<?php echo get_permalink(get_page_by_path('privacy-policy')); ?>" target="_blank">Privacy Policy</a>
+                                <a href="<?php echo get_permalink( get_page_by_path('privacy-policy') ); ?>" target="_blank">Privacy Policy</a>
                             </label>
                         </div>
                         <input type="hidden" name="with_quest" value="<?php echo esc_attr($with_quest); ?>">
